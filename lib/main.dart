@@ -6,16 +6,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  static const String _title = 'Flutter Code Sample';
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
-      home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
-        body: Center(
-          child: MyStatefulWidget(),
+      home: SafeArea(
+        child: Scaffold(
+          body: Center(
+            child: MyStatefulWidget(),
+          ),
         ),
       ),
     );
@@ -42,8 +40,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return items;
   }
 
-  Widget _hint;
-
   @override
   void initState() {
     _dropDownMenuItems = getDropDownMenuItems();
@@ -52,7 +48,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    bool b = false;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Container(
@@ -72,13 +67,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       items: _dropDownMenuItems,
                       onChanged: (String newValue) {
                         setState(() {
-                          // _items[index] = newValue;
-                          // if (!b) b = (_items[index] == null);
-                          // if ((_items[_items.length - 1] != null) && !(b))
-                          //   _items.insert(_items.length, null);
-                          // _items[index] = newValue;
-                          // if ((_items.e))
-                          //   _items.insert(_items.length, null);
+                          _items[index] = newValue;
+                          if (_items.indexOf(null) == -1)
+                            _items.insert(_items.length, null);
                         });
                       },
                     ),
@@ -95,18 +86,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 },
               ),
             ),
-            // Expanded(
-            //   child: ElevatedButton(
-            //     key: ValueKey(58),
-            //     child: Text('Add'),
-            //     onPressed: () {
-            //       setState(() {
-            //         if (_items[_items.length - 1] != null)
-            //           _items.insert(_items.length, null);
-            //       });
-            //     },
-            //   ),
-            // ),
           ],
         ),
       ),

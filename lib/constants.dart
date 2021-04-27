@@ -1,4 +1,4 @@
-List kWilaya = [
+const List<String> kWilaya = [
   "أدرار",
   "الشلف",
   "الأغواط",
