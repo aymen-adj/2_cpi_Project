@@ -69,7 +69,6 @@ class _TrajetBoxState extends State<TrajetBox> {
                       items: _dropDownMenuItems,
                       onChanged: (String newValue) {
                         setState(() {
-                          print(newValue);
                           _items[index] = newValue;
                           if (_items.indexOf(null) == -1)
                             _items.insert(_items.length, null);
