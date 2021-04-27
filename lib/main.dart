@@ -75,6 +75,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       });
                     },
                   ),
+                ElevatedButton(
+                  key: ValueKey(58),
+                  child: Text('Add'),
+                  onPressed: () {
+                    setState(() {
+                      _items.insert(_items.length, null);
+                    });
+                  },
+                ),
               ],
               //
               onReorder: (int oldIndex, int newIndex) {
@@ -84,15 +93,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   }
                   final String item = _items.removeAt(oldIndex);
                   _items.insert(newIndex, item);
-                });
-              },
-            ),
-            ElevatedButton(
-              key: ValueKey(58),
-              child: Text('Add'),
-              onPressed: () {
-                setState(() {
-                  _items.insert(_items.length, null);
                 });
               },
             ),
