@@ -52,47 +52,62 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    bool b = false;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Container(
-        child: ReorderableListView(
-          padding: EdgeInsets.symmetric(horizontal: 40),
-          //
-          children: <Widget>[
-            for (int index = 0; index < _items.length; index++)
-              DropdownButton(
-                key: Key('$index'),
-                hint: (index == 0) ? Text("الانطلاق") : Icon(Icons.add),
-                iconSize: 0,
-                value: _items[index],
-                items: _dropDownMenuItems,
-                focusColor: Colors.blue,
-                onChanged: (String newValue) {
+        child: Column(
+          children: [
+            Expanded(
+              child: ReorderableListView(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                //
+                children: <Widget>[
+                  for (int index = 0; index < _items.length; index++)
+                    DropdownButton(
+                      key: Key('$index'),
+                      hint: (index == 0) ? Text("الانطلاق") : Icon(Icons.add),
+                      iconSize: 0,
+                      value: _items[index],
+                      items: _dropDownMenuItems,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          // _items[index] = newValue;
+                          // if (!b) b = (_items[index] == null);
+                          // if ((_items[_items.length - 1] != null) && !(b))
+                          //   _items.insert(_items.length, null);
+                          // _items[index] = newValue;
+                          // if ((_items.e))
+                          //   _items.insert(_items.length, null);
+                        });
+                      },
+                    ),
+                ],
+                //
+                onReorder: (int oldIndex, int newIndex) {
                   setState(() {
-                    _items[index] = newValue;
+                    if (oldIndex < newIndex) {
+                      newIndex -= 1;
+                    }
+                    final String item = _items.removeAt(oldIndex);
+                    _items.insert(newIndex, item);
                   });
                 },
               ),
-            ElevatedButton(
-              key: ValueKey(58),
-              child: Text('Add'),
-              onPressed: () {
-                setState(() {
-                  _items.insert(_items.length, null);
-                });
-              },
             ),
+            // Expanded(
+            //   child: ElevatedButton(
+            //     key: ValueKey(58),
+            //     child: Text('Add'),
+            //     onPressed: () {
+            //       setState(() {
+            //         if (_items[_items.length - 1] != null)
+            //           _items.insert(_items.length, null);
+            //       });
+            //     },
+            //   ),
+            // ),
           ],
-          //
-          onReorder: (int oldIndex, int newIndex) {
-            setState(() {
-              if (oldIndex < newIndex) {
-                newIndex -= 1;
-              }
-              final String item = _items.removeAt(oldIndex);
-              _items.insert(newIndex, item);
-            });
-          },
         ),
       ),
     );
