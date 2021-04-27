@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import 'constantes/constants.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,10 +9,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
+
           body: Center(
-            child: MyStatefulWidget(),
+            child: TrajetBox(),
           ),
         ),
       ),
@@ -20,12 +22,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
+class TrajetBox extends StatefulWidget {
   @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+  _TrajetBoxState createState() => _TrajetBoxState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _TrajetBoxState extends State<TrajetBox> {
   List<String> _items = [null];
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
@@ -55,7 +57,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           children: [
             Expanded(
               child: ReorderableListView(
-                padding: EdgeInsets.symmetric(horizontal: 40),
+                padding: EdgeInsets.symmetric(horizontal: 50),
                 //
                 children: <Widget>[
                   for (int index = 0; index < _items.length; index++)
@@ -67,6 +69,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       items: _dropDownMenuItems,
                       onChanged: (String newValue) {
                         setState(() {
+                          print(newValue);
                           _items[index] = newValue;
                           if (_items.indexOf(null) == -1)
                             _items.insert(_items.length, null);
