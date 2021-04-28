@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/screens/Demandes.dart';
-import 'package:ii_cpi_project/screens/create_offer.dart';
+import 'package:ii_cpi_project/screens/First.dart';
 import 'package:ii_cpi_project/screens/homeScreen.dart';
-import 'constantes/constants.dart';
 import 'package:ii_cpi_project/screens/profileScreen.dart';
+
 import 'components/appbar.dart';
+import 'screens/create_offer.dart';
 
 void main() {
   runApp(MaterialApp(
     darkTheme: ThemeData.dark(),
     debugShowCheckedModeBanner: false,
     routes: {
-      '/': (contex) => Home(),
+      '/': (context) => First(),
     },
   ));
 }
@@ -29,15 +30,12 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),   //   components/appbar.dart
+      drawer: MyDrawer(), //   components/appbar.dart
       appBar: AppBar(
-
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-
-            ],
+            children: [],
           )
         ],
       ),
@@ -114,77 +112,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-//
-// class TrajetBox extends StatefulWidget {
-//   @override
-//   _TrajetBoxState createState() => _TrajetBoxState();
-// }
-//
-// class _TrajetBoxState extends State<TrajetBox> {
-//   List<String> _items = [null];
-//
-//   List<DropdownMenuItem<String>> _dropDownMenuItems;
-//   List<DropdownMenuItem<String>> getDropDownMenuItems() {
-//     List<DropdownMenuItem<String>> items = [];
-//     for (int i = 0; i < 58; i++) {
-//       items.add(DropdownMenuItem(
-//         value: kWilaya[i],
-//         child: Text((i + 1).toString() + " - " + kWilaya[i]),
-//       ));
-//     }
-//     return items;
-//   }
-//
-//   @override
-//   void initState() {
-//     _dropDownMenuItems = getDropDownMenuItems();
-//     super.initState();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Directionality(
-//       textDirection: TextDirection.rtl,
-//       child: Container(
-//         child: Column(
-//           children: [
-//             Expanded(
-//               child: ReorderableListView(
-//                 padding: EdgeInsets.symmetric(horizontal: 50),
-//                 //
-//                 children: <Widget>[
-//                   for (int index = 0; index < _items.length; index++)
-//                     DropdownButton(
-//                       key: Key('$index'),
-//                       hint: (index == 0) ? Text("الانطلاق") : Icon(Icons.add),
-//                       iconSize: 0,
-//                       value: _items[index],
-//                       items: _dropDownMenuItems,
-//                       onChanged: (String newValue) {
-//                         setState(() {
-//                           _items[index] = newValue;
-//                           if (_items.indexOf(null) == -1)
-//                             _items.insert(_items.length, null);
-//                         });
-//                       },
-//                     ),
-//                 ],
-//                 //
-//                 onReorder: (int oldIndex, int newIndex) {
-//                   setState(() {
-//                     if (oldIndex < newIndex) {
-//                       newIndex -= 1;
-//                     }
-//                     final String item = _items.removeAt(oldIndex);
-//                     _items.insert(newIndex, item);
-//                   });
-//                 },
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
