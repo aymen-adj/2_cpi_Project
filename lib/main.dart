@@ -28,14 +28,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),   //   components/appbar.dart
+      drawer: MyDrawer(),
+      endDrawer: MyDrawer(),
+      drawerEnableOpenDragGesture: false,
+      drawerScrimColor: Colors.indigo,//   components/appbar.dart
       appBar: AppBar(
-
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
             ],
           )
         ],
@@ -96,20 +97,24 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      body: PageView(
-        onPageChanged: (ind) {
-          setState(() {
-            selected = ind;
-          });
-        },
-        controller: index,
+      body: Stack(
         children: [
-          HomePage(),
-          DemandesScreen(),
-          TrajetBox(),
-          ProfileScreen(),
+          PageView(
+            onPageChanged: (ind) {
+              setState(() {
+                selected = ind;
+              });
+            },
+            controller: index,
+            children: [
+              HomePage(),
+              DemandesScreen(),
+              TrajetBox(),
+              ProfileScreen(),
+            ],
+          ),
         ],
-      ),
+      )
     );
   }
 }

@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Drawer(   //TODO: implementation of drawer
+    return Drawer(
+      //TODO: implementation of drawer
+
+      elevation: 10,
       child: ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
