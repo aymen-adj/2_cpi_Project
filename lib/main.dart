@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/screens/Demandes.dart';
+import 'package:ii_cpi_project/screens/homeScreen.dart';
 import 'constantes/constants.dart';
 import 'package:ii_cpi_project/screens/profileScreen.dart';
 import 'components/appbar.dart';
 
 void main() {
   runApp(MaterialApp(
+    darkTheme: ThemeData.dark(),
     debugShowCheckedModeBanner: false,
     routes: {
       '/': (contex) => Home(),
@@ -102,6 +105,7 @@ class _HomeState extends State<Home> {
         controller: index,
         children: [
           HomePage(),
+          DemandesScreen(),
           TrajetBox(),
           ProfileScreen(),
         ],
@@ -110,21 +114,6 @@ class _HomeState extends State<Home> {
   }
 }
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.teal,
-      ),
-    );
-  }
-}
 
 class TrajetBox extends StatefulWidget {
   @override
