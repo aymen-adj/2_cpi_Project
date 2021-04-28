@@ -9,9 +9,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        color: Colors.teal,//TODO: implementation of this screen
-      ),
+      child: Container(color: Colors.teal),
     );
   }
 }

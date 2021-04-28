@@ -4,9 +4,6 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      //TODO: implementation of drawer
-
-      elevation: 10,
       child: ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
@@ -15,7 +12,7 @@ class MyDrawer extends StatelessWidget {
             child: Column(
               children: [
                 CircleAvatar(
-                  minRadius:30,
+                  minRadius: 30,
                   maxRadius: 50,
                 ),
                 Text('mosbah'),
