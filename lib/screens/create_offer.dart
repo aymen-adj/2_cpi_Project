@@ -97,23 +97,34 @@ class _TrajetBoxState extends State<TrajetBox> {
                 key: Key("$index"),
                 wilayat: kWilaya,
                 wilaya: _reaget[index],
-                onDeletIconPressed: () {},
+                onDeletIconPressed: () {
+                  setState(() {
+                    _reaget.removeAt(index);
+                  });
+                },
                 onChooseWilaya: (_) {
-                  _reaget[index] = _;
-                  if (_reaget.indexOf(null) == -1)
-                    _reaget.insert(_reaget.length, null);
+                  if(! _reaget.contains(_)){
+                    _reaget[index] = _;
+                    if (_reaget.indexOf(null) == -1)
+                      _reaget.insert(_reaget.length, null);
 
-                  setState(() {});
+                    setState(() {});
+                    print(_reaget);
+                  }
+
                 },
               ),
           ],
           onReorder: (int oldIndex, int newIndex) {
             setState(() {
+              print(_reaget);
               if (oldIndex < newIndex) {
                 newIndex -= 1;
               }
               final String item = _reaget.removeAt(oldIndex);
               _reaget.insert(newIndex, item);
+              print(_reaget);
+
             });
           },
         ),
