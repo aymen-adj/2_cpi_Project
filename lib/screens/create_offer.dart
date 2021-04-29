@@ -10,11 +10,39 @@ class _TrajetBoxState extends State<TrajetBox> {
   List<String> _traget;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Directionality(
-        textDirection: TextDirection.rtl,
-        child: ListWilayaWedget(
-          onChooseTraget: (_) {},
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Scaffold(
+        body: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "اختيار المسار : ",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                ),
+              ),
+              Container(
+                height: 300,
+                width: double.infinity,
+                child: ListWilayaWedget(
+                  onChooseTraget: (_) {},
+                ),
+              ),
+              RaisedButton(
+                onPressed: () {},
+              ),
+              TextField(),
+              TextField(),
+              TextField(),
+            ],
+          ),
         ),
       ),
     );

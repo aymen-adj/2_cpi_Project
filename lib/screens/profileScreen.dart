@@ -9,7 +9,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('profile'),//TODO: implementation of profile screen
+      child: Text('profile'),
+      //TODO: implementation of profile screen
     );
   }
 }
