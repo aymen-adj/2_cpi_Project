@@ -17,6 +17,11 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
   Widget build(BuildContext context) {
     List<String> elwilayat = kWilaya;
     return ReorderableListView(
+      header: Text(
+        "اختر المسار :",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 25),
+      ),
       children: [
         for (int index = 0; index < _traget.length; index++)
           WilayaWidget(
