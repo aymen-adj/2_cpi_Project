@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/screens/Demandes.dart';
-import 'package:ii_cpi_project/screens/First.dart';
 import 'package:ii_cpi_project/screens/homeScreen.dart';
 import 'package:ii_cpi_project/screens/profileScreen.dart';
 
@@ -12,7 +11,7 @@ void main() {
     darkTheme: ThemeData.dark(),
     debugShowCheckedModeBanner: false,
     routes: {
-      '/': (context) => First(),
+      '/': (context) => Home(),
     },
   ));
 }
