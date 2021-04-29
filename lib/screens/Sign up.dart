@@ -17,11 +17,17 @@ class _SignState extends State<Sign> {
         SizedBox(
           height: 20,
         ),
-        Formule(text: 'الإسـم و اللقب', icon: Icons.account_circle),
+        Formule(
+          text: 'الإسـم و اللقب',
+          icon: Icons.account_circle,
+        ),
         SizedBox(
           height: 20,
         ),
-        Formule(text: 'البريد الإلكتروني', icon: Icons.email),
+        Formule(
+          text: 'البريد الإلكتروني',
+          icon: Icons.email,
+        ),
         SizedBox(
           height: 25,
         ),
