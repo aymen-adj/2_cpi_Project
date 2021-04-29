@@ -13,16 +13,8 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            width: double.infinity,
-            child: Image(image: AssetImage('images/logo.png')),
-            height: MediaQuery.of(context).size.height * 0.48,
-            decoration: BoxDecoration(
-              gradient: RadialGradient(
-                colors: [Colors.lightBlueAccent, Colors.blue],
-              ),
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100)),
-            ),
+          Bar(
+            pourcentage: 0.46,
           ),
           SizedBox(
             height: 15,
@@ -31,9 +23,25 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: 20,
           ),
-          Formule(text: 'كلمة المرور', icon: Icons.vpn_key),
+          Formule(
+            text: 'كلمة المرور',
+            icon: Icons.vpn_key,
+            pass: true,
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            alignment: Alignment.bottomRight,
+            child: Text(
+              'نسيت كلمة المرور؟',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           SizedBox(
-            height: 50,
+            height: 40,
           ),
           Bouton(
             text: 'تسجيل الدخول',
@@ -61,23 +69,6 @@ class _LoginState extends State<Login> {
             onpressed: () {},
           ),
         ],
-      ),
-    );
-  }
-}
-
-class Formule extends StatelessWidget {
-  Formule({@required this.text, @required this.icon});
-  final String text;
-  final IconData icon;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 15),
-      child: TextFormField(
-        decoration: InputDecoration(icon: Icon(icon), labelText: text),
-        keyboardType: TextInputType.visiblePassword,
-        obscureText: true,
       ),
     );
   }

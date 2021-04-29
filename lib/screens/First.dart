@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Log.dart';
+import 'package:ii_cpi_project/screens/Sign%20up.dart';
 import 'package:ii_cpi_project/screens/log_in.dart';
 
 class First extends StatefulWidget {
@@ -68,7 +69,10 @@ class _FirstState extends State<First> {
                     text: 'إنشاء حساب جديد',
                     boutoncolor: Colors.blue,
                     textcolor: Colors.white,
-                    onpressed: () {},
+                    onpressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Sign()));
+                    },
                   ),
                 ],
               ),

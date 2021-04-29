@@ -34,3 +34,40 @@ class Bouton extends StatelessWidget {
     );
   }
 }
+
+class Bar extends StatelessWidget {
+  Bar({@required this.pourcentage});
+  final double pourcentage;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      child: Image(image: AssetImage('images/logo.png')),
+      height: MediaQuery.of(context).size.height * pourcentage,
+      decoration: BoxDecoration(
+        gradient: RadialGradient(
+          colors: [Colors.lightBlueAccent, Colors.blue],
+        ),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100)),
+      ),
+    );
+  }
+}
+
+class Formule extends StatelessWidget {
+  Formule({@required this.text, @required this.icon, this.pass});
+  final String text;
+  final IconData icon;
+  final bool pass;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 15),
+      child: TextFormField(
+        decoration: InputDecoration(icon: Icon(icon), labelText: text),
+        keyboardType: TextInputType.visiblePassword,
+        obscureText: pass ?? false,
+      ),
+    );
+  }
+}
