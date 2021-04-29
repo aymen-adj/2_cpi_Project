@@ -3,7 +3,7 @@ import 'package:ii_cpi_project/components/wilaya-widget.dart';
 import 'package:ii_cpi_project/constantes/constants.dart';
 
 class ListWilayaWedget extends StatefulWidget {
-  void Function(List<String> traget) onChooseTraget;
+  final void Function(List<String> traget) onChooseTraget;
   ListWilayaWedget({this.onChooseTraget});
 
   @override
@@ -15,9 +15,8 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> elwilayat = kWilaya;
     return ReorderableListView(
-      children: [
+      /* children: [
         for (int index = 0; index < _traget.length; index++)
           WilayaWidget(
             key: Key("$index"),
@@ -28,16 +27,16 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
               setState(() {});
             },
             onChooseWilaya: (_) {
-              if (!_traget.contains(_)) _traget[index] = _;
-              if (_traget.indexOf(null) == -1)
-                _traget.insert(_traget.length, null);
-              List<String> traget = List.from(_traget);
-              traget.remove(null);
-              widget.onChooseTraget(traget);
-              setState(() {});
+              setState(() {
+                if (!_traget.contains(_)) _traget[index] = _;
+                if (_traget.indexOf(null) == -1)
+                  _traget.insert(_traget.length, null);
+                returnTheTraget();
+              });
             },
           ),
-      ],
+      ],*/
+      children: getWilayatWidgets(),
       onReorder: (int oldIndex, int newIndex) {
         setState(() {
           if (oldIndex < newIndex) {
@@ -45,11 +44,44 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
           }
           final String item = _traget.removeAt(oldIndex);
           _traget.insert(newIndex, item);
-          List<String> traget = List.from(_traget);
-          traget.remove(null);
-          widget.onChooseTraget(traget);
+          returnTheTraget();
         });
       },
     );
+  }
+
+  List<Widget> getWilayatWidgets() {
+    List<Widget> l = [];
+    for (int index = 0; index < _traget.length; index++) {
+      List<String> kWilaya2 = List.from(kWilaya);
+      for (int i = 0; i < _traget.length; i++) {
+        if (i == index) continue;
+        kWilaya2.remove(_traget[i]);
+      }
+      l.add(WilayaWidget(
+        key: Key("$index"),
+        wilayat: List.from(kWilaya2),
+        wilaya: _traget[index],
+        onDeletIconPressed: () {
+          _traget.remove(_traget[index]);
+          setState(() {});
+        },
+        onChooseWilaya: (_) {
+          setState(() {
+            if (!_traget.contains(_)) _traget[index] = _;
+            if (_traget.indexOf(null) == -1)
+              _traget.insert(_traget.length, null);
+            returnTheTraget();
+          });
+        },
+      ));
+    }
+    return l;
+  }
+
+  void returnTheTraget() {
+    List<String> traget = List.from(_traget);
+    traget.remove(null);
+    widget.onChooseTraget(traget);
   }
 }

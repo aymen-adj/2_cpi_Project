@@ -18,7 +18,7 @@ class WilayaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<DropdownMenuItem<String>> items = [];
-    for (int i = 0; i < 58; i++) {
+    for (int i = 0; i < wilayat.length; i++) {
       items.add(DropdownMenuItem(
         value: wilayat[i],
         child: Text((i + 1).toString() + " - " + wilayat[i]),
