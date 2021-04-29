@@ -26,18 +26,25 @@ class WilayaWidget extends StatelessWidget {
     }
     return ListTile(
       key: key,
-      leading: wilaya == null ? null : Icon(Icons.reorder),
+      leading: wilaya == null
+          ? SizedBox(
+              width: 24,
+            )
+          : Icon(Icons.reorder),
       trailing: wilaya == null
-          ? null
+          ? SizedBox(
+              width: 48,
+            )
           : IconButton(
               icon: Icon(Icons.delete),
               onPressed: onDeletIconPressed,
             ),
       title: DropdownButtonHideUnderline(
         child: DropdownButton(
+          isExpanded: true,
           items: items,
           value: wilaya,
-          hint: Icon(Icons.add),
+          hint: Center(child: Icon(Icons.add)),
           iconSize: 0,
           onChanged: onChooseWilaya,
         ),

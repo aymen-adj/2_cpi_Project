@@ -50,30 +50,3 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
     );
   }
 }
-
-//   List<Widget> getChildren() {
-//     List<String> elwilayat = List.from(kWilaya);
-//     List<Widget> addWilaya = [];
-//     for (int index = 0; index < _traget.length; index++) {
-//       addWilaya.add(WilayaWidget(
-//         key: Key("$index"),
-//         wilayat: elwilayat,
-//         wilaya: _traget[index],
-//         onDeletIconPressed: () {
-//           _traget.remove(_traget[index]);
-//           setState(() {});
-//         },
-//         onChooseWilaya: (_) {
-//           _traget[index] = _;
-
-//           if (_traget.indexOf(null) == -1) _traget.insert(_traget.length, null);
-//           List<String> traget = List.from(_traget);
-//           traget.remove(null);
-//           widget.onChooseTraget(traget);
-//           setState(() {});
-//         },
-//       ));
-//       elwilayat.remove(_traget[index]);
-//     }
-//     return addWilaya;
-//   }
