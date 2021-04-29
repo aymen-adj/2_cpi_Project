@@ -10,6 +10,12 @@ class _TrajetBoxState extends State<TrajetBox> {
   DateTime pickedDate;
   TimeOfDay time;
   List<String> traget;
+  String vehicle;
+  List<DropdownMenuItem<String>> vehicles = [
+    DropdownMenuItem(value: "شاحنة", child: Text("شاحنة")),
+    DropdownMenuItem(value: "سيارة", child: Text("سيارة")),
+    DropdownMenuItem(value: "دراجة", child: Text("دراجة")),
+  ];
 
   @override
   void initState() {
@@ -21,7 +27,7 @@ class _TrajetBoxState extends State<TrajetBox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: Scaffold(
         body: Directionality(
           textDirection: TextDirection.rtl,
@@ -49,12 +55,15 @@ class _TrajetBoxState extends State<TrajetBox> {
                     },
                   ),
                 ),
-                Text(
-                  "اختيار المسار : ",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                  ),
+                DropdownButton(
+                  hint: Text("نوع المركبة"),
+                  items: vehicles,
+                  value: vehicle,
+                  onChanged: (_) {
+                    setState(() {
+                      vehicle = _;
+                    });
+                  },
                 ),
                 ListTile(
                   title: Text(

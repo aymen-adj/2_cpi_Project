@@ -16,26 +16,6 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
   @override
   Widget build(BuildContext context) {
     return ReorderableListView(
-      /* children: [
-        for (int index = 0; index < _traget.length; index++)
-          WilayaWidget(
-            key: Key("$index"),
-            wilayat: elwilayat,
-            wilaya: _traget[index],
-            onDeletIconPressed: () {
-              _traget.remove(_traget[index]);
-              setState(() {});
-            },
-            onChooseWilaya: (_) {
-              setState(() {
-                if (!_traget.contains(_)) _traget[index] = _;
-                if (_traget.indexOf(null) == -1)
-                  _traget.insert(_traget.length, null);
-                returnTheTraget();
-              });
-            },
-          ),
-      ],*/
       children: getWilayatWidgets(),
       onReorder: (int oldIndex, int newIndex) {
         setState(() {
@@ -68,7 +48,7 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
         },
         onChooseWilaya: (_) {
           setState(() {
-            if (!_traget.contains(_)) _traget[index] = _;
+            _traget[index] = _;
             if (_traget.indexOf(null) == -1)
               _traget.insert(_traget.length, null);
             returnTheTraget();

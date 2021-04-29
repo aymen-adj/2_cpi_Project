@@ -21,7 +21,7 @@ class WilayaWidget extends StatelessWidget {
     for (int i = 0; i < wilayat.length; i++) {
       items.add(DropdownMenuItem(
         value: wilayat[i],
-        child: Text((i + 1).toString() + " - " + wilayat[i]),
+        child: Text(wilayat[i]),
       ));
     }
     return ListTile(
