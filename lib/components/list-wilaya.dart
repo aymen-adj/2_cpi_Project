@@ -45,6 +45,9 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
           }
           final String item = _traget.removeAt(oldIndex);
           _traget.insert(newIndex, item);
+          List<String> traget = List.from(_traget);
+          traget.remove(null);
+          widget.onChooseTraget(traget);
         });
       },
     );

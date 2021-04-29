@@ -9,7 +9,7 @@ class TrajetBox extends StatefulWidget {
 class _TrajetBoxState extends State<TrajetBox> {
   DateTime pickedDate;
   TimeOfDay time;
-  List<String> _traget;
+  List<String> traget;
 
   @override
   void initState() {
@@ -25,44 +25,54 @@ class _TrajetBoxState extends State<TrajetBox> {
       child: Scaffold(
         body: Directionality(
           textDirection: TextDirection.rtl,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "اختيار المسار : ",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20,
                 ),
-              ),
-              Container(
-                height: 300,
-                width: double.infinity,
-                child: ListWilayaWedget(
-                  onChooseTraget: (_) {},
+                Text(
+                  "اختيار المسار : ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
                 ),
-              ),
-              ListTile(
-                title: Text(
-                    "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
-                onTap: _pickDate,
-              ),
-              ListTile(
-                title: Text("الوقت: ${time.hour}:${time.minute}"),
-                onTap: _pickTime,
-              ),
-              SizedBox(
-                height: 100,
-                child: TextField(
+                Container(
+                  height: 300,
+                  width: double.infinity,
+                  child: ListWilayaWedget(
+                    onChooseTraget: (_) {
+                      traget = _;
+                      print(traget);
+                    },
+                  ),
+                ),
+                Text(
+                  "اختيار المسار : ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                      "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
+                  onTap: _pickDate,
+                ),
+                ListTile(
+                  title: Text("الوقت: ${time.hour}:${time.minute}"),
+                  onTap: _pickTime,
+                ),
+                TextField(
                   keyboardType: TextInputType.text,
-                  maxLines: 5,
-                  minLines: 3,
+                  minLines: 1,
+                  maxLines: 3,
+                  maxLength: 200,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
