@@ -29,6 +29,10 @@ class _TrajetBoxState extends State<TrajetBox> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.check),
+          onPressed: submit,
+        ),
         body: Directionality(
           textDirection: TextDirection.rtl,
           child: SingleChildScrollView(
@@ -76,6 +80,7 @@ class _TrajetBoxState extends State<TrajetBox> {
                 ),
                 TextField(
                   keyboardType: TextInputType.text,
+                  decoration: InputDecoration(hintText: "مزيد من المعلومات"),
                   minLines: 1,
                   maxLines: 3,
                   maxLength: 200,
@@ -115,4 +120,6 @@ class _TrajetBoxState extends State<TrajetBox> {
       });
     }
   }
+
+  void submit() {}
 }
