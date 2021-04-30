@@ -4,7 +4,7 @@ import 'package:ii_cpi_project/constantes/constants.dart';
 
 class ListWilayaWedget extends StatefulWidget {
   final void Function(List<String> traget) onChooseTraget;
-  ListWilayaWedget({this.onChooseTraget});
+  ListWilayaWedget.ListWilaya({this.onChooseTraget});
 
   @override
   _ListWilayaWedgetState createState() => _ListWilayaWedgetState();
@@ -38,23 +38,27 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
         if (i == index) continue;
         kWilaya2.remove(_traget[i]);
       }
-      l.add(WilayaWidget(
-        key: Key("$index"),
-        wilayat: List.from(kWilaya2),
-        wilaya: _traget[index],
-        onDeletIconPressed: () {
-          _traget.remove(_traget[index]);
-          setState(() {});
-        },
-        onChooseWilaya: (_) {
-          setState(() {
-            _traget[index] = _;
-            if (_traget.indexOf(null) == -1)
-              _traget.insert(_traget.length, null);
-            returnTheTraget();
-          });
-        },
-      ));
+      l.add(
+        WilayaWidget(
+          key: Key("$index"),
+          wilayat: List.from(kWilaya2),
+          wilaya: _traget[index],
+          onDeletIconPressed: () {
+            _traget.remove(_traget[index]);
+            setState(() {});
+          },
+          onChooseWilaya: (_) {
+            setState(
+              () {
+                _traget[index] = _;
+                if (_traget.indexOf(null) == -1)
+                  _traget.insert(_traget.length, null);
+                returnTheTraget();
+              },
+            );
+          },
+        ),
+      );
     }
     return l;
   }
