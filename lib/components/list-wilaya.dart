@@ -4,7 +4,7 @@ import 'package:ii_cpi_project/constantes/constants.dart';
 
 class ListWilayaWedget extends StatefulWidget {
   final void Function(List<String> traget) onChooseTraget;
-  ListWilayaWedget.ListWilaya({this.onChooseTraget});
+  ListWilayaWedget.listWilaya({this.onChooseTraget});
 
   @override
   _ListWilayaWedgetState createState() => _ListWilayaWedgetState();

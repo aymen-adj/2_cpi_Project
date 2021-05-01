@@ -58,3 +58,12 @@ const List<String> kWilaya = [
   "57 - عين صالح",
   "58 - عين قزّام",
 ];
+
+enum Vehicules {
+  Herbine,
+  DFM,
+  DFSK,
+  DACIA,
+  KANGO,
+}
+Map wilayat = kWilaya.asMap();

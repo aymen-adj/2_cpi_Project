@@ -52,7 +52,7 @@ class _TrajetBoxState extends State<TrajetBox> {
                 Container(
                   height: 300,
                   width: double.infinity,
-                  child: ListWilayaWedget.ListWilaya(
+                  child: ListWilayaWedget.listWilaya(
                     onChooseTraget: (_) {
                       traget = _;
                       print(traget);

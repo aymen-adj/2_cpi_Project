@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/post.dart';
-import 'package:ii_cpi_project/components/wilaya-widget.dart';
 import 'package:ii_cpi_project/constantes/constants.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,14 +16,17 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
-            Post(),
-            Post(),
-            Post(),
-            Post(),
-            Post(),
-            Post(),
-            Post(),
-            Post(),
+            Post(
+              postID: 20,
+              postingDate: 22/12/2020,
+              postType: 0,
+              userId: 244,
+              vehicule: Vehicules.DACIA,
+              trajet: '1958',
+              description: 'jfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+
+            ),
+
 
           ],
         ),

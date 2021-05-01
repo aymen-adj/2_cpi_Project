@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/screens/profileScreen.dart';
+import 'package:ii_cpi_project/constantes/constants.dart';
 
 class Post extends StatefulWidget {
   final userId;
   final postID;
   final postingDate;
-  final image;
+  final Image image;
   final trajet;
-  final vehicule;
+  final Vehicules vehicule;
   final description;
   final postType;
   Post(
-      {this.userId,
-      this.postID,
+      {@required this.userId,
+      @required this.postID,
       this.description,
       this.image,
-      this.postingDate,
-      this.postType,
+      @required this.postingDate,
+      @required this.postType,
       this.trajet,
       this.vehicule});
   @override
@@ -24,7 +25,8 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
-  final userName='Profile name';
+  final userName = 'Profile name';
+  int maxlines=2;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,14 +63,15 @@ class _PostState extends State<Post> {
               child: Image.asset('images/logo.png'),
             ),
             title: Text(userName),
-            subtitle: Text(widget.postingDate.toString()),
+            subtitle: Text(widget.postingDate==null ? 'Just now' :widget.postingDate.toString()),
             trailing: DropdownButton(
               icon: Icon(Icons.more_horiz_rounded),
               dropdownColor: Colors.blueGrey,
               items: <String>['Save Post', 'Report Post', 'Notify Me']
                   .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>( // to transform list<string> to DropDownMenuItem
-                  value: value,// the string
+                return DropdownMenuItem<String>(
+                  // to transform list<string> to DropDownMenuItem
+                  value: value, // the string
                   child: Text(value),
                 );
               }).toList(),
@@ -78,7 +81,8 @@ class _PostState extends State<Post> {
             ),
             onTap: () {
               setState(() {
-                Navigator.pushNamed(context, ProfileScreen.id); // go to profile taped in
+                Navigator.pushNamed(
+                    context, ProfileScreen.id); // go to profile taped in
               });
             },
           ),
@@ -95,19 +99,23 @@ class _PostState extends State<Post> {
                       VehiculeContainer(
                         vehiculName: widget.vehicule,
                       ),
-                      VehiculeContainer(
-                        vehiculName: 'Ferrari',
-                      ),
-                      VehiculeContainer(
-                        vehiculName: 'R4',
-                      ),
                     ],
                   ),
                 ),
-
                 Container(
+                  height: 70,
                   width: double.infinity,
-                  child: Text(widget.description),
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        maxlines == 2 && TextOverflow.values != []  ? maxlines = 20 : maxlines = 2;
+                      });
+                    },
+                    child: Text(widget.description,textDirection: TextDirection.rtl,
+                    maxLines: maxlines,
+                    overflow: TextOverflow.values== [] ? null : TextOverflow.ellipsis,
+                    ),
+                  ),
                 )
               ],
             ),
@@ -119,7 +127,7 @@ class _PostState extends State<Post> {
 }
 
 class VehiculeContainer extends StatelessWidget {
-  final String vehiculName;
+  final Vehicules vehiculName;
   VehiculeContainer({this.vehiculName});
   @override
   Widget build(BuildContext context) {
@@ -134,7 +142,11 @@ class VehiculeContainer extends StatelessWidget {
             Icons.train_rounded,
             size: 20,
           ),
-          Text(vehiculName == null ? 'NONE' : vehiculName),// if no vehicule selected then print 'NONE'
+          Text(vehiculName == null
+              ? 'NONE'
+              : vehiculName.toString().substring(10)), // if no vehicule selected then print 'NONE'
+          //substring to delete the string = 'Vehicules.'
+
         ],
       ),
       decoration:
