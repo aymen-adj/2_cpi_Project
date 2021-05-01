@@ -22,14 +22,6 @@ class _HomeState extends State<Home> {
     index= Home.index;
     return Scaffold(
       drawer: MyDrawer(), //   components/appbar.dart
-      appBar: AppBar(
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [],
-          )
-        ],
-      ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         child: Row(

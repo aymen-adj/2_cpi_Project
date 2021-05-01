@@ -5,7 +5,7 @@ import 'package:ii_cpi_project/screens/profileScreen.dart';
 void main() {
   runApp(
     MaterialApp(
-      darkTheme: ThemeData.dark(),
+     theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => Home(),
