@@ -3,6 +3,8 @@ import 'package:flutter/rendering.dart';
 
 
 class HomeAppBar extends StatefulWidget {
+  ScrollController scrollController;
+  HomeAppBar({this.scrollController});
   @override
   _HomeAppBarState createState() => _HomeAppBarState();
 }
@@ -18,13 +20,22 @@ class _HomeAppBarState extends State<HomeAppBar> {
         expandedHeight: 60,
         title:isSearching? TextField(
 
-        ): Text('طلبات التوصيل',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 28,
+        ): GestureDetector(
+          onTap: (){
+          setState(() {
+            widget.scrollController.animateTo(widget.scrollController.initialScrollOffset,
+                duration: Duration(milliseconds: 2000),
+                curve: Curves.easeOut);
+          });
+          },
+          child: Text('طلبات التوصيل',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 28,
+            ),
+            textDirection: TextDirection.ltr,
           ),
-          textDirection: TextDirection.ltr,
         ),
         floating: true,
         actions: [
@@ -39,48 +50,6 @@ class _HomeAppBarState extends State<HomeAppBar> {
               });
             }),
           )
-        ],
-      ),
-    );
-  }
-}
-
-class MyDrawer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        // Important: Remove any padding from the ListView.
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Column(
-              children: [
-                CircleAvatar(
-                  minRadius: 30,
-                  maxRadius: 50,
-                ),
-                Text('mosbah'),
-              ],
-            ),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-          ),
-          ListTile(
-            title: Text('Item 1'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
-          ListTile(
-            title: Text('Item 2'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
         ],
       ),
     );

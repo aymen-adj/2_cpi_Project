@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/Drawer.dart';
 import 'package:ii_cpi_project/components/appbar.dart';
 import 'package:ii_cpi_project/constantes/colors.dart';
 import 'package:ii_cpi_project/screens/profileScreen.dart';

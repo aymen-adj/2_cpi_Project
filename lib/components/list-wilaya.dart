@@ -33,7 +33,7 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
   List<Widget> getWilayatWidgets() {
     List<Widget> l = [];
     for (int index = 0; index < _traget.length; index++) {
-      List<String> kWilaya2 = List.from(kWilaya);
+      List<String> kWilaya2 = List.from(kWilayaNumerated);
       for (int i = 0; i < _traget.length; i++) {
         if (i == index) continue;
         kWilaya2.remove(_traget[i]);

@@ -10,12 +10,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ScrollController scrollController= ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+        controller:scrollController,
          slivers: [
-           HomeAppBar(),
+           HomeAppBar(scrollController: scrollController,),
            SliverToBoxAdapter(
              child: Container(
                height: 140,
