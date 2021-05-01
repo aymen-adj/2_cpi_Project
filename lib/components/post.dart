@@ -12,6 +12,7 @@ class Post extends StatefulWidget {
   final description;
   final postType;
   final date;
+  final phoneNumber;
   Post(
       {@required this.userId,
       @required this.postID,
@@ -21,6 +22,7 @@ class Post extends StatefulWidget {
       @required this.postingDate,
       @required this.postType,
       this.trajet,
+        this.phoneNumber,
       this.vehicule});
   @override
   _PostState createState() => _PostState();
@@ -105,6 +107,10 @@ class _PostState extends State<Post> {
                       MyOwnContainer(
                         icon: Icons.timer,
                         text: widget.date,
+                      ),
+                      MyOwnContainer(
+                        icon: Icons.phone,
+                        text: widget.phoneNumber,
                       )
                     ],
                   ),
