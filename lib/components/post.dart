@@ -24,6 +24,7 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+  final userName='Profile name';
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,15 +60,15 @@ class _PostState extends State<Post> {
             leading: CircleAvatar(
               child: Image.asset('images/logo.png'),
             ),
-            title: Text('Profile name'),
-            subtitle: Text('1 day'),
+            title: Text(userName),
+            subtitle: Text(widget.postingDate.toString()),
             trailing: DropdownButton(
               icon: Icon(Icons.more_horiz_rounded),
               dropdownColor: Colors.blueGrey,
               items: <String>['Save Post', 'Report Post', 'Notify Me']
                   .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
+                return DropdownMenuItem<String>( // to transform list<string> to DropDownMenuItem
+                  value: value,// the string
                   child: Text(value),
                 );
               }).toList(),
@@ -77,7 +78,7 @@ class _PostState extends State<Post> {
             ),
             onTap: () {
               setState(() {
-                Navigator.pushNamed(context, ProfileScreen.id);
+                Navigator.pushNamed(context, ProfileScreen.id); // go to profile taped in
               });
             },
           ),
@@ -92,7 +93,7 @@ class _PostState extends State<Post> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       VehiculeContainer(
-                        vehiculName: 'Herbine',
+                        vehiculName: widget.vehicule,
                       ),
                       VehiculeContainer(
                         vehiculName: 'Ferrari',
@@ -103,6 +104,11 @@ class _PostState extends State<Post> {
                     ],
                   ),
                 ),
+
+                Container(
+                  width: double.infinity,
+                  child: Text(widget.description),
+                )
               ],
             ),
           )
