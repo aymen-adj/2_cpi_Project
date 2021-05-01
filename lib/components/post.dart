@@ -134,7 +134,7 @@ class VehiculeContainer extends StatelessWidget {
             Icons.train_rounded,
             size: 20,
           ),
-          Text(vehiculName == null ? 'NONE' : vehiculName),
+          Text(vehiculName == null ? 'NONE' : vehiculName),// if no vehicule selected then print 'NONE'
         ],
       ),
       decoration:
