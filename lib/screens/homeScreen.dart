@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
               userId: 244,
               vehicule: Vehicules.DACIA,
               trajet: '1958',
+              date: '22/10/2020',
               description: 'jfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
 
             ),

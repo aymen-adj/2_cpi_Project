@@ -11,11 +11,13 @@ class Post extends StatefulWidget {
   final Vehicules vehicule;
   final description;
   final postType;
+  final date;
   Post(
       {@required this.userId,
       @required this.postID,
       this.description,
       this.image,
+        this.date,
       @required this.postingDate,
       @required this.postType,
       this.trajet,
@@ -96,9 +98,14 @@ class _PostState extends State<Post> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      VehiculeContainer(
-                        vehiculName: widget.vehicule,
+                      MyOwnContainer(
+                        text: widget.vehicule,
+                        icon:Icons.train_rounded,
                       ),
+                      MyOwnContainer(
+                        icon: Icons.timer,
+                        text: widget.date,
+                      )
                     ],
                   ),
                 ),
@@ -126,9 +133,10 @@ class _PostState extends State<Post> {
   }
 }
 
-class VehiculeContainer extends StatelessWidget {
-  final Vehicules vehiculName;
-  VehiculeContainer({this.vehiculName});
+class MyOwnContainer extends StatelessWidget {
+  final text;
+  final icon;
+MyOwnContainer({this.text,this.icon});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -139,12 +147,12 @@ class VehiculeContainer extends StatelessWidget {
       child: Row(
         children: [
           Icon(
-            Icons.train_rounded,
+            icon,
             size: 20,
           ),
-          Text(vehiculName == null
+          Text(text == null
               ? 'NONE'
-              : vehiculName.toString().substring(10)), // if no vehicule selected then print 'NONE'
+              : text.toString().contains('Vehicules.' ) ? text.toString().substring(10) : text.toString() ), // if no vehicule selected then print 'NONE'
           //substring to delete the string = 'Vehicules.'
 
         ],
