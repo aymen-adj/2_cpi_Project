@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/post.dart';
 import 'package:ii_cpi_project/components/wilaya-widget.dart';
 import 'package:ii_cpi_project/constantes/constants.dart';
 
@@ -10,8 +12,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(color: Colors.teal,),
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Post(),
+            Post(),
+            Post(),
+            Post(),
+            Post(),
+            Post(),
+            Post(),
+            Post(),
+
+          ],
+        ),
+      ),
     );
   }
 }

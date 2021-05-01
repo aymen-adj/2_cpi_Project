@@ -9,15 +9,17 @@ import 'create_offer.dart';
 import 'homeScreen.dart';
 
 class Home extends StatefulWidget {
+  static   PageController index = PageController(initialPage: 0);
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   int selected = 0;
-  PageController index = PageController(initialPage: 0);
+  PageController index ;
   @override
   Widget build(BuildContext context) {
+    index= Home.index;
     return Scaffold(
       drawer: MyDrawer(), //   components/appbar.dart
       appBar: AppBar(

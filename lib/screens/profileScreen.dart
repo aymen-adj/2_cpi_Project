@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
+ static final String id ='profile';
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -9,7 +10,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('profile'),
+      child: Scaffold(body: Text('profile')),
       //TODO: implementation of profile screen
     );
   }
