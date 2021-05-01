@@ -18,11 +18,11 @@ class Post extends StatefulWidget {
       @required this.postID,
       this.description,
       this.image,
-        this.date,
+      this.date,
       @required this.postingDate,
       @required this.postType,
       this.trajet,
-        this.phoneNumber,
+      this.phoneNumber,
       this.vehicule});
   @override
   _PostState createState() => _PostState();
@@ -30,7 +30,7 @@ class Post extends StatefulWidget {
 
 class _PostState extends State<Post> {
   final userName = 'Profile name';
-  int maxlines=2;
+  int maxlines = 2;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,7 +67,9 @@ class _PostState extends State<Post> {
               child: Image.asset('images/logo.png'),
             ),
             title: Text(userName),
-            subtitle: Text(widget.postingDate==null ? 'Just now' :widget.postingDate.toString()),
+            subtitle: Text(widget.postingDate == null
+                ? 'Just now'
+                : widget.postingDate.toString()),
             trailing: DropdownButton(
               icon: Icon(Icons.more_horiz_rounded),
               dropdownColor: Colors.blueGrey,
@@ -102,7 +104,7 @@ class _PostState extends State<Post> {
                     children: [
                       MyOwnContainer(
                         text: widget.vehicule,
-                        icon:Icons.train_rounded,
+                        icon: Icons.train_rounded,
                       ),
                       MyOwnContainer(
                         icon: Icons.timer,
@@ -119,14 +121,20 @@ class _PostState extends State<Post> {
                   height: 70,
                   width: double.infinity,
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       setState(() {
-                        maxlines == 2 && TextOverflow.values != []  ? maxlines = 20 : maxlines = 2;
+                        maxlines == 2 && TextOverflow.values != []
+                            ? maxlines = 20
+                            : maxlines = 2;
                       });
                     },
-                    child: Text(widget.description,textDirection: TextDirection.rtl,
-                    maxLines: maxlines,
-                    overflow: TextOverflow.values== [] ? null : TextOverflow.ellipsis,
+                    child: Text(
+                      widget.description,
+                      textDirection: TextDirection.rtl,
+                      maxLines: maxlines,
+                      overflow: TextOverflow.values == []
+                          ? null
+                          : TextOverflow.ellipsis,
                     ),
                   ),
                 )
@@ -142,7 +150,7 @@ class _PostState extends State<Post> {
 class MyOwnContainer extends StatelessWidget {
   final text;
   final icon;
-MyOwnContainer({this.text,this.icon});
+  MyOwnContainer({this.text, this.icon});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -158,9 +166,11 @@ MyOwnContainer({this.text,this.icon});
           ),
           Text(text == null
               ? 'NONE'
-              : text.toString().contains('Vehicules.' ) ? text.toString().substring(10) : text.toString() ), // if no vehicule selected then print 'NONE'
+              : text.toString().contains('Vehicules.')
+                  ? text.toString().substring(10)
+                  : text
+                      .toString()), // if no vehicule selected then print 'NONE'
           //substring to delete the string = 'Vehicules.'
-
         ],
       ),
       decoration:
