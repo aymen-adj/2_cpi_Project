@@ -5,12 +5,11 @@ import 'package:ii_cpi_project/screens/profileScreen.dart';
 void main() {
   runApp(
     MaterialApp(
-     theme: ThemeData.dark(),
+      theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => Home(),
-       ProfileScreen.id :(context) => ProfileScreen(),
-
+        ProfileScreen.id: (context) => ProfileScreen(),
       },
     ),
   );

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/CustomContainer2.dart';
 
 class WilayaWidget extends StatelessWidget {
   final void Function() onDeletIconPressed;
@@ -36,17 +37,19 @@ class WilayaWidget extends StatelessWidget {
               width: 48,
             )
           : IconButton(
-              icon: Icon(Icons.delete),
+              icon: Icon(Icons.cancel),
               onPressed: onDeletIconPressed,
             ),
-      title: DropdownButtonHideUnderline(
-        child: DropdownButton(
-          isExpanded: true,
-          items: items,
-          value: wilaya,
-          hint: Center(child: Icon(Icons.add)),
-          iconSize: 0,
-          onChanged: onChooseWilaya,
+      title: CustomContainer2(
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            isExpanded: true,
+            items: items,
+            value: wilaya,
+            hint: Center(child: Icon(Icons.add)),
+            iconSize: 0,
+            onChanged: onChooseWilaya,
+          ),
         ),
       ),
     );

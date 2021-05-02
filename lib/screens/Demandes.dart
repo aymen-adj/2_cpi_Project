@@ -11,19 +11,20 @@ class _DemandesScreenState extends State<DemandesScreen> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child:Container(
+        child: Container(
           height: 100,
           child: ListView.builder(
-              itemCount: kWilaya.length-1,
+              itemCount: kWilaya.length - 1,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context,int i){
+              itemBuilder: (BuildContext context, int i) {
                 return Container(
                   color: Colors.amber,
                   height: 40,
                   width: 80,
-                  child: Text(kWilaya[i]),) ;
+                  child: Text(kWilaya[i]),
+                );
               }),
-        ),//TODO: implementation of this screen
+        ),
       ),
     );
   }

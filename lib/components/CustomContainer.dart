@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/CustomContainer2.dart';
 
-
+/**
+ * created by Mosbah :
+ *
+ * this is a custom container used acress the app
+ *  use it ;
+ */
 
 class CustomContainer extends StatelessWidget {
   final String text;
@@ -12,11 +18,7 @@ class CustomContainer extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          height: 26,
-          padding: EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
+        CustomContainer2(
           child: Row(
             children: [
               Icon(
@@ -27,8 +29,8 @@ class CustomContainer extends StatelessWidget {
                 text == null
                     ? 'NONE'
                     : text.contains('Vehicules.')
-                    ? text.substring(10)
-                    : text,
+                        ? text.substring(10)
+                        : text,
                 style: TextStyle(
                   fontSize: 18,
                 ),
@@ -36,35 +38,15 @@ class CustomContainer extends StatelessWidget {
               //substring to delete the string = 'Vehicules.'
             ],
           ),
-          decoration: BoxDecoration(
-              color: Colors.black87,
-              borderRadius: BorderRadius.circular(9),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: const Offset(
-                    1.0,
-                    2.3,
-                  ),
-                  blurRadius: 1.0,
-                  spreadRadius: 0.0,
-                ), //BoxShadow
-                BoxShadow(
-                  color: Colors.white,
-                  offset: const Offset(0.0, 0.0),
-                  blurRadius: 0.0,
-                  spreadRadius: 0.0,
-                ), //BoxShadow
-              ]),
         ),
         subtitle == null
             ? null
             : Text(
-          subtitle,
-          style: TextStyle(
-            fontSize: 18,
-          ),
-        ),
+                subtitle,
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
       ],
     );
   }
