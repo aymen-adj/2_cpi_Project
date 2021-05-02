@@ -79,11 +79,9 @@ class _TrajetBoxState extends State<TrajetBox> {
                   onTap: _pickTime,
                 ),
                 TextField(
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   decoration: InputDecoration(hintText: "مزيد من المعلومات"),
-                  minLines: 1,
-                  maxLines: 3,
-                  maxLength: 200,
                 ),
               ],
             ),

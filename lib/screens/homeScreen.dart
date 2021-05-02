@@ -60,33 +60,8 @@ class _HomePageState extends State<HomePage> {
              time: '13:30',
              phoneNumber: 0540047893,
              description:
-             'jfjfjjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-           ),
-           Post(
-             postID: 20,
-             postingDate: '22/12/2020',
-             postType: 0,
-             userId: 244,
-             vehicule: Vehicules.DACIA,
-             trajet: '1958',
-             date: '22/10/2020',
-             time: '13:30',
-             phoneNumber: 0540047893,
-             description:
-             'jfjfjjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-           ),
-           Post(
-             postID: 20,
-             postingDate: '22/12/2020',
-             postType: 0,
-             userId: 244,
-             vehicule: Vehicules.DACIA,
-             trajet: '1958',
-             date: '22/10/2020',
-             time: '13:30',
-             phoneNumber: 0540047893,
-             description:
-             'jfjfjjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxfjxxxxxxxxxxccccdffxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxjfjfjfjxxxxxxxxxxccccdffxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+             'السلام عليكم \n'
+                 'راني رايح من الجلفة لسطيف بصح ندخل لجيجل قبل. لي محتاج اي حاجة يعيطلي في التيليفون , رقم الهاتف راه واضح عندكم صحاب التطبيق هذا سهلولكم كلش ',
            ),
          ],
       ),
