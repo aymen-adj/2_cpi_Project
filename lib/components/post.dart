@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/CustomContainer.dart';
 import 'package:ii_cpi_project/screens/profileScreen.dart';
 import 'package:ii_cpi_project/constantes/constants.dart';
 
@@ -115,12 +116,12 @@ class _PostState extends State<Post> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              MyOwnContainer(
+                              CustomContainer(
                                 text: widget.vehicule.toString(),
                                 icon: Icons.train_rounded,
                                 subtitle: 'نوع المركبة',
                               ),
-                              MyOwnContainer(
+                              CustomContainer(
                                 icon: Icons.phone,
                                 text: '0${widget.phoneNumber}',
                                 subtitle: 'رقم الهاتف',
@@ -130,12 +131,12 @@ class _PostState extends State<Post> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              MyOwnContainer(
+                              CustomContainer(
                                 icon: Icons.timer,
                                 text: widget.time,
                                 subtitle: 'الوقت',
                               ),
-                              MyOwnContainer(
+                              CustomContainer(
                                 icon: Icons.timer,
                                 text: widget.date,
                                 subtitle: 'تاريخ الانطلاق',
@@ -192,73 +193,6 @@ class _PostState extends State<Post> {
   }
 }
 
-class MyOwnContainer extends StatelessWidget {
-  final String text;
-  final String subtitle;
-  final icon;
-  MyOwnContainer({this.text, this.icon, this.subtitle});
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          height: 26,
-          padding: EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
-          child: Row(
-            children: [
-              Icon(
-                icon,
-                size: 20,
-              ),
-              Text(
-                text == null
-                    ? 'NONE'
-                    : text.contains('Vehicules.')
-                        ? text.substring(10)
-                        : text,
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ), // if no vehicule selected then print 'NONE'
-              //substring to delete the string = 'Vehicules.'
-            ],
-          ),
-          decoration: BoxDecoration(
-              color: Colors.black87,
-              borderRadius: BorderRadius.circular(9),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: const Offset(
-                    1.0,
-                    2.3,
-                  ),
-                  blurRadius: 1.0,
-                  spreadRadius: 0.0,
-                ), //BoxShadow
-                BoxShadow(
-                  color: Colors.white,
-                  offset: const Offset(0.0, 0.0),
-                  blurRadius: 0.0,
-                  spreadRadius: 0.0,
-                ), //BoxShadow
-              ]),
-        ),
-        subtitle == null
-            ? null
-            : Text(
-                subtitle,
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-      ],
-    );
-  }
-}
 
 class TrajetContainer extends StatelessWidget {
   final List trajet;
@@ -272,7 +206,7 @@ class TrajetContainer extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          MyOwnContainer(
+          CustomContainer(
             subtitle: 'نقطة الإنطلاق',
             text: trajet[0],
             icon: Icons.location_on_outlined,
@@ -282,7 +216,7 @@ class TrajetContainer extends StatelessWidget {
             size: 40,
             textDirection: TextDirection.rtl,
           ),
-          MyOwnContainer(
+          CustomContainer(
             subtitle: 'نقطة الوصول',
             text: trajet.last,
             icon: Icons.location_on_outlined,
@@ -302,7 +236,7 @@ class DetailedTrajet extends StatelessWidget {
     for (int i = 0; i < trajet.length; i++) {
       traj.add(Row(
         children: [
-          MyOwnContainer(
+          CustomContainer(
             text: trajet[i],
             subtitle: '',
           ),
