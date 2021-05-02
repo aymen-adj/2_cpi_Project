@@ -13,12 +13,14 @@ class Post extends StatefulWidget {
   final postType;
   final date;
   final phoneNumber;
+  final time;
   Post(
       {@required this.userId,
       @required this.postID,
       this.description,
       this.image,
       this.date,
+        this.time,
       @required this.postingDate,
       @required this.postType,
       this.trajet,
@@ -99,27 +101,45 @@ class _PostState extends State<Post> {
                 child: Column(
                   children: [
                     Container(
-                      height: 80,
-                      width: double.infinity,
+                      height: 150,
+                     // width: double.infinity,
                       padding: EdgeInsets.all(10),
-                      child: Row(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        textDirection: TextDirection.rtl,
                         children: [
-                          MyOwnContainer(
-                            text: widget.vehicule,
-                            icon: Icons.train_rounded,
-                            subtitle: 'نوع المركبة',
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              MyOwnContainer(
+                                text: widget.vehicule,
+                                icon: Icons.train_rounded,
+                                subtitle: 'نوع المركبة',
+                              ),
+                              MyOwnContainer(
+                                icon: Icons.phone,
+                                text: '0${widget.phoneNumber}',
+                                subtitle: 'رقم الهاتف',
+                              )
+                            ],
                           ),
-                          MyOwnContainer(
-                            icon: Icons.timer,
-                            text: widget.date,
-                            subtitle: 'تاريخ الانطلاق',
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              MyOwnContainer(
+                                icon: Icons.timer,
+                                text: widget.time,
+                                subtitle: 'الوقت',
+                              ),
+                              MyOwnContainer(
+                                icon: Icons.timer,
+                                text: widget.date,
+                                subtitle: 'تاريخ الانطلاق',
+                              ),
+
+                            ],
                           ),
-                          MyOwnContainer(
-                            icon: Icons.phone,
-                            text: '0${widget.phoneNumber}',
-                            subtitle: 'رقم الهاتف',
-                          )
                         ],
                       ),
                     ),
@@ -129,7 +149,7 @@ class _PostState extends State<Post> {
                         onTap: () {
                           setState(() {
                             maxlines == 2 && TextOverflow.values != []
-                                ? maxlines = 20
+                                ? maxlines = 50
                                 : maxlines = 2;
                           });
                         },
@@ -145,7 +165,10 @@ class _PostState extends State<Post> {
                               : TextOverflow.ellipsis,semanticsLabel: 'see more',
                         ),
                       ),
-                    )
+                    ),
+                    TrajetContainer(
+                      trajet: kWilaya,
+                    ),
                   ],
                 ),
               )
@@ -182,7 +205,10 @@ class MyOwnContainer extends StatelessWidget {
                   : text.toString().contains('Vehicules.')
                       ? text.toString().substring(10)
                       : text
-                          .toString()), // if no vehicule selected then print 'NONE'
+                          .toString(),
+              style: TextStyle(
+                fontSize: 18,
+              ),), // if no vehicule selected then print 'NONE'
               //substring to delete the string = 'Vehicules.'
             ],
           ),
@@ -215,24 +241,39 @@ class MyOwnContainer extends StatelessWidget {
   }
 }
 
-class TrajetContainer extends StatefulWidget {
-  @override
-  _TrajetContainerState createState() => _TrajetContainerState();
-}
+class TrajetContainer extends StatelessWidget {
+  final List trajet;
 
-class _TrajetContainerState extends State<TrajetContainer> {
+  TrajetContainer({this.trajet}) ;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(),
-        child: Column(
-          children: [
-
-          ],
-        ),
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 20),
+      decoration: BoxDecoration(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          MyOwnContainer(
+            subtitle: 'نقطة الإنطلاق',
+            text: trajet[0],
+            icon: Icons.location_on_outlined,
+          ),
+          Icon(
+            Icons.arrow_right_alt,
+            size: 40,textDirection: TextDirection.rtl,
+          ),
+          MyOwnContainer(
+            subtitle: 'نقطة الوصول',
+            text: trajet.last,
+            icon: Icons.location_on_outlined,
+          ),
+        ],
       ),
     );
   }
 }
+
+
+
+
 
