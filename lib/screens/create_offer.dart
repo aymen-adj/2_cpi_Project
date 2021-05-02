@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/list-wilaya.dart';
 import 'package:ii_cpi_project/components/post.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
+import 'package:ii_cpi_project/constantes/functions.dart';
 
 class TrajetBox extends StatefulWidget {
   @override
@@ -129,7 +130,7 @@ class _TrajetBoxState extends State<TrajetBox> {
 
   void submit() {
     Posts.add(
-      Post(userId: 1, postID: 01, postingDate: '01/05/2021', postType: 1,
+      Post(userId: 1, postID: 01, postingDate: getPostingTime(), postType: 1,
         time:  '${time.hour}:${time.minute}',
       date:'${pickedDate.year}/${pickedDate.month}/${pickedDate.day}',
       description: description,
