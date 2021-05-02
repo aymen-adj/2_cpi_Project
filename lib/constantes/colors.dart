@@ -1,4 +1,3 @@
 import 'package:flutter/material.dart';
 
-const kMyColor = Colors.red;
-
+const ActiveColor = Colors.blueGrey;

@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
  *  use it ;
  */
 
-class CustomContainer2 extends StatelessWidget {
+class BasicContainerWithShadow extends StatelessWidget {
   final Widget child;
-  CustomContainer2({
+  BasicContainerWithShadow({
     this.child,
   });
   @override

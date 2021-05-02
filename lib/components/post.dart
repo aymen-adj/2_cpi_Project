@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/CustomContainer.dart';
 import 'package:ii_cpi_project/screens/profileScreen.dart';
-import 'package:ii_cpi_project/constantes/constants.dart';
 
 class Post extends StatefulWidget {
   final userId;
@@ -15,18 +14,19 @@ class Post extends StatefulWidget {
   final String date;
   final String phoneNumber;
   final time;
-  Post(
-      {@required this.userId,
-      @required this.postID,
-      this.description,
-      this.image,
-      this.date,
-      this.time,
-      @required this.postingDate,
-      @required this.postType,
-      this.trajet,
-      this.phoneNumber,
-      this.vehicule});
+  Post({
+    @required this.userId,
+    @required this.postID,
+    this.description,
+    this.image,
+    this.date,
+    this.time,
+    @required this.postingDate,
+    @required this.postType,
+    this.trajet,
+    this.phoneNumber,
+    this.vehicule,
+  });
   @override
   _PostState createState() => _PostState();
 }
@@ -193,9 +193,8 @@ class _PostState extends State<Post> {
   }
 }
 
-
 class TrajetContainer extends StatelessWidget {
-  final List trajet;
+  final List<String> trajet;
 
   TrajetContainer({this.trajet});
   @override
@@ -241,9 +240,7 @@ class DetailedTrajet extends StatelessWidget {
             subtitle: '',
           ),
           Column(
-            children: [
-
-            ],
+            children: [],
           )
         ],
       ));
@@ -252,8 +249,7 @@ class DetailedTrajet extends StatelessWidget {
       margin: EdgeInsets.all(10),
       child: Center(
         child: Row(
-       mainAxisAlignment: MainAxisAlignment.center,
-
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
               children: traj,

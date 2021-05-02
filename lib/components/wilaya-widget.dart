@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/components/CustomContainer2.dart';
+
+import 'BasicContainerWithShadow.dart';
 
 class WilayaWidget extends StatelessWidget {
   final void Function() onDeletIconPressed;
@@ -40,7 +41,7 @@ class WilayaWidget extends StatelessWidget {
               icon: Icon(Icons.cancel),
               onPressed: onDeletIconPressed,
             ),
-      title: CustomContainer2(
+      title: BasicContainerWithShadow(
         child: DropdownButtonHideUnderline(
           child: DropdownButton(
             isExpanded: true,

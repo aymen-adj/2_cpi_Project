@@ -5,8 +5,8 @@ import 'package:ii_cpi_project/constantes/colors.dart';
 import 'package:ii_cpi_project/screens/profileScreen.dart';
 
 import 'Demandes.dart';
+import 'Offers.dart';
 import 'create_offer.dart';
-import 'homeScreen.dart';
 
 class Home extends StatefulWidget {
   static PageController index = PageController(initialPage: 0);
@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
               IconButton(
                   icon: Icon(
                     Icons.home,
-                    color: selected == 0 ? kMyColor : Colors.grey,
+                    color: selected == 0 ? ActiveColor : Colors.grey,
                   ),
                   iconSize: 36,
                   onPressed: () {
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
               IconButton(
                   icon: Icon(
                     Icons.contacts_rounded,
-                    color: selected == 1 ? kMyColor : Colors.grey,
+                    color: selected == 1 ? ActiveColor : Colors.grey,
                   ),
                   iconSize: 36,
                   onPressed: () {
@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
               IconButton(
                   icon: Icon(
                     Icons.schedule_send,
-                    color: selected == 2 ? kMyColor : Colors.grey,
+                    color: selected == 2 ? ActiveColor : Colors.grey,
                   ),
                   iconSize: 36,
                   onPressed: () {
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
               IconButton(
                   icon: Icon(
                     Icons.account_circle,
-                    color: selected == 3 ? kMyColor : Colors.grey,
+                    color: selected == 3 ? ActiveColor : Colors.grey,
                   ),
                   iconSize: 36,
                   onPressed: () {
@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
           },
           controller: index,
           children: [
-            HomePage(),
+            Offers(),
             DemandesScreen(),
             TrajetBox(),
             ProfileScreen(),

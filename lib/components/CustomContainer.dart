@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/components/CustomContainer2.dart';
+
+import 'BasicContainerWithShadow.dart';
 
 /**
  * created by Mosbah :
@@ -18,7 +19,7 @@ class CustomContainer extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CustomContainer2(
+        BasicContainerWithShadow(
           child: Row(
             children: [
               Icon(

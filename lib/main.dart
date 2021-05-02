@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/screens/home.dart';
+import 'package:ii_cpi_project/screens/Home.dart';
 import 'package:ii_cpi_project/screens/profileScreen.dart';
 
 void main() {
