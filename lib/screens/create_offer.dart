@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/list-wilaya.dart';
+import 'package:ii_cpi_project/components/post.dart';
+import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
 
 class TrajetBox extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class _TrajetBoxState extends State<TrajetBox> {
   TimeOfDay time;
   List<String> traget;
   String vehicle;
+  String description;
   List<DropdownMenuItem<String>> vehicles = [
     DropdownMenuItem(value: "شاحنة", child: Text("شاحنة")),
     DropdownMenuItem(value: "سيارة", child: Text("سيارة")),
@@ -82,6 +85,11 @@ class _TrajetBoxState extends State<TrajetBox> {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   decoration: InputDecoration(hintText: "مزيد من المعلومات"),
+                  onChanged: (_){
+                    setState(() {
+                      description=_;
+                    });
+                  },
                 ),
               ],
             ),
@@ -119,5 +127,21 @@ class _TrajetBoxState extends State<TrajetBox> {
     }
   }
 
-  void submit() {}
+  void submit() {
+    Posts.add(
+      Post(userId: 1, postID: 01, postingDate: '01/05/2021', postType: 1,
+        time:  '${time.hour}:${time.minute}',
+      date:'${pickedDate.year}/${pickedDate.month}/${pickedDate.day}',
+      description: description,
+        vehicule: vehicle,
+        trajet: traget,
+        phoneNumber: '0540047893',
+        image: Image.asset("images/logo.png"),
+      )
+    );
+
+    print(vehicle);
+    print(description);
+
+  }
 }

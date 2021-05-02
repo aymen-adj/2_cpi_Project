@@ -7,12 +7,12 @@ class Post extends StatefulWidget {
   final postID;
   final postingDate;
   final Image image;
-  final trajet;
-  final Vehicules vehicule;
-  final description;
+  final List trajet;
+  final String vehicule;
+  final String description;
   final postType;
-  final date;
-  final phoneNumber;
+  final String date;
+  final String phoneNumber;
   final time;
   Post(
       {@required this.userId,
@@ -175,10 +175,10 @@ class _PostState extends State<Post> {
                       },
                       child: trajetIsDetailed
                           ? DetailedTrajet(
-                              trajet: kWilaya.sublist(16, 19),
+                              trajet: widget.trajet,
                             )
                           : TrajetContainer(
-                              trajet: kWilaya.sublist(16, 19),
+                              trajet: widget.trajet,
                             ),
                     ),
                   ],
@@ -319,7 +319,7 @@ class DetailedTrajet extends StatelessWidget {
       child: Center(
         child: Row(
        mainAxisAlignment: MainAxisAlignment.center,
-    
+
           children: [
             Column(
               children: traj,
