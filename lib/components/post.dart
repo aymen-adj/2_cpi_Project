@@ -20,7 +20,7 @@ class Post extends StatefulWidget {
       this.description,
       this.image,
       this.date,
-        this.time,
+      this.time,
       @required this.postingDate,
       @required this.postType,
       this.trajet,
@@ -33,6 +33,7 @@ class Post extends StatefulWidget {
 class _PostState extends State<Post> {
   final userName = 'Profile name';
   int maxlines = 2;
+  bool trajetIsDetailed = false;
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -75,7 +76,9 @@ class _PostState extends State<Post> {
                     ? 'Just now'
                     : widget.postingDate.toString()),
                 trailing: DropdownButton(
-                  underline: Container(width: 1,),
+                  underline: Container(
+                    width: 1,
+                  ),
                   icon: Icon(Icons.more_horiz_rounded),
                   dropdownColor: Colors.blueGrey,
                   items: <String>['Save Post', 'Report Post', 'Notify Me']
@@ -102,7 +105,7 @@ class _PostState extends State<Post> {
                   children: [
                     Container(
                       height: 150,
-                     // width: double.infinity,
+                      // width: double.infinity,
                       padding: EdgeInsets.all(10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -113,7 +116,7 @@ class _PostState extends State<Post> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               MyOwnContainer(
-                                text: widget.vehicule,
+                                text: widget.vehicule.toString(),
                                 icon: Icons.train_rounded,
                                 subtitle: 'نوع المركبة',
                               ),
@@ -137,7 +140,6 @@ class _PostState extends State<Post> {
                                 text: widget.date,
                                 subtitle: 'تاريخ الانطلاق',
                               ),
-
                             ],
                           ),
                         ],
@@ -155,19 +157,29 @@ class _PostState extends State<Post> {
                         },
                         child: Text(
                           widget.description,
-                          style: TextStyle(
-                            fontSize: 20
-                          ),
+                          style: TextStyle(fontSize: 20),
                           textDirection: TextDirection.rtl,
                           maxLines: maxlines,
                           overflow: TextOverflow.values == []
                               ? null
-                              : TextOverflow.ellipsis,semanticsLabel: 'see more',
+                              : TextOverflow.ellipsis,
+                          semanticsLabel: 'see more',
                         ),
                       ),
                     ),
-                    TrajetContainer(
-                      trajet: kWilaya,
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          trajetIsDetailed = !trajetIsDetailed;
+                        });
+                      },
+                      child: trajetIsDetailed
+                          ? DetailedTrajet(
+                              trajet: kWilaya.sublist(16, 19),
+                            )
+                          : TrajetContainer(
+                              trajet: kWilaya.sublist(16, 19),
+                            ),
                     ),
                   ],
                 ),
@@ -181,13 +193,14 @@ class _PostState extends State<Post> {
 }
 
 class MyOwnContainer extends StatelessWidget {
-  final text;
+  final String text;
   final String subtitle;
   final icon;
-  MyOwnContainer({this.text, this.icon,this.subtitle});
+  MyOwnContainer({this.text, this.icon, this.subtitle});
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           height: 26,
@@ -200,42 +213,48 @@ class MyOwnContainer extends StatelessWidget {
                 icon,
                 size: 20,
               ),
-              Text(text == null
-                  ? 'NONE'
-                  : text.toString().contains('Vehicules.')
-                      ? text.toString().substring(10)
-                      : text
-                          .toString(),
-              style: TextStyle(
-                fontSize: 18,
-              ),), // if no vehicule selected then print 'NONE'
+              Text(
+                text == null
+                    ? 'NONE'
+                    : text.contains('Vehicules.')
+                        ? text.substring(10)
+                        : text,
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ), // if no vehicule selected then print 'NONE'
               //substring to delete the string = 'Vehicules.'
             ],
           ),
-          decoration:
-              BoxDecoration(
-                  color: Colors.black87 ,
-                  borderRadius: BorderRadius.circular(9), boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              offset: const Offset(
-                1.0,
-                2.3,
-              ),
-              blurRadius: 1.0,
-              spreadRadius: 0.0,
-            ), //BoxShadow
-            BoxShadow(
-              color: Colors.white,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ), //BoxShadow
-          ]),
+          decoration: BoxDecoration(
+              color: Colors.black87,
+              borderRadius: BorderRadius.circular(9),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: const Offset(
+                    1.0,
+                    2.3,
+                  ),
+                  blurRadius: 1.0,
+                  spreadRadius: 0.0,
+                ), //BoxShadow
+                BoxShadow(
+                  color: Colors.white,
+                  offset: const Offset(0.0, 0.0),
+                  blurRadius: 0.0,
+                  spreadRadius: 0.0,
+                ), //BoxShadow
+              ]),
         ),
-        Text(subtitle,style: TextStyle(
-          fontSize: 18,
-        ),)
+        subtitle == null
+            ? null
+            : Text(
+                subtitle,
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
       ],
     );
   }
@@ -244,7 +263,7 @@ class MyOwnContainer extends StatelessWidget {
 class TrajetContainer extends StatelessWidget {
   final List trajet;
 
-  TrajetContainer({this.trajet}) ;
+  TrajetContainer({this.trajet});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -260,7 +279,8 @@ class TrajetContainer extends StatelessWidget {
           ),
           Icon(
             Icons.arrow_right_alt,
-            size: 40,textDirection: TextDirection.rtl,
+            size: 40,
+            textDirection: TextDirection.rtl,
           ),
           MyOwnContainer(
             subtitle: 'نقطة الوصول',
@@ -273,7 +293,40 @@ class TrajetContainer extends StatelessWidget {
   }
 }
 
+class DetailedTrajet extends StatelessWidget {
+  List<dynamic> trajet;
+  DetailedTrajet({this.trajet});
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> traj = [];
+    for (int i = 0; i < trajet.length; i++) {
+      traj.add(Row(
+        children: [
+          MyOwnContainer(
+            text: trajet[i],
+            subtitle: '',
+          ),
+          Column(
+            children: [
 
-
-
-
+            ],
+          )
+        ],
+      ));
+    }
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: Center(
+        child: Row(
+       mainAxisAlignment: MainAxisAlignment.center,
+    
+          children: [
+            Column(
+              children: traj,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
