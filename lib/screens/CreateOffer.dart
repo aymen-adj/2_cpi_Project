@@ -111,7 +111,7 @@ class _CreateOfferState extends State<CreateOffer> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            submit();
+                            //submit();
                             Offers.createPostVisible = false;
                           });
                         },
@@ -120,6 +120,7 @@ class _CreateOfferState extends State<CreateOffer> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
+                            //submit();
                             Offers.createPostVisible = false;
                           });
                         },
