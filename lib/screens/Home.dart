@@ -4,7 +4,6 @@ import 'package:ii_cpi_project/components/Drawer.dart';
 import 'package:ii_cpi_project/constantes/Colors.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 
-import 'CreateOffer.dart';
 import 'Demandes.dart';
 import 'Offers.dart';
 
@@ -26,7 +25,7 @@ class _HomeState extends State<Home> {
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
                   icon: Icon(
@@ -54,7 +53,7 @@ class _HomeState extends State<Home> {
                   }),
               IconButton(
                   icon: Icon(
-                    Icons.schedule_send,
+                    Icons.account_circle,
                     color: selected == 2 ? ActiveColor : Colors.grey,
                   ),
                   iconSize: 36,
@@ -62,18 +61,6 @@ class _HomeState extends State<Home> {
                     setState(() {
                       index.jumpToPage(2);
                       selected = 2;
-                    });
-                  }),
-              IconButton(
-                  icon: Icon(
-                    Icons.account_circle,
-                    color: selected == 3 ? ActiveColor : Colors.grey,
-                  ),
-                  iconSize: 36,
-                  onPressed: () {
-                    setState(() {
-                      index.jumpToPage(3);
-                      selected = 3;
                     });
                   }),
             ],
@@ -89,7 +76,6 @@ class _HomeState extends State<Home> {
           children: [
             Offers(),
             DemandesScreen(),
-            CreateOffer(),
             ProfileScreen(),
           ],
         ),

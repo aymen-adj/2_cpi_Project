@@ -21,27 +21,39 @@ class _OffersState extends State<Offers> {
     );
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: ActiveColor,
-        child: Icon(
-          !Offers.createPostVisible ? Icons.post_add_rounded : Icons.cancel,
-          size: 40,
-          color: Colors.white,
-        ),
-        //onPressed: _appearenceOfCreateOffer,
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (_) => CreateOffer(),
-          );
-        },
-      ),
+          backgroundColor: ActiveColor,
+          child: Icon(
+            !Offers.createPostVisible ? Icons.post_add_rounded : Icons.cancel,
+            size: 40,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (b) {
+                  return Dialog(
+                    insetAnimationCurve: Curves.ease,
+                    backgroundColor: Colors.transparent,
+                    insetAnimationDuration: Duration(milliseconds: 3000),
+                    child: CreateOffer(),
+                  );
+                });
+          }),
       body: Stack(
         children: [
           CustomScrollView(
             controller: scrollController,
             slivers: Posts,
           ),
-          Offers.createPostVisible ? CreateOffer() : Container(),
+          //Offers.createPostVisible ? CreateOffer() : Container(),
+          Offers.createPostVisible
+              ? Dialog(
+                  insetAnimationCurve: Curves.ease,
+                  backgroundColor: Colors.transparent,
+                  insetAnimationDuration: Duration(milliseconds: 3000),
+                  child: CreateOffer(),
+                )
+              : Container(),
         ],
       ),
     );

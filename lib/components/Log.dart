@@ -9,7 +9,7 @@ class Bouton extends StatelessWidget {
   final Color textcolor;
   final Color boutoncolor;
   final String text;
-  final Function onpressed;€
+  final Function onpressed;
 
   @override
   Widget build(BuildContext context) {
