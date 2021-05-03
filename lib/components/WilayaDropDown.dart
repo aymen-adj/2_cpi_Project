@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import 'BasicContainerWithShadow.dart';
 
-class WilayaWidget extends StatelessWidget {
+class WIlayaDropDown extends StatelessWidget {
   final void Function() onDeletIconPressed;
   final void Function(String newWilaya) onChooseWilaya;
   final Key key;
   final String wilaya;
   final List<String> wilayat;
 
-  WilayaWidget(
+  WIlayaDropDown(
       {@required this.onDeletIconPressed,
       this.onChooseWilaya,
       this.key,

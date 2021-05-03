@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/components/wilaya-widget.dart';
-import 'package:ii_cpi_project/constantes/constants.dart';
+import 'package:ii_cpi_project/components/WilayaDropDown.dart';
+import 'package:ii_cpi_project/constantes/Constants.dart';
 
-class ListWilayaWedget extends StatefulWidget {
+class TragetChooser extends StatefulWidget {
   final void Function(List<String> traget) onChooseTraget;
-  ListWilayaWedget.listWilaya({this.onChooseTraget});
+  TragetChooser.listWilaya({this.onChooseTraget});
 
   @override
-  _ListWilayaWedgetState createState() => _ListWilayaWedgetState();
+  _TragetChooserState createState() => _TragetChooserState();
 }
 
-class _ListWilayaWedgetState extends State<ListWilayaWedget> {
+class _TragetChooserState extends State<TragetChooser> {
   List<String> _traget = [null];
 
   @override
@@ -39,7 +39,7 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
         kWilaya2.remove(_traget[i]);
       }
       l.add(
-        WilayaWidget(
+        WIlayaDropDown(
           key: Key("$index"),
           wilayat: List.from(kWilaya2),
           wilaya: _traget[index],
