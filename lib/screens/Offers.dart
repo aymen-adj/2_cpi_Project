@@ -35,7 +35,7 @@ class _OffersState extends State<Offers> {
             slivers: Posts,
           ),
           createPostVisible? Center(child: Container(
-              height: size.height-250,
+              height: size.height-340,
               child: TrajetBox()),
           ):Container(),
         ],

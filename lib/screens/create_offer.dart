@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/BasicContainerWithShadow.dart';
 import 'package:ii_cpi_project/components/list-wilaya.dart';
 import 'package:ii_cpi_project/components/post.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
@@ -41,7 +42,7 @@ class _TrajetBoxState extends State<TrajetBox> {
           textDirection: TextDirection.rtl,
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   height: 20,
@@ -54,7 +55,7 @@ class _TrajetBoxState extends State<TrajetBox> {
                   ),
                 ),
                 Container(
-                  height: 300,
+                  height: 100,
                   width: double.infinity,
                   child: ListWilayaWedget.listWilaya(
                     onChooseTraget: (_) {
@@ -63,34 +64,56 @@ class _TrajetBoxState extends State<TrajetBox> {
                     },
                   ),
                 ),
-                DropdownButton(
-                  hint: Text("نوع المركبة"),
-                  items: vehicles,
-                  value: vehicle,
-                  onChanged: (_) {
-                    setState(() {
-                      vehicle = _;
-                    });
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: BasicContainerWithShadow(
+                    child: DropdownButton(
+                      hint: Text("نوع المركبة"),
+                      items: vehicles,
+                      value: vehicle,
+                      onChanged: (_) {
+                        setState(() {
+                          vehicle = _;
+                        });
+                      },
+                    ),
+                  ),
                 ),
-                ListTile(
-                  title: Text(
-                      "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
-                  onTap: _pickDate,
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap:  _pickDate,
+                      child: BasicContainerWithShadow(
+                        child: Text(
+                            "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap:  _pickTime,
+                      child: BasicContainerWithShadow(
+                        child: Text("الوقت: ${time.hour}:${time.minute}"),
+                      ),
+                    ),
+                  ],
                 ),
-                ListTile(
-                  title: Text("الوقت: ${time.hour}:${time.minute}"),
-                  onTap: _pickTime,
-                ),
-                TextField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: InputDecoration(hintText: "مزيد من المعلومات"),
-                  onChanged: (_) {
-                    setState(() {
-                      description = _;
-                    });
-                  },
+              ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: BasicContainerWithShadow(
+                    child: TextField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      decoration: InputDecoration(hintText: "مزيد من المعلومات"),
+                      onChanged: (_) {
+                        setState(() {
+                          description = _;
+                        });
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
