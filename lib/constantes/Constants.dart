@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+
 const List<String> kWilaya = [
   "أدرار",
   "الشلف",
   "الأغواط",
   "أم البواقي",
   "باتنة",
-  " بجاية",
+  "بجاية",
   "بسكرة",
-  " بشار",
+  "بشار",
   "البليدة",
   "البويرة",
-  " تمنراست",
-  " تبسة",
+  "تمنراست",
+  "تبسة",
   "تلمسان",
   "تيارت",
   "تيزي وزو",
@@ -22,24 +23,24 @@ const List<String> kWilaya = [
   "سعيدة",
   "سكيكيدة",
   "سيدي بلعباس",
-  " عنابة",
-  " قالمة",
-  " قسنطينة",
-  " المدية",
-  " مستغانم",
-  " المسيلة",
-  " معسكر",
-  " ورقلة",
-  " وهران",
-  " البيض",
-  " إليزي",
-  " برج بوعريريج",
-  " بومرداس",
-  " الطارف",
-  " تندوف",
-  " تسمسيلت",
-  " الوادي",
-  " خنشلة",
+  "عنابة",
+  "قالمة",
+  "قسنطينة",
+  "المدية",
+  "مستغانم",
+  "المسيلة",
+  "معسكر",
+  "ورقلة",
+  "وهران",
+  "البيض",
+  "إليزي",
+  "برج بوعريريج",
+  "بومرداس",
+  "الطارف",
+  "تندوف",
+  "تسمسيلت",
+  "الوادي",
+  "خنشلة",
   "سوق الأهراس",
   "تيبازة",
   "ميلة",
@@ -59,7 +60,6 @@ const List<String> kWilaya = [
   "عين صالح",
   "عين قزّام",
 ];
-
 
 const List<String> kWilayaNumerated = [
   "1 - أدرار",
@@ -131,7 +131,6 @@ enum Vehicules {
 }
 Map wilayat = kWilaya.asMap();
 
-
 class WilayatImages extends StatefulWidget {
   @override
   _WilayatImagesState createState() => _WilayatImagesState();
@@ -147,7 +146,7 @@ class _WilayatImagesState extends State<WilayatImages> {
             itemCount: kWilaya.length,
             reverse: true,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (BuildContext context,int i){
+            itemBuilder: (BuildContext context, int i) {
               return Container(
                 child: Column(
                   children: [
@@ -159,15 +158,18 @@ class _WilayatImagesState extends State<WilayatImages> {
                         ),
                         margin: EdgeInsets.all(6),
                         width: 85,
-                        child: Center(child: Image.asset('images/logo.png',))),
-                    Text(wilayat[i],
-                      style: TextStyle(
-                          fontSize: 19
-                      )
-                      ,textDirection: TextDirection.rtl,),
+                        child: Center(
+                            child: Image.asset(
+                          'images/logo.png',
+                        ))),
+                    Text(
+                      wilayat[i],
+                      style: TextStyle(fontSize: 19),
+                      textDirection: TextDirection.rtl,
+                    ),
                   ],
                 ),
-              ) ;
+              );
             }),
       ),
     );

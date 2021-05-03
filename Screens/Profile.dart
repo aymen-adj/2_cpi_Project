@@ -1,9 +1,10 @@
 import 'dart:ui';
-import 'package:appbar_design/components/TextBox.dart';
+
 import 'package:flutter/material.dart';
-import 'package:appbar_design/components/Circle.dart';
-import 'package:appbar_design/components/RatingStars.dart';
-import 'package:appbar_design/components/RatingNumber.dart';
+import 'package:ii_cpi_project/components/Circle.dart';
+import 'package:ii_cpi_project/components/RatingNumber.dart';
+import 'package:ii_cpi_project/components/RatingStars.dart';
+import 'package:ii_cpi_project/components/TextBox.dart';
 
 class Profile extends StatelessWidget {
   @override

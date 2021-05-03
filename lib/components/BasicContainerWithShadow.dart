@@ -26,7 +26,6 @@ class BasicContainerWithShadow extends StatelessWidget {
       ),
       child: child,
       decoration: BoxDecoration(
-        color: Colors.black87,
         borderRadius: BorderRadius.circular(9),
         boxShadow: [
           BoxShadow(

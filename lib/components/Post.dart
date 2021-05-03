@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/Chips.dart';
 import 'package:ii_cpi_project/components/CustomContainer.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 
@@ -63,7 +64,6 @@ class _PostState extends State<Post> {
               ), //BoxShadow
             ],
             border: Border.all(color: Colors.grey),
-            color: Colors.black87,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
@@ -233,30 +233,11 @@ class DetailedTrajet extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> traj = [];
     for (int i = 0; i < trajet.length; i++) {
-      traj.add(Row(
-        children: [
-          CustomContainer(
-            text: trajet[i],
-            subtitle: '',
-          ),
-          Column(
-            children: [],
-          )
-        ],
-      ));
+      traj.add(buildChip(trajet[i], Colors.deepOrange));
     }
     return Container(
       margin: EdgeInsets.all(10),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              children: traj,
-            )
-          ],
-        ),
-      ),
+      child: chipList(traj),
     );
   }
 }
