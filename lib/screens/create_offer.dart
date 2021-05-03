@@ -86,9 +86,9 @@ class _TrajetBoxState extends State<TrajetBox> {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   decoration: InputDecoration(hintText: "مزيد من المعلومات"),
-                  onChanged: (_){
+                  onChanged: (_) {
                     setState(() {
-                      description=_;
+                      description = _;
                     });
                   },
                 ),
@@ -129,20 +129,21 @@ class _TrajetBoxState extends State<TrajetBox> {
   }
 
   void submit() {
-    Posts.add(
-      Post(userId: 1, postID: 01, postingDate: getPostingTime(), postType: 1,
-        time:  '${time.hour}:${time.minute}',
-      date:'${pickedDate.year}/${pickedDate.month}/${pickedDate.day}',
-      description: description,
-        vehicule: vehicle,
-        trajet: traget,
-        phoneNumber: '0540047893',
-        image: Image.asset("images/logo.png"),
-      )
-    );
+    Posts.add(Post(
+      userId: 1,
+      postID: 01,
+      postingDate: getPostingTime(),
+      postType: 1,
+      time: '${time.hour}:${time.minute}',
+      date: '${pickedDate.year}/${pickedDate.month}/${pickedDate.day}',
+      description: description==null? '' :description,
+      vehicule: vehicle==null? 'NONE' :vehicle,
+      trajet: traget.length>0?traget:[''],
+      phoneNumber: '0540047893',
+      image: Image.asset("images/logo.png"),
+    ));
 
     print(vehicle);
     print(description);
-
   }
 }

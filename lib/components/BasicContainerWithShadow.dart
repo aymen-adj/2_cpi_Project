@@ -15,7 +15,7 @@ class BasicContainerWithShadow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 26,
+     // height: 26,
       padding: EdgeInsets.symmetric(
         horizontal: 10,
       ),
