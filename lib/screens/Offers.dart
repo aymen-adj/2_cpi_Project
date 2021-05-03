@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/appbar.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
+import 'package:ii_cpi_project/constantes/colors.dart';
 import 'package:ii_cpi_project/screens/create_offer.dart';
 
 class Offers extends StatefulWidget {
@@ -20,9 +21,11 @@ class _OffersState extends State<Offers> {
     );
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+          backgroundColor: ActiveColor,
           child: Icon(
-            Icons.delivery_dining,
+            !Offers.createPostVisible ? Icons.post_add_rounded : Icons.cancel,
             size: 40,
+            color: Colors.white,
           ),
           onPressed: _appearenceOfCreateOffer),
       body: Stack(
