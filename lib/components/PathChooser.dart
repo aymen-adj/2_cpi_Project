@@ -3,8 +3,8 @@ import 'package:ii_cpi_project/components/WilayaDropDown.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 
 class TragetChooser extends StatefulWidget {
-  final void Function(List<String> traget) onChooseTraget;
-  TragetChooser.listWilaya({this.onChooseTraget});
+  final void Function(List<String> traget) onChoosePath;
+  TragetChooser.listWilaya({this.onChoosePath});
 
   @override
   _TragetChooserState createState() => _TragetChooserState();
@@ -65,6 +65,6 @@ class _TragetChooserState extends State<TragetChooser> {
   void returnTheTraget() {
     List<String> traget = List.from(path);
     traget.remove(null);
-    widget.onChooseTraget(traget);
+    widget.onChoosePath(traget);
   }
 }

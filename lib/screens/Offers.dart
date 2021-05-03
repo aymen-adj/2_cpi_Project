@@ -21,13 +21,20 @@ class _OffersState extends State<Offers> {
     );
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          backgroundColor: ActiveColor,
-          child: Icon(
-            !Offers.createPostVisible ? Icons.post_add_rounded : Icons.cancel,
-            size: 40,
-            color: Colors.white,
-          ),
-          onPressed: _appearenceOfCreateOffer),
+        backgroundColor: ActiveColor,
+        child: Icon(
+          !Offers.createPostVisible ? Icons.post_add_rounded : Icons.cancel,
+          size: 40,
+          color: Colors.white,
+        ),
+        //onPressed: _appearenceOfCreateOffer,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) => CreateOffer(),
+          );
+        },
+      ),
       body: Stack(
         children: [
           CustomScrollView(

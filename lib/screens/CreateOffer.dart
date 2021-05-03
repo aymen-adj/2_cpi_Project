@@ -3,7 +3,6 @@ import 'package:ii_cpi_project/components/BasicContainerWithShadow.dart';
 import 'package:ii_cpi_project/components/Post.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
-import 'package:ii_cpi_project/screens/Offers.dart';
 
 class CreateOffer extends StatefulWidget {
   @override
@@ -34,102 +33,122 @@ class _CreateOfferState extends State<CreateOffer> {
     Size size = MediaQuery.of(context).size;
     return Center(
       child: BasicContainerWithShadow(
-        child: Container(
-          height: size.height * 0.59,
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    height: 20,
+        height: size.height * 0.4,
+        width: size.width * 0.9,
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "اختيار المسار : ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
                   ),
-                  Text(
-                    "اختيار المسار : ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                ), /*
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: BasicContainerWithShadow(
+                    child: DropdownButton(
+                      hint: Text("نوع المركبة"),
+                      items: vehicles,
+                      value: vehicle,
+                      onChanged: (_) {
+                        setState(() {
+                          vehicle = _;
+                        });
+                      },
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: BasicContainerWithShadow(
-                      child: DropdownButton(
-                        hint: Text("نوع المركبة"),
-                        items: vehicles,
-                        value: vehicle,
-                        onChanged: (_) {
-                          setState(() {
-                            vehicle = _;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: _pickDate,
-                          child: BasicContainerWithShadow(
-                            child: Text(
-                                "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: _pickTime,
-                          child: BasicContainerWithShadow(
-                            child: Text("الوقت: ${time.hour}:${time.minute}"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: BasicContainerWithShadow(
-                      child: TextField(
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        decoration:
-                            InputDecoration(hintText: "مزيد من المعلومات"),
-                        onChanged: (_) {
-                          setState(() {
-                            description = _;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  Row(
+                ),*/
+                /*  Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            //submit();
-                            Offers.createPostVisible = false;
-                          });
-                        },
-                        child: BasicContainerWithShadow(child: Text('OK')),
+                        onTap: _pickDate,
+                        child: BasicContainerWithShadow(
+                          child: Text(
+                            "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}",
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
                       ),
                       GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            //submit();
-                            Offers.createPostVisible = false;
-                          });
-                        },
-                        child: BasicContainerWithShadow(child: Text('Cancel')),
-                      )
+                        onTap: _pickTime,
+                        child: BasicContainerWithShadow(
+                          child: Text(
+                            "الوقت: ${time.hour}:${time.minute}",
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: BasicContainerWithShadow(
+                    child: TextField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      decoration:
+                          InputDecoration(hintText: "مزيد من المعلومات"),
+                      onChanged: (_) {
+                        setState(() {
+                          description = _;
+                        });
+                      },
+                    ),
+                  ),
+                ),*/
+                /*Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          //submit();
+                          Offers.createPostVisible = false;
+                        });
+                      },
+                      child: BasicContainerWithShadow(
+                        width: 120,
+                        height: 50,
+                        child: Center(
+                          child: Text(
+                            'submit',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          //submit();
+                          Offers.createPostVisible = false;
+                        });
+                      },
+                      child: BasicContainerWithShadow(child: Text('Cancel')),
+                    )
+                  ],
+                ),*/
+              ],
             ),
           ),
         ),
