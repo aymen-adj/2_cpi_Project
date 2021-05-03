@@ -6,6 +6,7 @@ import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
 import 'package:ii_cpi_project/screens/Offers.dart';
 
 class CreateOffer extends StatefulWidget {
+  static final String id = 'create Offer';
   @override
   _CreateOfferState createState() => _CreateOfferState();
 }
