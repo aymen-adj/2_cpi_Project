@@ -122,7 +122,7 @@ class _TrajetBoxState extends State<TrajetBox> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            //submit();
+                            submit();
                             Offers.createPostVisible = false;
                           });
                         },
@@ -131,7 +131,6 @@ class _TrajetBoxState extends State<TrajetBox> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            //submit();
                             Offers.createPostVisible = false;
                           });
                         },

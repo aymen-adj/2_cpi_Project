@@ -12,7 +12,6 @@ class ListWilayaWedget extends StatefulWidget {
 
 class _ListWilayaWedgetState extends State<ListWilayaWedget> {
   List<String> _traget = [null];
-
   @override
   Widget build(BuildContext context) {
     return ReorderableListView(
