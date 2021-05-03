@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Drawer.dart';
-import 'package:ii_cpi_project/constantes/colors.dart';
-import 'package:ii_cpi_project/screens/profileScreen.dart';
+import 'package:ii_cpi_project/constantes/Colors.dart';
+import 'package:ii_cpi_project/screens/Profile.dart';
 
+import 'CreateOffer.dart';
 import 'Demandes.dart';
 import 'Offers.dart';
-import 'create_offer.dart';
 
 class Home extends StatefulWidget {
   static PageController index = PageController(initialPage: 0);
@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
           children: [
             Offers(),
             DemandesScreen(),
-            TrajetBox(),
+            CreateOffer(),
             ProfileScreen(),
           ],
         ),

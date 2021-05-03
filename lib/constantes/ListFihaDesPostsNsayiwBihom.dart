@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/components/post.dart';
-import 'package:ii_cpi_project/constantes/constants.dart';
+import 'package:ii_cpi_project/components/Post.dart';
+import 'package:ii_cpi_project/constantes/Constants.dart';
 
 List<Widget> Posts = [
   Center(),
@@ -14,9 +14,8 @@ List<Widget> Posts = [
     trajet: kWilaya,
     date: '22/10/2020',
     time: '13:30',
-    phoneNumber:'0540047893',
-    description:
-    'السلام عليكم'
+    phoneNumber: '0540047893',
+    description: 'السلام عليكم'
         'راني رايح من الجلفة لسطيف بصح ندخل لجيجل قبل. لي محتاج اي حاجة يعيطلي في التيليفون , رقم الهاتف راه واضح عندكم صحاب التطبيق هذا سهلولكم كلش ',
   ),
   Post(
@@ -28,12 +27,8 @@ List<Widget> Posts = [
     trajet: kWilaya,
     date: '22/10/2020',
     time: '13:30',
-    phoneNumber:'0540047893',
-    description:
-    'السلام عليكم'
+    phoneNumber: '0540047893',
+    description: 'السلام عليكم'
         'راني رايح من الجلفة لسطيف بصح ندخل لجيجل قبل. لي محتاج اي حاجة يعيطلي في التيليفون , رقم الهاتف راه واضح عندكم صحاب التطبيق هذا سهلولكم كلش ',
   ),
 ];
-
-
-

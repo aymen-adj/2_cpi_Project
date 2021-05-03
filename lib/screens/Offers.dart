@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/appbar.dart';
+import 'package:ii_cpi_project/constantes/Colors.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
-import 'package:ii_cpi_project/constantes/colors.dart';
-import 'package:ii_cpi_project/screens/create_offer.dart';
+import 'package:ii_cpi_project/screens/CreateOffer.dart';
 
 class Offers extends StatefulWidget {
   static bool createPostVisible = false;
@@ -34,7 +34,7 @@ class _OffersState extends State<Offers> {
             controller: scrollController,
             slivers: Posts,
           ),
-          Offers.createPostVisible ? TrajetBox() : Container(),
+          Offers.createPostVisible ? CreateOffer() : Container(),
         ],
       ),
     );

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/BasicContainerWithShadow.dart';
-import 'package:ii_cpi_project/components/list-wilaya.dart';
-import 'package:ii_cpi_project/components/post.dart';
+import 'package:ii_cpi_project/components/Post.dart';
+import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
-import 'package:ii_cpi_project/constantes/functions.dart';
 import 'package:ii_cpi_project/screens/Offers.dart';
 
-class TrajetBox extends StatefulWidget {
+class CreateOffer extends StatefulWidget {
   @override
-  _TrajetBoxState createState() => _TrajetBoxState();
+  _CreateOfferState createState() => _CreateOfferState();
 }
 
-class _TrajetBoxState extends State<TrajetBox> {
+class _CreateOfferState extends State<CreateOffer> {
   DateTime pickedDate;
   TimeOfDay time;
   List<String> traget;
@@ -53,16 +52,6 @@ class _TrajetBoxState extends State<TrajetBox> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
-                    ),
-                  ),
-                  Container(
-                    height: 100,
-                    width: double.infinity,
-                    child: ListWilayaWedget.listWilaya(
-                      onChooseTraget: (_) {
-                        traget = _;
-                        print(traget);
-                      },
                     ),
                   ),
                   Padding(

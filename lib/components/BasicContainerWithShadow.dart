@@ -9,13 +9,18 @@ import 'package:flutter/material.dart';
 
 class BasicContainerWithShadow extends StatelessWidget {
   final Widget child;
+  final double width;
+  final double height;
   BasicContainerWithShadow({
     this.child,
+    this.width,
+    this.height,
   });
   @override
   Widget build(BuildContext context) {
     return Container(
-     // height: 26,
+      height: height,
+      width: width,
       padding: EdgeInsets.symmetric(
         horizontal: 10,
       ),

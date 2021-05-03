@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/components/wilaya-widget.dart';
-import 'package:ii_cpi_project/constantes/constants.dart';
+import 'package:ii_cpi_project/components/WilayaDropDown.dart';
+import 'package:ii_cpi_project/constantes/Constants.dart';
 
-class ListWilayaWedget extends StatefulWidget {
+class TragetChooser extends StatefulWidget {
   final void Function(List<String> traget) onChooseTraget;
-  ListWilayaWedget.listWilaya({this.onChooseTraget});
+  TragetChooser.listWilaya({this.onChooseTraget});
 
   @override
-  _ListWilayaWedgetState createState() => _ListWilayaWedgetState();
+  _TragetChooserState createState() => _TragetChooserState();
 }
 
-class _ListWilayaWedgetState extends State<ListWilayaWedget> {
-  List<String> _traget = [null];
+class _TragetChooserState extends State<TragetChooser> {
+  List<String> path = [null];
+
   @override
   Widget build(BuildContext context) {
     return ReorderableListView(
@@ -21,8 +22,8 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
           if (oldIndex < newIndex) {
             newIndex -= 1;
           }
-          final String item = _traget.removeAt(oldIndex);
-          _traget.insert(newIndex, item);
+          final String item = path.removeAt(oldIndex);
+          path.insert(newIndex, item);
           returnTheTraget();
         });
       },
@@ -31,27 +32,26 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
 
   List<Widget> getWilayatWidgets() {
     List<Widget> l = [];
-    for (int index = 0; index < _traget.length; index++) {
+    for (int index = 0; index < path.length; index++) {
       List<String> kWilaya2 = List.from(kWilayaNumerated);
-      for (int i = 0; i < _traget.length; i++) {
+      for (int i = 0; i < path.length; i++) {
         if (i == index) continue;
-        kWilaya2.remove(_traget[i]);
+        kWilaya2.remove(path[i]);
       }
       l.add(
-        WilayaWidget(
+        WIlayaDropDown(
           key: Key("$index"),
           wilayat: List.from(kWilaya2),
-          wilaya: _traget[index],
+          wilaya: path[index],
           onDeletIconPressed: () {
-            _traget.remove(_traget[index]);
+            path.remove(path[index]);
             setState(() {});
           },
           onChooseWilaya: (_) {
             setState(
               () {
-                _traget[index] = _;
-                if (_traget.indexOf(null) == -1)
-                  _traget.insert(_traget.length, null);
+                path[index] = _;
+                if (path.indexOf(null) == -1) path.insert(path.length, null);
                 returnTheTraget();
               },
             );
@@ -63,7 +63,7 @@ class _ListWilayaWedgetState extends State<ListWilayaWedget> {
   }
 
   void returnTheTraget() {
-    List<String> traget = List.from(_traget);
+    List<String> traget = List.from(path);
     traget.remove(null);
     widget.onChooseTraget(traget);
   }
