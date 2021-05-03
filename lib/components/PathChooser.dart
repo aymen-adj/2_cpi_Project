@@ -11,7 +11,7 @@ class TragetChooser extends StatefulWidget {
 }
 
 class _TragetChooserState extends State<TragetChooser> {
-  List<String> _traget = [null];
+  List<String> path = [null];
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,8 @@ class _TragetChooserState extends State<TragetChooser> {
           if (oldIndex < newIndex) {
             newIndex -= 1;
           }
-          final String item = _traget.removeAt(oldIndex);
-          _traget.insert(newIndex, item);
+          final String item = path.removeAt(oldIndex);
+          path.insert(newIndex, item);
           returnTheTraget();
         });
       },
@@ -32,27 +32,26 @@ class _TragetChooserState extends State<TragetChooser> {
 
   List<Widget> getWilayatWidgets() {
     List<Widget> l = [];
-    for (int index = 0; index < _traget.length; index++) {
+    for (int index = 0; index < path.length; index++) {
       List<String> kWilaya2 = List.from(kWilayaNumerated);
-      for (int i = 0; i < _traget.length; i++) {
+      for (int i = 0; i < path.length; i++) {
         if (i == index) continue;
-        kWilaya2.remove(_traget[i]);
+        kWilaya2.remove(path[i]);
       }
       l.add(
         WIlayaDropDown(
           key: Key("$index"),
           wilayat: List.from(kWilaya2),
-          wilaya: _traget[index],
+          wilaya: path[index],
           onDeletIconPressed: () {
-            _traget.remove(_traget[index]);
+            path.remove(path[index]);
             setState(() {});
           },
           onChooseWilaya: (_) {
             setState(
               () {
-                _traget[index] = _;
-                if (_traget.indexOf(null) == -1)
-                  _traget.insert(_traget.length, null);
+                path[index] = _;
+                if (path.indexOf(null) == -1) path.insert(path.length, null);
                 returnTheTraget();
               },
             );
@@ -64,7 +63,7 @@ class _TragetChooserState extends State<TragetChooser> {
   }
 
   void returnTheTraget() {
-    List<String> traget = List.from(_traget);
+    List<String> traget = List.from(path);
     traget.remove(null);
     widget.onChooseTraget(traget);
   }
