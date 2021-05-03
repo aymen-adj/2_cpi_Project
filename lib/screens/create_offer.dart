@@ -4,6 +4,7 @@ import 'package:ii_cpi_project/components/list-wilaya.dart';
 import 'package:ii_cpi_project/components/post.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
 import 'package:ii_cpi_project/constantes/functions.dart';
+import 'package:ii_cpi_project/screens/Offers.dart';
 
 class TrajetBox extends StatefulWidget {
   @override
@@ -31,91 +32,115 @@ class _TrajetBoxState extends State<TrajetBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.check),
-          onPressed: submit,
-        ),
-        body: Directionality(
-          textDirection: TextDirection.rtl,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "اختيار المسار : ",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
+    Size size = MediaQuery.of(context).size;
+    return Center(
+      child: BasicContainerWithShadow(
+        child: Container(
+          height: size.height * 0.59,
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    height: 20,
                   ),
-                ),
-                Container(
-                  height: 100,
-                  width: double.infinity,
-                  child: ListWilayaWedget.listWilaya(
-                    onChooseTraget: (_) {
-                      traget = _;
-                      print(traget);
-                    },
+                  Text(
+                    "اختيار المسار : ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: BasicContainerWithShadow(
-                    child: DropdownButton(
-                      hint: Text("نوع المركبة"),
-                      items: vehicles,
-                      value: vehicle,
-                      onChanged: (_) {
-                        setState(() {
-                          vehicle = _;
-                        });
+                  Container(
+                    height: 100,
+                    width: double.infinity,
+                    child: ListWilayaWedget.listWilaya(
+                      onChooseTraget: (_) {
+                        traget = _;
+                        print(traget);
                       },
                     ),
                   ),
-                ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap:  _pickDate,
-                      child: BasicContainerWithShadow(
-                        child: Text(
-                            "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: BasicContainerWithShadow(
+                      child: DropdownButton(
+                        hint: Text("نوع المركبة"),
+                        items: vehicles,
+                        value: vehicle,
+                        onChanged: (_) {
+                          setState(() {
+                            vehicle = _;
+                          });
+                        },
                       ),
                     ),
-                    GestureDetector(
-                      onTap:  _pickTime,
-                      child: BasicContainerWithShadow(
-                        child: Text("الوقت: ${time.hour}:${time.minute}"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        GestureDetector(
+                          onTap: _pickDate,
+                          child: BasicContainerWithShadow(
+                            child: Text(
+                                "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: _pickTime,
+                          child: BasicContainerWithShadow(
+                            child: Text("الوقت: ${time.hour}:${time.minute}"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: BasicContainerWithShadow(
+                      child: TextField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration:
+                            InputDecoration(hintText: "مزيد من المعلومات"),
+                        onChanged: (_) {
+                          setState(() {
+                            description = _;
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            //submit();
+                            Offers.createPostVisible = false;
+                          });
+                        },
+                        child: BasicContainerWithShadow(child: Text('OK')),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            //submit();
+                            Offers.createPostVisible = false;
+                          });
+                        },
+                        child: BasicContainerWithShadow(child: Text('Cancel')),
+                      )
+                    ],
+                  ),
+                ],
               ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: BasicContainerWithShadow(
-                    child: TextField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration: InputDecoration(hintText: "مزيد من المعلومات"),
-                      onChanged: (_) {
-                        setState(() {
-                          description = _;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-              ],
             ),
           ),
         ),
@@ -159,9 +184,9 @@ class _TrajetBoxState extends State<TrajetBox> {
       postType: 1,
       time: '${time.hour}:${time.minute}',
       date: '${pickedDate.year}/${pickedDate.month}/${pickedDate.day}',
-      description: description==null? '' :description,
-      vehicule: vehicle==null? 'NONE' :vehicle,
-      trajet: traget.length>0?traget:[''],
+      description: description == null ? '' : description,
+      vehicule: vehicle == null ? 'NONE' : vehicle,
+      trajet: traget.length > 0 ? traget : [''],
       phoneNumber: '0540047893',
       image: Image.asset("images/logo.png"),
     ));
