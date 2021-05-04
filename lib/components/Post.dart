@@ -168,19 +168,22 @@ class _PostState extends State<Post> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          trajetIsDetailed = !trajetIsDetailed;
-                        });
-                      },
-                      child: trajetIsDetailed
-                          ? DetailedTrajet(
-                              trajet: widget.trajet,
-                            )
-                          : TrajetContainer(
-                              trajet: widget.trajet,
-                            ),
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            trajetIsDetailed = !trajetIsDetailed;
+                          });
+                        },
+                        child: trajetIsDetailed
+                            ? DetailedTrajet(
+                                trajet: widget.trajet,
+                              )
+                            : TrajetContainer(
+                                trajet: widget.trajet,
+                              ),
+                      ),
                     ),
                   ],
                 ),
@@ -231,13 +234,9 @@ class DetailedTrajet extends StatelessWidget {
   DetailedTrajet({this.trajet});
   @override
   Widget build(BuildContext context) {
-    List<Widget> traj = [];
-    for (int i = 0; i < trajet.length; i++) {
-      traj.add(buildChip(trajet[i], Colors.deepOrange));
-    }
     return Container(
       margin: EdgeInsets.all(10),
-      child: chipList(traj),
+      child: chipList(TransformStringToChip(trajet)),
     );
   }
 }

@@ -20,6 +20,14 @@ Widget buildChip(String wilayaName, Color color) {
   );
 }
 
+List<Widget> TransformStringToChip(List<String> listOfString) {
+  List<Widget> traj = [];
+  for (int i = 0; i < listOfString.length; i++) {
+    traj.add(buildChip(listOfString[i], Colors.deepOrange));
+  }
+  return traj;
+}
+
 chipList(List children) {
   return Wrap(
     spacing: 6.0,
