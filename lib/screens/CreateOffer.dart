@@ -5,7 +5,6 @@ import 'package:ii_cpi_project/components/Post.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
-import 'package:ii_cpi_project/screens/Offers.dart';
 
 class CreateOffer extends StatefulWidget {
   static final String id = 'create Offer';
@@ -121,7 +120,7 @@ class _CreateOfferState extends State<CreateOffer> {
                           onTap: () {
                             setState(() {
                               submit();
-                              Offers.createPostVisible = false;
+                              Navigator.pop(context);
                             });
                           },
                           child: BasicContainerWithShadow(child: Text('OK')),
@@ -129,7 +128,7 @@ class _CreateOfferState extends State<CreateOffer> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              Offers.createPostVisible = false;
+                              Navigator.pop(context);
                             });
                           },
                           child:
@@ -186,10 +185,9 @@ class _CreateOfferState extends State<CreateOffer> {
       description: description == null ? '' : description,
       vehicule: vehicle == null ? 'NONE' : vehicle,
       trajet: traget.length > 0 ? traget : [''],
-      phoneNumber: '0540047893',
+      phoneNumber: '540047893',
       image: Image.asset("images/logo.png"),
     ));
-
     print(vehicle);
     print(description);
   }

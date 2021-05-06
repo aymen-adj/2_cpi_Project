@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Post.dart';
+import 'package:ii_cpi_project/components/wilayaImage.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 
 List<Widget> Posts = [
