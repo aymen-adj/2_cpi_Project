@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Drawer.dart';
@@ -77,6 +78,70 @@ class _HomeState extends State<Home> {
             Offers(),
             DemandesScreen(),
             ProfileScreen(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+*/
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/Drawer.dart';
+import 'package:ii_cpi_project/screens/Profile.dart';
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int _currentIndex = 0;
+  List<Widget> pages = [];
+
+  @override
+  void initState() {
+    pages.add(ProfileScreen());
+    pages.add(ProfileScreen());
+    pages.add(ProfileScreen());
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme; /**/
+    return SafeArea(
+      child: Scaffold(
+        drawer: MyDrawer(),
+        body: pages[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          backgroundColor: colorScheme.surface,
+          selectedItemColor: colorScheme.onSurface,
+          unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
+          selectedLabelStyle: textTheme.caption,
+          unselectedLabelStyle: textTheme.caption,
+          onTap: (value) {
+            setState(() => _currentIndex = value);
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.contacts_rounded,
+              ),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              label: "",
+            ),
           ],
         ),
       ),

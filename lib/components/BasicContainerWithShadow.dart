@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 
-/**
- * created by Mosbah :
- *
- * this is a custom container used acress the app
- *  use it ;
- */
-
 class BasicContainerWithShadow extends StatelessWidget {
   final Widget child;
   final double width;
