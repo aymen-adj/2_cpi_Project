@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Drawer.dart';
 import 'package:ii_cpi_project/constantes/Colors.dart';
+import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 
 import 'Demandes.dart';
@@ -17,6 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int selected = 0;
   PageController index;
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     index = Home.index;
@@ -36,6 +38,7 @@ class _HomeState extends State<Home> {
                   iconSize: 36,
                   onPressed: () {
                     setState(() {
+                      gotoTopPage(scrollController);
                       selected = 0;
                       index.jumpToPage(0);
                     });
@@ -75,7 +78,9 @@ class _HomeState extends State<Home> {
           },
           controller: index,
           children: [
-            Offers(),
+            Offers(
+              scrollController: scrollController,
+            ),
             DemandesScreen(),
             ProfileScreen(),
           ],

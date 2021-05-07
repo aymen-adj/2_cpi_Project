@@ -121,11 +121,11 @@ class _PostState extends State<Post> {
                                 icon: Icons.train_rounded,
                                 subtitle: 'نوع المركبة',
                               ),
-                              CustomContainer(
-                                icon: Icons.phone,
-                                text: '0${widget.phoneNumber}',
-                                subtitle: 'رقم الهاتف',
-                              )
+                              // CustomContainer(
+                              //   icon: Icons.phone,
+                              //   text: '${widget.phoneNumber}',
+                              //   subtitle: 'رقم الهاتف',
+                              // )
                             ],
                           ),
                           Row(
@@ -209,8 +209,8 @@ class TrajetContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           CustomContainer(
-            subtitle: 'نقطة الإنطلاق',
-            text: trajet[0],
+            subtitle: 'نقطة الوصول',
+            text: trajet.last,
             icon: Icons.location_on_outlined,
           ),
           Icon(
@@ -219,8 +219,8 @@ class TrajetContainer extends StatelessWidget {
             textDirection: TextDirection.rtl,
           ),
           CustomContainer(
-            subtitle: 'نقطة الوصول',
-            text: trajet.last,
+            subtitle: 'نقطة الإنطلاق',
+            text: trajet[0],
             icon: Icons.location_on_outlined,
           ),
         ],

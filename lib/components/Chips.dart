@@ -5,10 +5,10 @@ Widget buildChip(String wilayaName, Color color) {
     labelPadding: EdgeInsets.all(2.0),
     avatar: CircleAvatar(
       backgroundColor: Colors.white70,
-      child: Text(wilayaName[0].toUpperCase()),
+      child: Text((wilayaName[0] + wilayaName[1]).toUpperCase()),
     ),
     label: Text(
-      wilayaName,
+      wilayaName.substring(4),
       style: TextStyle(
         color: Colors.white,
       ),
@@ -23,12 +23,12 @@ Widget buildChip(String wilayaName, Color color) {
 List<Widget> TransformStringToChip(List<String> listOfString) {
   List<Widget> traj = [];
   for (int i = 0; i < listOfString.length; i++) {
-    traj.add(buildChip(listOfString[i], Colors.deepOrange));
+    traj.add(buildChip(listOfString[i], Colors.lightBlue));
   }
   return traj;
 }
 
-chipList(List children) {
+Widget chipList(List children) {
   return Wrap(
     spacing: 6.0,
     runSpacing: 6.0,

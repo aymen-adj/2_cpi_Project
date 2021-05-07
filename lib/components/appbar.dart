@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-
 class HomeAppBar extends StatefulWidget {
   ScrollController scrollController;
   HomeAppBar({this.scrollController});
@@ -10,7 +9,7 @@ class HomeAppBar extends StatefulWidget {
 }
 
 class _HomeAppBarState extends State<HomeAppBar> {
-  bool isSearching=false;
+  bool isSearching = false;
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -18,37 +17,32 @@ class _HomeAppBarState extends State<HomeAppBar> {
       child: SliverAppBar(
         centerTitle: false,
         expandedHeight: 60,
-        title:isSearching? TextField(
-
-        ): GestureDetector(
-          onTap: (){
-          setState(() {
-            widget.scrollController.animateTo(widget.scrollController.initialScrollOffset,
-                duration: Duration(milliseconds: 2000),
-                curve: Curves.easeOut);
-          });
-          },
-          child: Text('طلبات التوصيل',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 28,
-            ),
-            textDirection: TextDirection.ltr,
-          ),
-        ),
+        title: isSearching
+            ? TextField()
+            : Text(
+                'طلبات التوصيل',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28,
+                ),
+                textDirection: TextDirection.ltr,
+              ),
         floating: true,
         actions: [
           Container(
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black26
-            ),
-            child: IconButton(icon: Icon(isSearching? Icons.cancel : Icons.search,size: 30,), onPressed: (){
-              setState(() {
-                isSearching=!isSearching;
-              });
-            }),
+            decoration:
+                BoxDecoration(shape: BoxShape.circle, color: Colors.black26),
+            child: IconButton(
+                icon: Icon(
+                  isSearching ? Icons.cancel : Icons.search,
+                  size: 30,
+                ),
+                onPressed: () {
+                  setState(() {
+                    isSearching = !isSearching;
+                  });
+                }),
           )
         ],
       ),

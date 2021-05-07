@@ -1,11 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/BasicContainerWithShadow.dart';
 import 'package:ii_cpi_project/components/Chips.dart';
+import 'package:ii_cpi_project/components/PathChooser.dart';
 import 'package:ii_cpi_project/components/Post.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
-import 'package:ii_cpi_project/screens/Offers.dart';
 
 class CreateOffer extends StatefulWidget {
   static final String id = 'create Offer';
@@ -16,7 +17,7 @@ class CreateOffer extends StatefulWidget {
 class _CreateOfferState extends State<CreateOffer> {
   DateTime pickedDate;
   TimeOfDay time;
-  List<String> traget;
+  List<String> traget = [];
   String vehicle;
   String description;
   List<DropdownMenuItem<String>> vehicles = [
@@ -45,24 +46,33 @@ class _CreateOfferState extends State<CreateOffer> {
               textDirection: TextDirection.rtl,
               child: SingleChildScrollView(
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      "اختيار المسار : ",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
+                    RaisedButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return PathChooser.listWilaya(
+                                onChoosePath: (choosedTrajet) {
+                              traget = choosedTrajet;
+                              setState(() {});
+                            });
+                          },
+                        );
+                      },
+                      child: Text(
+                        "اختر المسار ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
                       ),
                     ),
-                    // WIlayaDropDown(
-                    //   onDeletIconPressed: () {},
-                    //   onChooseWilaya: (newWilaya) {
-                    //   },
-                    //   wilayat: kWilaya,
-                    // ),
-                    chipList(TransformStringToChip(kWilaya.sublist(10, 19))),
+                    SingleChildScrollView(
+                        child:
+                            chipList(TransformStringToChip(kWilayaNumerated))),
                     Padding(
                       padding: const EdgeInsets.all(10),
                       child: BasicContainerWithShadow(
@@ -121,7 +131,7 @@ class _CreateOfferState extends State<CreateOffer> {
                           onTap: () {
                             setState(() {
                               submit();
-                              Offers.createPostVisible = false;
+                              Navigator.pop(context);
                             });
                           },
                           child: BasicContainerWithShadow(child: Text('OK')),
@@ -129,7 +139,7 @@ class _CreateOfferState extends State<CreateOffer> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              Offers.createPostVisible = false;
+                              Navigator.pop(context);
                             });
                           },
                           child:
@@ -186,10 +196,9 @@ class _CreateOfferState extends State<CreateOffer> {
       description: description == null ? '' : description,
       vehicule: vehicle == null ? 'NONE' : vehicle,
       trajet: traget.length > 0 ? traget : [''],
-      phoneNumber: '0540047893',
+      phoneNumber: '540047893',
       image: Image.asset("images/logo.png"),
     ));
-
     print(vehicle);
     print(description);
   }
