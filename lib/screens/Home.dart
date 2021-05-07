@@ -93,6 +93,8 @@ class _HomeState extends State<Home> {
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Drawer.dart';
+import 'package:ii_cpi_project/screens/Demandes.dart';
+import 'package:ii_cpi_project/screens/Offers.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 
 class Home extends StatefulWidget {
@@ -106,8 +108,8 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    pages.add(ProfileScreen());
-    pages.add(ProfileScreen());
+    pages.add(Offers());
+    pages.add(Demandes());
     pages.add(ProfileScreen());
     super.initState();
   }
