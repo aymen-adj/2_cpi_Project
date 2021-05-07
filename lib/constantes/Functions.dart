@@ -12,3 +12,8 @@ List<Widget> TransformStringToWidget(List<String> listOfString) {
   }
   return traj;
 }
+
+void gotoTopPage(ScrollController scrollController) {
+  scrollController.animateTo(scrollController.initialScrollOffset,
+      duration: Duration(milliseconds: 2000), curve: Curves.easeOut);
+}

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/WilayaDropDown.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 
-class TragetChooser extends StatefulWidget {
+class PathChooser extends StatefulWidget {
   final void Function(List<String> traget) onChoosePath;
-  TragetChooser.listWilaya({this.onChoosePath});
+  PathChooser.listWilaya({this.onChoosePath});
 
   @override
-  _TragetChooserState createState() => _TragetChooserState();
+  _PathChooserState createState() => _PathChooserState();
 }
 
-class _TragetChooserState extends State<TragetChooser> {
+class _PathChooserState extends State<PathChooser> {
   List<String> path = [null];
 
   @override
@@ -44,8 +44,9 @@ class _TragetChooserState extends State<TragetChooser> {
           wilayat: List.from(kWilaya2),
           wilaya: path[index],
           onDeletIconPressed: () {
-            path.remove(path[index]);
-            setState(() {});
+            setState(() {
+              path.remove(path[index]);
+            });
           },
           onChooseWilaya: (_) {
             setState(

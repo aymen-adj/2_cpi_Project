@@ -6,24 +6,23 @@ import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
 
 class Offers extends StatefulWidget {
-  static bool createPostVisible = false;
+  ScrollController scrollController = ScrollController();
+  Offers({this.scrollController});
   @override
   _OffersState createState() => _OffersState();
 }
 
 class _OffersState extends State<Offers> {
-  ScrollController scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     Posts[0] = HomeAppBar(
-      scrollController: scrollController,
+      scrollController: widget.scrollController,
     );
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: ActiveColor,
           child: Icon(
-            !Offers.createPostVisible ? Icons.post_add_rounded : Icons.cancel,
+            Icons.post_add_rounded,
             size: 40,
             color: Colors.white,
           ),
@@ -33,7 +32,7 @@ class _OffersState extends State<Offers> {
             });
           }),
       body: CustomScrollView(
-        controller: scrollController,
+        controller: widget.scrollController,
         slivers: Posts,
       ),
     );

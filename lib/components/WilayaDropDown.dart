@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'BasicContainerWithShadow.dart';
-
 class WIlayaDropDown extends StatelessWidget {
   final void Function() onDeletIconPressed;
   final void Function(String newWilaya) onChooseWilaya;
@@ -41,16 +39,14 @@ class WIlayaDropDown extends StatelessWidget {
               icon: Icon(Icons.cancel),
               onPressed: onDeletIconPressed,
             ),
-      title: BasicContainerWithShadow(
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton(
-            isExpanded: true,
-            items: items,
-            value: wilaya,
-            hint: Center(child: Icon(Icons.add)),
-            iconSize: 0,
-            onChanged: onChooseWilaya,
-          ),
+      title: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          isExpanded: true,
+          items: items,
+          value: wilaya,
+          hint: Center(child: Icon(Icons.add)),
+          iconSize: 0,
+          onChanged: onChooseWilaya,
         ),
       ),
     );
