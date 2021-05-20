@@ -136,7 +136,10 @@ class _SignState extends State<Sign> {
       db: 'ftrigk',
     );
     var conn = await MySqlConnection.connect(settings);
-    await conn.query(
-        "insert into user (FirstName,PhoneNumber) values (?,?)", [nom, number]);
+    print(conn.toString());
+    var r = await conn.query(
+        "insert into user (FirstName,FamillyName,PhoneNumber) values (?,?,?)",
+        [nom, nom, number]);
+    print(r);
   }
 }
