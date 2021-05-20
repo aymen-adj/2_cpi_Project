@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 enum formtype { pass, name, phone }
 
+class valid {
+  bool valide = true;
+}
+
 class Bouton extends StatelessWidget {
   Bouton(
       {@required this.text,
@@ -55,14 +59,18 @@ class Bar extends StatelessWidget {
 }
 
 class Formule extends StatelessWidget {
+  final void Function(bool b) valide;
+  final void Function(String value) valeur;
   Formule(
       {@required this.text,
       @required this.icon,
       @required this.type,
-      bool valid});
+      this.valide,
+      this.valeur});
   final String text;
   final IconData icon;
   final formtype type;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,19 +82,31 @@ class Formule extends StatelessWidget {
         obscureText: (type == formtype.pass) ?? false,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (String value) {
+          bool b = true;
+          valeur(value);
           if (type == formtype.pass) {
             if (value.length < 8) {
+              b = false;
+              valide(b);
               return 'يرجى إدخال كلمة مرور أكثر أمان';
             }
           } else if (type == formtype.phone) {
             if (!validnumber(value)) {
+              b = false;
+              valide(b);
+              print("given M " + b.toString());
+
               return 'يرجى إدخال رقم صحيح';
             }
           } else {
             if (value.length == 0) {
+              b = false;
+              valide(b);
               return 'يرجى كتابة إسم صحيح';
             }
           }
+          valide(b);
+          return null;
         },
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Log.dart';
@@ -11,6 +12,10 @@ class _SignState extends State<Sign> {
   static bool validpass = true;
   static bool validphone = true;
   static bool valid = true;
+  String number = "";
+  String nom = "";
+  String pass = "";
+  FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,23 +30,40 @@ class _SignState extends State<Sign> {
             Formule(
                 text: 'الإسـم و اللقب',
                 icon: Icons.account_circle,
-                type: formtype.name),
+                type: formtype.name,
+                valide: (b) {
+                  valid = b;
+                },
+                valeur: (value) {
+                  nom = value;
+                }),
             SizedBox(
               height: 20,
             ),
             Formule(
-              text: 'رقم الهاتف',
-              icon: Icons.phone,
-              type: formtype.phone,
-            ),
+                text: 'رقم الهاتف',
+                icon: Icons.phone,
+                type: formtype.phone,
+                valide: (b) {
+                  validphone = b;
+                  print("executed" + valid.toString());
+                },
+                valeur: (value) {
+                  number = value;
+                }),
             SizedBox(
               height: 25,
             ),
             Formule(
-              text: 'كلمة المرور',
-              icon: Icons.vpn_key,
-              type: formtype.pass,
-            ),
+                text: 'كلمة المرور',
+                icon: Icons.vpn_key,
+                type: formtype.pass,
+                valide: (b) {
+                  validpass = b;
+                },
+                valeur: (value) {
+                  pass = value;
+                }),
             SizedBox(
               height: 25,
             ),
@@ -49,16 +71,35 @@ class _SignState extends State<Sign> {
                 text: 'إنشاء حساب جديد',
                 boutoncolor: Colors.blue,
                 textcolor: Colors.white,
-                onpressed: () {
-                  print(valid);
-                  showDialog(
+                onpressed: () async {
+                  if (!(valid && validpass && validphone))
+                    showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                            title: Text('يرجى ملء المعلومات ب طريقة صحيحة'),
-                            content: Text('dsqdksqj'),
-                          ));
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => (Signup2())));
+                        title: Center(child: Text("إنتـبه")),
+                        content: Directionality(
+                          child: Text('يرجى مراجعة المعلومات المدخلة'),
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                    );
+                  else {
+                    await auth.verifyPhoneNumber(
+                        phoneNumber: '+213' + number.substring(1),
+                        timeout: Duration(seconds: 60),
+                        verificationCompleted: (value) async {
+                          print('C bon');
+                        },
+                        verificationFailed: (value) async {
+                          print('mazal');
+                        },
+                        codeSent: (id, val) {
+                          print(val);
+                        },
+                        codeAutoRetrievalTimeout: (value) async {
+                          await print(value);
+                        });
+                  }
                 }),
             SizedBox(
               height: 15,
