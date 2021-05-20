@@ -20,12 +20,6 @@ class _CreateOfferState extends State<CreateOffer> {
   List<String> traget = [];
   String vehicle;
   String description;
-  List<DropdownMenuItem<String>> vehicles = [
-    DropdownMenuItem(value: "شاحنة مبردة", child: Text("شاحنة مبردة")),
-    DropdownMenuItem(value: "شاحنة", child: Text("شاحنة")),
-    DropdownMenuItem(value: "سيارة", child: Text("سيارة")),
-    DropdownMenuItem(value: "دراجة", child: Text("دراجة")),
-  ];
 
   @override
   void initState() {
