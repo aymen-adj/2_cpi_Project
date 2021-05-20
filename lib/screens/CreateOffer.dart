@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/BasicContainerWithShadow.dart';
 import 'package:ii_cpi_project/components/Chips.dart';

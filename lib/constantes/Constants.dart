@@ -129,7 +129,16 @@ enum Vehicules {
   DACIA,
   KANGO,
 }
+
 Map wilayat = kWilaya.asMap();
+
+const List<DropdownMenuItem<String>> vehicles = [
+  DropdownMenuItem(value: "شاحنة مبردة", child: Text("شاحنة مبردة")),
+  DropdownMenuItem(value: "شاحنة", child: Text("شاحنة")),
+  DropdownMenuItem(value: "سيارة", child: Text("سيارة")),
+  DropdownMenuItem(value: "دراجة", child: Text("دراجة")),
+];
+
 const List<DropdownMenuItem<String>> kWilayat = [
   DropdownMenuItem(value: "1 - أدرار", child: Text("1 - أدرار")),
   DropdownMenuItem(value: "2 - الشلف", child: Text("2 - الشلف")),
@@ -191,10 +200,4 @@ const List<DropdownMenuItem<String>> kWilayat = [
   DropdownMenuItem(value: "56 - جانت", child: Text("56 - جانت")),
   DropdownMenuItem(value: "57 - عين صالح", child: Text("57 - عين صالح")),
   DropdownMenuItem(value: "58 - عين قزّام", child: Text("58 - عين قزّام")),
-];
-const List<DropdownMenuItem<String>> vehicles = [
-  DropdownMenuItem(value: "شاحنة مبردة", child: Text("شاحنة مبردة")),
-  DropdownMenuItem(value: "شاحنة", child: Text("شاحنة")),
-  DropdownMenuItem(value: "سيارة", child: Text("سيارة")),
-  DropdownMenuItem(value: "دراجة", child: Text("دراجة")),
 ];
