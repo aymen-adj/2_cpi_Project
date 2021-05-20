@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Log.dart';
+import 'package:mysql1/mysql1.dart';
 
 class Sign extends StatefulWidget {
   @override
@@ -84,6 +85,7 @@ class _SignState extends State<Sign> {
                       ),
                     );
                   else {
+                    createuser();
                     await auth.verifyPhoneNumber(
                         phoneNumber: '+213' + number.substring(1),
                         timeout: Duration(seconds: 60),
@@ -123,5 +125,18 @@ class _SignState extends State<Sign> {
         ),
       )),
     );
+  }
+
+  void createuser() async {
+    var settings = ConnectionSettings(
+      host: '172.20.10.10',
+      port: 3306,
+      user: 'mosbah',
+      password: 'mosbah',
+      db: 'ftrigk',
+    );
+    var conn = await MySqlConnection.connect(settings);
+    await conn.query(
+        "insert into user (FirstName,PhoneNumber) values (?,?)", [nom, number]);
   }
 }
