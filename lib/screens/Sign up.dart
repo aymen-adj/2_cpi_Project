@@ -7,6 +7,7 @@ import 'package:mysql1/mysql1.dart';
 class Sign extends StatefulWidget {
   @override
   _SignState createState() => _SignState();
+  static String id = "sign";
 }
 
 class _SignState extends State<Sign> {
