@@ -5,6 +5,7 @@ import 'package:ii_cpi_project/components/Log.dart';
 import 'package:mysql1/mysql1.dart';
 
 class Sign extends StatefulWidget {
+  static final String id = 'Login';
   @override
   _SignState createState() => _SignState();
 }
@@ -117,7 +118,9 @@ class _SignState extends State<Sign> {
                 text: 'تسجيل الدخول',
                 boutoncolor: Colors.white,
                 textcolor: Colors.blue,
-                onpressed: () {}),
+                onpressed: () {
+                  Navigator.pushNamed(context, Sign.id);
+                }),
             SizedBox(
               height: 25,
             ),
