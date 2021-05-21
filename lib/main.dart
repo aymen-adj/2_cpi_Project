@@ -4,6 +4,7 @@ import 'package:ii_cpi_project/screens/CreateDemande.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
 import 'package:ii_cpi_project/screens/First.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
+import 'package:ii_cpi_project/screens/Rating.dart';
 import 'package:ii_cpi_project/screens/Sign%20up.dart';
 import 'package:ii_cpi_project/screens/log_in.dart';
 
@@ -15,7 +16,7 @@ void main() async {
       // theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => First(),
+        '/': (context) => Rating(),
         ProfileScreen.id: (context) => ProfileScreen(),
         CreateOffer.id: (context) => CreateOffer(),
         CreateDemande.id: (context) => CreateDemande(),
