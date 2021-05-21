@@ -38,7 +38,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                       "Enter your phone number ",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 1987,
+                        fontSize: 17,
                       ),
                     ),
                     SizedBox(

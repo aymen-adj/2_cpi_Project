@@ -4,7 +4,7 @@ import 'package:ii_cpi_project/constantes/Constants.dart';
 
 class PathChooser extends StatefulWidget {
   final void Function(List<String> traget) onChoosePath;
-  PathChooser.listWilaya({this.onChoosePath});
+  PathChooser({this.onChoosePath});
 
   @override
   _PathChooserState createState() => _PathChooserState();
