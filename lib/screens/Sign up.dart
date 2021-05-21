@@ -17,6 +17,7 @@ class _SignState extends State<Sign> {
   String nom = "";
   String pass = "";
   FirebaseAuth auth = FirebaseAuth.instance;
+  String verification;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -88,7 +89,6 @@ class _SignState extends State<Sign> {
                     createuser();
                     await auth.verifyPhoneNumber(
                         phoneNumber: '+213' + number.substring(1),
-                        timeout: Duration(seconds: 60),
                         verificationCompleted: (value) async {
                           print('C bon');
                         },
@@ -96,7 +96,9 @@ class _SignState extends State<Sign> {
                           print('mazal');
                         },
                         codeSent: (id, val) {
-                          print(val);
+                          setState(() {
+                            verification = id;
+                          });
                         },
                         codeAutoRetrievalTimeout: (value) async {
                           await print(value);
@@ -117,7 +119,14 @@ class _SignState extends State<Sign> {
                 text: 'تسجيل الدخول',
                 boutoncolor: Colors.white,
                 textcolor: Colors.blue,
-                onpressed: () {}),
+                onpressed: () {
+                  auth
+                      .signInWithCredential(PhoneAuthProvider.credential(
+                          verificationId: verification, smsCode: pass))
+                      .then((value) {
+                    Navigator.pop(context);
+                  });
+                }),
             SizedBox(
               height: 25,
             ),

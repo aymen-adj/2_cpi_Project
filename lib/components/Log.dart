@@ -85,7 +85,7 @@ class Formule extends StatelessWidget {
           bool b = true;
           valeur(value);
           if (type == formtype.pass) {
-            if (value.length < 8) {
+            if (value.length < 1) {
               b = false;
               valide(b);
               return 'يرجى إدخال كلمة مرور أكثر أمان';
