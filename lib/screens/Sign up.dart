@@ -5,9 +5,9 @@ import 'package:ii_cpi_project/components/Log.dart';
 import 'package:mysql1/mysql1.dart';
 
 class Sign extends StatefulWidget {
-  static final String id = 'Login';
   @override
   _SignState createState() => _SignState();
+  static String id = "sign";
 }
 
 class _SignState extends State<Sign> {
@@ -118,9 +118,7 @@ class _SignState extends State<Sign> {
                 text: 'تسجيل الدخول',
                 boutoncolor: Colors.white,
                 textcolor: Colors.blue,
-                onpressed: () {
-                  Navigator.pushNamed(context, Sign.id);
-                }),
+                onpressed: () {}),
             SizedBox(
               height: 25,
             ),
@@ -139,10 +137,7 @@ class _SignState extends State<Sign> {
       db: 'ftrigk',
     );
     var conn = await MySqlConnection.connect(settings);
-    print(conn.toString());
-    var r = await conn.query(
-        "insert into user (FirstName,FamillyName,PhoneNumber) values (?,?,?)",
-        [nom, nom, number]);
-    print(r);
+    await conn.query(
+        "insert into user (FirstName,PhoneNumber) values (?,?)", [nom, number]);
   }
 }

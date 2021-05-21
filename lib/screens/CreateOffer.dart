@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/components/BasicContainerWithShadow.dart';
-import 'package:ii_cpi_project/components/Chips.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ii_cpi_project/components/PathChooser.dart';
-import 'package:ii_cpi_project/components/Post.dart';
-import 'package:ii_cpi_project/constantes/Constants.dart';
-import 'package:ii_cpi_project/constantes/Functions.dart';
-import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
 
+/*
 class CreateOffer extends StatefulWidget {
   static final String id = 'create Offer';
   @override
@@ -31,119 +27,116 @@ class _CreateOfferState extends State<CreateOffer> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Choix de trajet"),
+      ),
       body: Center(
-        child: BasicContainerWithShadow(
-          child: Container(
-            height: size.height * 0.59,
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    RaisedButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return PathChooser.listWilaya(
-                                onChoosePath: (choosedTrajet) {
-                              traget = choosedTrajet;
-                              setState(() {});
-                            });
-                          },
-                        );
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return PathChooser.listWilaya(
+                            onChoosePath: (choosedTrajet) {
+                          traget = choosedTrajet;
+                          setState(() {});
+                        });
                       },
-                      child: Text(
-                        "اختر المسار ",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
+                    );
+                  },
+                  child: Text(
+                    "اختر المسار ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+                SingleChildScrollView(
+                    child: chipList(
+                        TransformStringToChip(kWilayaNumerated.sublist(1, 3)))),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: BasicContainerWithShadow(
+                    child: DropdownButton(
+                      hint: Text("نوع المركبة"),
+                      items: vehicles,
+                      value: vehicle,
+                      onChanged: (_) {
+                        setState(() {
+                          vehicle = _;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: _pickDate,
+                        child: BasicContainerWithShadow(
+                          child: Text(
+                              "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
                         ),
                       ),
-                    ),
-                    SingleChildScrollView(
-                        child:
-                            chipList(TransformStringToChip(kWilayaNumerated))),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: BasicContainerWithShadow(
-                        child: DropdownButton(
-                          hint: Text("نوع المركبة"),
-                          items: vehicles,
-                          value: vehicle,
-                          onChanged: (_) {
-                            setState(() {
-                              vehicle = _;
-                            });
-                          },
+                      GestureDetector(
+                        onTap: _pickTime,
+                        child: BasicContainerWithShadow(
+                          child: Text("الوقت: ${time.hour}:${time.minute}"),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: BasicContainerWithShadow(
+                    child: TextField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      decoration:
+                          InputDecoration(hintText: "مزيد من المعلومات"),
+                      onChanged: (_) {
+                        setState(() {
+                          description = _;
+                        });
+                      },
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          GestureDetector(
-                            onTap: _pickDate,
-                            child: BasicContainerWithShadow(
-                              child: Text(
-                                  "يوم الانطلاق: ${pickedDate.year}, ${pickedDate.month}, ${pickedDate.day}"),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: _pickTime,
-                            child: BasicContainerWithShadow(
-                              child: Text("الوقت: ${time.hour}:${time.minute}"),
-                            ),
-                          ),
-                        ],
-                      ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          // submit();
+                          //   createPostToDB(postingDate, date, trajet, vehicule, description, postType)
+                          Navigator.pop(context);
+                        });
+                      },
+                      child: BasicContainerWithShadow(child: Text('OK')),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: BasicContainerWithShadow(
-                        child: TextField(
-                          keyboardType: TextInputType.multiline,
-                          maxLines: null,
-                          decoration:
-                              InputDecoration(hintText: "مزيد من المعلومات"),
-                          onChanged: (_) {
-                            setState(() {
-                              description = _;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              // submit();
-                              //   createPostToDB(postingDate, date, trajet, vehicule, description, postType)
-                              Navigator.pop(context);
-                            });
-                          },
-                          child: BasicContainerWithShadow(child: Text('OK')),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              Navigator.pop(context);
-                            });
-                          },
-                          child:
-                              BasicContainerWithShadow(child: Text('Cancel')),
-                        )
-                      ],
-                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          Navigator.pop(context);
+                        });
+                      },
+                      child: BasicContainerWithShadow(child: Text('Cancel')),
+                    )
                   ],
                 ),
-              ),
+              ],
             ),
           ),
         ),
@@ -196,4 +189,73 @@ class _CreateOfferState extends State<CreateOffer> {
     print(vehicle);
     print(description);
   }
+}
+*/
+
+class CreateOffer extends StatefulWidget {
+  static final String id = 'create Offer';
+  @override
+  _CreateOfferState createState() => _CreateOfferState();
+}
+
+class _CreateOfferState extends State<CreateOffer> {
+  DateTime pickedDate;
+  TimeOfDay time;
+  List<String> traget = [];
+  String vehicle;
+  String description;
+
+  int currentStep = 0;
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.arrow_forward_sharp),
+          onPressed: () {
+            currentStep++;
+            setState(() {});
+          },
+        ),
+        body: Stepper(
+          type: StepperType.horizontal,
+          currentStep: currentStep,
+          onStepTapped: (step) {
+            if (step < currentStep) currentStep = step;
+            setState(() {});
+          },
+          controlsBuilder: removeButtons,
+          steps: [
+            Step(
+              isActive: currentStep == 0,
+              title: Text("Choose trajet"),
+              content: Container(
+                height: MediaQuery.of(context).size.height,
+                child: PathChooser(
+                  onChoosePath: (path) {
+                    print(path);
+                  },
+                ),
+              ),
+            ),
+            Step(
+              isActive: currentStep == 1,
+              title: Text("Choose Time"),
+              content: Center(
+                child: Container(
+                  child: Row(
+                    children: [],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget removeButtons(BuildContext,
+          {void Function() onStepCancel, void Function() onStepContinue}) =>
+      Container();
 }
