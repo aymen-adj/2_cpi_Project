@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/Log.dart';
 
 class LogInUsingPhone extends StatefulWidget {
   @override
@@ -28,7 +29,30 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
               isActive: currentStep == 0,
               title: Text("Phone number"),
               content: Center(
-                child: Text("here phone number"),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 200,
+                    ),
+                    Text(
+                      "Enter your phone number ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 1987,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Formule(
+                      text: "phone",
+                      icon: Icons.phone,
+                      type: formtype.phone,
+                      valide: (b) {},
+                      valeur: (b) {},
+                    ),
+                  ],
+                ),
               ),
             ),
             Step(
@@ -36,7 +60,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
               isActive: currentStep == 1,
               title: Text("Phone verification"),
               content: Center(
-                child: Text("here phone verification"),
+                child: Text("here phon e verification"),
               ),
             ),
           ],
