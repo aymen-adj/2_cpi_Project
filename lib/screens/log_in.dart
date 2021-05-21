@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Log.dart';
 
 class Login extends StatefulWidget {
+  static final String id = 'Sign';
   @override
   _LoginState createState() => _LoginState();
 }
@@ -72,7 +73,9 @@ class _LoginState extends State<Login> {
               text: 'إنشاء حساب جديد',
               boutoncolor: Colors.white,
               textcolor: Colors.blue,
-              onpressed: () {},
+              onpressed: () {
+                Navigator.pushNamed(context, Login.id);
+              },
             ),
           ],
         ),

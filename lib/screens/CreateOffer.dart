@@ -123,7 +123,8 @@ class _CreateOfferState extends State<CreateOffer> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              submit();
+                              // submit();
+                              //   createPostToDB(postingDate, date, trajet, vehicule, description, postType)
                               Navigator.pop(context);
                             });
                           },
