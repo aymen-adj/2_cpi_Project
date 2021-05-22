@@ -9,19 +9,14 @@ class LogInUsingPhone extends StatefulWidget {
 
 class _LogInUsingPhoneState extends State<LogInUsingPhone> {
   int currentStep = 0;
+  bool refrech = false;
+  bool valide = false;
+
   @override
   Widget build(BuildContext context) {
+    print("build called valide is " + valide.toString());
     return SafeArea(
       child: Scaffold(
-        //appBar: AppBar(),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.arrow_forward_sharp),
-          onPressed: () {
-            setState(() {
-              if (currentStep == 0) currentStep++;
-            });
-          },
-        ),
         body: Stepper(
           steps: [
             Step(
@@ -48,7 +43,13 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                       text: "phone",
                       icon: Icons.phone,
                       type: formtype.phone,
-                      valide: (b) {},
+                      valide: (b) {
+                        valide = b;
+                        WidgetsBinding.instance
+                            .addPostFrameCallback((timeStamp) {
+                          setState(() {});
+                        });
+                      },
                       valeur: (b) {},
                     ),
                   ],
@@ -56,12 +57,12 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
               ),
             ),
             Step(
-              state: currentStep == 1 ? StepState.editing : StepState.indexed,
+              state: currentStep == 1
+                  ? (valide ? StepState.editing : StepState.error)
+                  : StepState.indexed,
               isActive: currentStep == 1,
               title: Text("Phone verification"),
-              content: Center(
-                child: Text("here phon e verification"),
-              ),
+              content: Text("here phone verification"),
             ),
           ],
           currentStep: currentStep,
@@ -70,6 +71,17 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
             if (step == 0) setState(() => currentStep = step);
           },
           controlsBuilder: removeButtons,
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+            Icons.arrow_forward_sharp,
+          ),
+          backgroundColor: valide ? Colors.blue : Colors.red,
+          onPressed: () {
+            setState(() {
+              if (currentStep == 0 && valide) currentStep++;
+            });
+          },
         ),
       ),
     );

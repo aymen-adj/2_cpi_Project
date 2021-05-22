@@ -76,7 +76,11 @@ class Formule extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(left: 15),
       child: TextFormField(
-        decoration: InputDecoration(icon: Icon(icon), labelText: text),
+        decoration: InputDecoration(
+            icon: Icon(
+              icon,
+            ),
+            labelText: text),
         keyboardType:
             (type == formtype.phone) ? TextInputType.phone : TextInputType.text,
         obscureText: (type == formtype.pass) ?? false,
