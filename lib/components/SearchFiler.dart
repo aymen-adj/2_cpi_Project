@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/components/appbar.dart';
+import 'package:ii_cpi_project/components/DialogFiler.dart';
 
 class Filter extends StatefulWidget {
   Filter({@required this.dropTitle, @required this.dropdownmenu});
@@ -34,11 +34,11 @@ class _FilterState extends State<Filter> {
                   wilaya = value;
                 });
                 if (widget.dropTitle == "الإنطلاق")
-                  HomeAppBar.traget[0] = wilaya;
+                  DialogFilter.traget[0] = wilaya;
                 else if (widget.dropTitle == "الـوصـول")
-                  HomeAppBar.traget[1] = wilaya;
+                  DialogFilter.traget[1] = wilaya;
                 else
-                  HomeAppBar.vehicule = wilaya;
+                  DialogFilter.vehicule = wilaya;
               },
               items: widget.dropdownmenu,
             ),

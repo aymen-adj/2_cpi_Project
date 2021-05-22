@@ -12,13 +12,22 @@ class MyDrawer extends StatelessWidget {
         )),
         child: ListView(
           children: <Widget>[
-            DrawerHeader(
-              child: Image.asset('images/logo.png'),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(
-                bottom: Radius.elliptical(500, 150),
-              )),
-            ),
+            Center(
+                child: DrawerHeader(
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage('images/avatar.jpg'),
+                    radius: 50,
+                  ),
+                  Text(
+                    'Mosbah Aymen',
+                    style: TextStyle(
+                        fontFamily: 'Amiri', fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            )),
             DrawerItem(
               title: 'Find My Location',
               icon: Icons.location_on_outlined,
@@ -36,29 +45,15 @@ class MyDrawer extends StatelessWidget {
               icon: Icons.settings,
             ),
             DrawerItem(
-              title: 'Help',
-              icon: Icons.help_outline_rounded,
+              title: 'Log Out',
+              icon: Icons.logout,
             ),
-            Center(
-              child: UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: Colors.transparent),
-                accountName: Text(
-                  'Mosbah Aymen',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Amiri',
-                      fontWeight: FontWeight.bold),
-                ),
-                currentAccountPicture: CircleAvatar(
-                    backgroundImage: AssetImage('images/avatar.jpg')),
-                accountEmail: Text(
-                  'mosbah.avion12345@gmail.com',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Amiri',
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+            DrawerHeader(
+              child: Image.asset('images/logo.png'),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                bottom: Radius.elliptical(500, 150),
+              )),
             ),
           ],
         ),
