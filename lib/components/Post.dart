@@ -1,33 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Chips.dart';
 import 'package:ii_cpi_project/components/CustomContainer.dart';
+import 'package:ii_cpi_project/models/postClass.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 
 class Post extends StatefulWidget {
-  final userId;
-  final postID;
-  final postingDate;
-  final Image image;
-  final List trajet;
-  final String vehicule;
-  final String description;
-  final postType;
-  final String date;
-  final String phoneNumber;
-  final time;
-  Post({
-    @required this.userId,
-    @required this.postID,
-    this.description,
-    this.image,
-    this.date,
-    this.time,
-    @required this.postingDate,
-    @required this.postType,
-    this.trajet,
-    this.phoneNumber,
-    this.vehicule,
-  });
+  final PostClass post;
+  Post({@required this.post});
   @override
   _PostState createState() => _PostState();
 }
@@ -38,34 +17,11 @@ class _PostState extends State<Post> {
   bool trajetIsDetailed = false;
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Expanded(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 4,
         child: Container(
-          //height: 300,
-          width: double.infinity,
-          margin: EdgeInsets.symmetric(vertical: 10),
-          padding: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                offset: const Offset(
-                  1.0,
-                  0.9,
-                ),
-                blurRadius: 4.0,
-                spreadRadius: 0.0,
-              ), //BoxShadow
-              BoxShadow(
-                color: Colors.white,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ), //BoxShadow
-            ],
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(20),
-          ),
           child: Column(
             children: [
               ListTile(
@@ -73,9 +29,9 @@ class _PostState extends State<Post> {
                   child: Image.asset('images/logo.png'),
                 ),
                 title: Text(userName),
-                subtitle: Text(widget.postingDate == null
+                subtitle: Text(widget.post.postingDate == null
                     ? 'Just now'
-                    : widget.postingDate.toString()),
+                    : widget.post.postingDate.toString()),
                 trailing: DropdownButton(
                   underline: Container(
                     width: 1,
@@ -102,50 +58,9 @@ class _PostState extends State<Post> {
                 },
               ),
               Container(
+                padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Container(
-                      height: 150,
-                      // width: double.infinity,
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        textDirection: TextDirection.rtl,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              CustomContainer(
-                                text: widget.vehicule.toString(),
-                                icon: Icons.train_rounded,
-                                subtitle: 'نوع المركبة',
-                              ),
-                              // CustomContainer(
-                              //   icon: Icons.phone,
-                              //   text: '${widget.phoneNumber}',
-                              //   subtitle: 'رقم الهاتف',
-                              // )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              CustomContainer(
-                                icon: Icons.timer,
-                                text: widget.time,
-                                subtitle: 'الوقت',
-                              ),
-                              CustomContainer(
-                                icon: Icons.timer,
-                                text: widget.date,
-                                subtitle: 'تاريخ الانطلاق',
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
                     Container(
                       width: double.infinity,
                       child: GestureDetector(
@@ -157,7 +72,7 @@ class _PostState extends State<Post> {
                           });
                         },
                         child: Text(
-                          widget.description,
+                          widget.post.description,
                           style: TextStyle(fontSize: 20),
                           textDirection: TextDirection.rtl,
                           maxLines: maxlines,
@@ -168,6 +83,49 @@ class _PostState extends State<Post> {
                         ),
                       ),
                     ),
+                    // Container(
+                    //   height: 150,
+                    //   // width: double.infinity,
+                    //   padding: EdgeInsets.all(10),
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //     crossAxisAlignment: CrossAxisAlignment.center,
+                    //     textDirection: TextDirection.rtl,
+                    //     children: [
+                    //       Row(
+                    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //         children: [
+                    //           CustomContainer(
+                    //             text: widget.post.vehicule.toString(),
+                    //             icon: Icons.train_rounded,
+                    //             subtitle: 'نوع المركبة',
+                    //           ),
+                    //           CustomContainer(
+                    //             icon: Icons.phone,
+                    //             text: '${widget.post.phoneNumber}',
+                    //             subtitle: 'رقم الهاتف',
+                    //           )
+                    //         ],
+                    //       ),
+                    //       Row(
+                    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //         children: [
+                    //           CustomContainer(
+                    //             icon: Icons.timer,
+                    //             text: widget.post.time,
+                    //             subtitle: 'الوقت',
+                    //           ),
+                    //           CustomContainer(
+                    //             icon: Icons.timer,
+                    //             text: widget.post.date,
+                    //             subtitle: 'تاريخ الانطلاق',
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    Divider(),
                     Directionality(
                       textDirection: TextDirection.rtl,
                       child: GestureDetector(
@@ -178,10 +136,10 @@ class _PostState extends State<Post> {
                         },
                         child: trajetIsDetailed
                             ? DetailedTrajet(
-                                trajet: widget.trajet,
+                                trajet: widget.post.trajet,
                               )
                             : TrajetContainer(
-                                trajet: widget.trajet,
+                                trajet: widget.post.trajet,
                               ),
                       ),
                     ),
@@ -203,25 +161,32 @@ class TrajetContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
-      decoration: BoxDecoration(),
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          CustomContainer(
-            subtitle: 'نقطة الوصول',
-            text: trajet.last,
-            icon: Icons.location_on_outlined,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text("     نقطة الاتطلاق  :    "),
+              Chip(
+                label: Text("مسيلة"),
+                avatar: Icon(
+                  Icons.location_on_outlined,
+                ),
+              ),
+            ],
           ),
-          Icon(
-            Icons.arrow_right_alt,
-            size: 40,
-            textDirection: TextDirection.rtl,
-          ),
-          CustomContainer(
-            subtitle: 'نقطة الإنطلاق',
-            text: trajet[0],
-            icon: Icons.location_on_outlined,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text("    نقطة الوصول  :     "),
+              Chip(
+                label: Text("سطيف"),
+                avatar: Icon(
+                  Icons.location_on_outlined,
+                ),
+              ),
+            ],
           ),
         ],
       ),

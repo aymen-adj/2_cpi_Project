@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
-import 'package:ii_cpi_project/components/appbar.dart';
 import 'package:ii_cpi_project/components/SearchFiler.dart';
 
 class DialogFilter extends StatefulWidget {
+  static List<String> traget = [null, null];
+  static String vehicule;
+  static DateTime date;
+
   @override
   _DialogFilterState createState() => _DialogFilterState();
 }
@@ -14,7 +17,7 @@ class _DialogFilterState extends State<DialogFilter> {
     DateTime date = await showDatePicker(
       context: context,
       initialDate: pickedDate,
-      firstDate: DateTime(DateTime.now().year),
+      firstDate: DateTime(DateTime.now().day),
       lastDate: DateTime(DateTime.now().year + 1),
     );
 
@@ -69,8 +72,10 @@ class _DialogFilterState extends State<DialogFilter> {
                 ElevatedButton(
                   child: Text("بحث"),
                   onPressed: () {
-                    print(HomeAppBar.traget);
-                    print(HomeAppBar.vehicule);
+                    print(DialogFilter.traget);
+                    print(DialogFilter.vehicule);
+                    DialogFilter.date = pickedDate;
+                    print(DialogFilter.date);
                   },
                 ),
               ],

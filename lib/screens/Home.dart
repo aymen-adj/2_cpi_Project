@@ -92,6 +92,7 @@ class _HomeState extends State<Home> {
 */
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/DialogFiler.dart';
 import 'package:ii_cpi_project/components/Drawer.dart';
 import 'package:ii_cpi_project/screens/Demandes.dart';
 import 'package:ii_cpi_project/screens/Offers.dart';
@@ -120,6 +121,36 @@ class _HomeState extends State<Home> {
     final textTheme = Theme.of(context).textTheme; /**/
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'طلبات التوصيل',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 28,
+            ),
+            textDirection: TextDirection.ltr,
+          ),
+          actions: [
+            Container(
+              decoration:
+                  BoxDecoration(shape: BoxShape.circle, color: Colors.black26),
+              child: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (_) {
+                          return DialogFilter();
+                        });
+                  }),
+            ),
+          ],
+        ),
         drawer: MyDrawer(),
         body: pages[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
