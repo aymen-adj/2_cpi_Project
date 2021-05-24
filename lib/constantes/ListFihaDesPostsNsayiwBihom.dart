@@ -6,11 +6,11 @@ import 'package:ii_cpi_project/models/postClass.dart';
 
 PostClass firstPostClass = PostClass(
   postID: 20,
-  postingDate: duration.inHours,
+  // postingDate: duration.inHours,
   postType: demande,
   userId: 244,
   vehicule: 'herbine',
-  trajet: kWilayaNumerated.sublist(10, 20),
+  trajet: kWilaya.sublist(4, 14),
   date: '22/10/2020',
   time: '13:30',
   phoneNumber: '0540047893',
@@ -29,16 +29,4 @@ List<Widget> Posts = [
   Post(
     post: firstPostClass,
   ),
-  Post(
-    post: firstPostClass,
-  ),
-  Post(
-    post: firstPostClass,
-  ),
-  Post(
-    post: firstPostClass,
-  ),
-  Post(
-    post: firstPostClass,
-  ),
-];
+].toSet().toList();

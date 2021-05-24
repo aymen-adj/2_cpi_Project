@@ -196,3 +196,5 @@ const List<DropdownMenuItem<String>> kWilayat = [
 
 const bool demande = false;
 const bool offer = true;
+
+var postType = [demande, offer].asMap();

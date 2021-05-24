@@ -106,7 +106,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   List<Widget> pages = [];
-
+  String title = 'عروض التوصيل';
   @override
   void initState() {
     pages.add(Offers());
@@ -124,7 +124,7 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'طلبات التوصيل',
+            title,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -134,8 +134,6 @@ class _HomeState extends State<Home> {
           ),
           actions: [
             Container(
-              decoration:
-                  BoxDecoration(shape: BoxShape.circle, color: Colors.black26),
               child: IconButton(
                   icon: Icon(
                     Icons.search,
@@ -161,7 +159,26 @@ class _HomeState extends State<Home> {
           selectedLabelStyle: textTheme.caption,
           unselectedLabelStyle: textTheme.caption,
           onTap: (value) {
-            setState(() => _currentIndex = value);
+            setState(() {
+              _currentIndex = value;
+              switch (_currentIndex) {
+                case 0:
+                  {
+                    title = 'عروض التوصيل';
+                  }
+                  break;
+                case 1:
+                  {
+                    title = 'طلبات التوصيل';
+                  }
+                  break;
+                case 1:
+                  {
+                    title = 'حسابي الشخصي';
+                  }
+                  break;
+              }
+            });
           },
           items: [
             BottomNavigationBarItem(

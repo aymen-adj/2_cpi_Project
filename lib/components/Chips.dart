@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 
-Widget buildChip(String wilayaName, Color color) {
+Widget buildChip(String wilayaName, int step) {
   return Chip(
-    labelPadding: EdgeInsets.all(2.0),
+    //labelPadding: EdgeInsets.all(2.0),
     avatar: CircleAvatar(
-      backgroundColor: Colors.white70,
-      child: Text((wilayaName[0] + wilayaName[1]).toUpperCase()),
-    ),
-    label: Text(
-      wilayaName.substring(4),
-      style: TextStyle(
-        color: Colors.white,
+      backgroundColor: Colors.white60,
+      child: Text(
+        '$step',
+        style: TextStyle(color: Colors.black),
       ),
     ),
-    backgroundColor: color,
-    elevation: 6.0,
-    shadowColor: Colors.grey[60],
-    padding: EdgeInsets.all(8.0),
+    label: Text(
+      wilayaName,
+      style: TextStyle(
+          //  color: Colors.white,
+          ),
+    ),
   );
 }
 
 List<Widget> TransformStringToChip(List<String> listOfString) {
   List<Widget> traj = [];
   for (int i = 0; i < listOfString.length; i++) {
-    traj.add(buildChip(listOfString[i], Colors.lightBlue));
+    traj.add(buildChip(listOfString[i], i + 1));
   }
   return traj;
 }
