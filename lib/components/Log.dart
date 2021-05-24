@@ -58,7 +58,7 @@ class Bar extends StatelessWidget {
   }
 }
 
-class Formule extends StatelessWidget {
+class Formule extends StatefulWidget {
   final void Function(bool b) valide;
   final void Function(String value) valeur;
   Formule(
@@ -70,30 +70,51 @@ class Formule extends StatelessWidget {
   final String text;
   final IconData icon;
   final formtype type;
+  Color color = Colors.red;
 
   @override
+  _FormuleState createState() => _FormuleState();
+}
+
+class _FormuleState extends State<Formule> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 15),
       child: TextFormField(
-        decoration: InputDecoration(icon: Icon(icon), labelText: text),
-        keyboardType:
-            (type == formtype.phone) ? TextInputType.phone : TextInputType.text,
-        obscureText: (type == formtype.pass) ?? false,
+        decoration: InputDecoration(
+            hintText: "دخل النيميرو مون فرار",
+            icon: Icon(
+              widget.icon,
+              color: widget.color,
+            ),
+            labelText: widget.text),
+        keyboardType: (widget.type == formtype.phone)
+            ? TextInputType.phone
+            : TextInputType.text,
+        obscureText: (widget.type == formtype.pass) ?? false,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (String value) {
           bool b = true;
-          valeur(value);
-          if (type == formtype.pass) {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            setState(() {
+              widget.color = Colors.blue;
+            });
+          });
+          if (widget.type == formtype.pass) {
             if (value.length < 1) {
               b = false;
-              valide(b);
+              widget.valide(b);
               return 'يرجى إدخال كلمة مرور أكثر أمان';
             }
-          } else if (type == formtype.phone) {
-            if (!validnumber(value)) {
+          } else if (widget.type == formtype.phone) {
+            if (!validnumber(value) && value.length != 0) {
               b = false;
-              valide(b);
+              widget.valide(b);
+              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                setState(() {
+                  widget.color = Colors.red;
+                });
+              });
               print("given M " + b.toString());
 
               return 'يرجى إدخال رقم صحيح';
@@ -101,11 +122,11 @@ class Formule extends StatelessWidget {
           } else {
             if (value.length == 0) {
               b = false;
-              valide(b);
+              widget.valide(b);
               return 'يرجى كتابة إسم صحيح';
             }
           }
-          valide(b);
+          widget.valide(b);
           return null;
         },
       ),
