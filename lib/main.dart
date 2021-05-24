@@ -4,8 +4,13 @@ import 'package:ii_cpi_project/screens/CreateDemande.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
 import 'package:ii_cpi_project/screens/Home.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
+<<<<<<< Updated upstream
 import 'package:ii_cpi_project/screens/Sign%20up.dart';
 import 'package:ii_cpi_project/screens/log_in.dart';
+=======
+import 'screens/Home.dart';
+import 'screens/LogInUsingPhone.dart';
+>>>>>>> Stashed changes
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

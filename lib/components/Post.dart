@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ii_cpi_project/components/Chips.dart';
-import 'package:ii_cpi_project/components/CustomContainer.dart';
 import 'package:ii_cpi_project/models/postClass.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 
@@ -12,6 +12,8 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
+  double h = null;
+
   final userName = 'Profile name';
   int maxlines = 2;
   bool trajetIsDetailed = false;
@@ -66,14 +68,14 @@ class _PostState extends State<Post> {
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            maxlines == 2 && TextOverflow.values != []
+                            maxlines == 3 && TextOverflow.values != []
                                 ? maxlines = 50
-                                : maxlines = 2;
+                                : maxlines = 3;
                           });
                         },
                         child: Text(
                           widget.post.description,
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 16),
                           textDirection: TextDirection.rtl,
                           maxLines: maxlines,
                           overflow: TextOverflow.values == []
@@ -128,20 +130,66 @@ class _PostState extends State<Post> {
                     Divider(),
                     Directionality(
                       textDirection: TextDirection.rtl,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            trajetIsDetailed = !trajetIsDetailed;
-                          });
-                        },
-                        child: trajetIsDetailed
-                            ? DetailedTrajet(
-                                trajet: widget.post.trajet,
-                              )
-                            : TrajetContainer(
-                                trajet: widget.post.trajet,
-                              ),
+                      child: AnimatedContainer(
+                        duration: Duration(seconds: 3),
+                        height: h,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              trajetIsDetailed = !trajetIsDetailed;
+                            });
+                          },
+                          child: TrajetContainer(
+                            trajet: widget.post.trajet,
+                          ),
+                        ),
                       ),
+                    ),
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: widget.post.postType
+                          ? ExpansionTile(
+                              title: Text("المزيد"),
+                              expandedAlignment: Alignment.topRight,
+                              children: [
+                                ListTile(
+                                  leading: Icon(Icons.calendar_today_rounded),
+                                  title: Text(widget.post.date),
+                                  subtitle: Text("تاريخ الانطلاق"),
+                                ),
+                                ListTile(
+                                  leading: Icon(Icons.commute),
+                                  title: Text(widget.post.vehicule),
+                                  subtitle: Text("نوع المركبة"),
+                                ),
+                                ListTile(
+                                  onLongPress: () {
+                                    Clipboard.setData(ClipboardData(
+                                        text: widget.post.phoneNumber
+                                            .toString()));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content: Text(
+                                        'تم النسخ   ',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      duration: Duration(milliseconds: 600),
+                                    ));
+                                  },
+                                  leading: Icon(Icons.phone),
+                                  title: Text(widget.post.phoneNumber),
+                                  subtitle: Text("الهاتف"),
+                                ),
+                                DetailedTrajet(
+                                  trajet: widget.post.trajet,
+                                )
+                              ],
+                            )
+                          : ListTile(
+                              leading: Icon(Icons.calendar_today_rounded),
+                              title: Text(widget.post.date),
+                              subtitle: Text("تاريخ الانطلاق"),
+                            ),
                     ),
                   ],
                 ),
@@ -168,24 +216,14 @@ class TrajetContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text("     نقطة الاتطلاق  :    "),
-              Chip(
-                label: Text("مسيلة"),
-                avatar: Icon(
-                  Icons.location_on_outlined,
-                ),
-              ),
+              buildChip(trajet.first, 1)
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text("    نقطة الوصول  :     "),
-              Chip(
-                label: Text("سطيف"),
-                avatar: Icon(
-                  Icons.location_on_outlined,
-                ),
-              ),
+              buildChip(trajet.last, trajet.length)
             ],
           ),
         ],
@@ -201,7 +239,13 @@ class DetailedTrajet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
-      child: chipList(TransformStringToChip(trajet)),
+      child: ListTile(
+          title: chipList(
+            TransformStringToChip(trajet),
+          ),
+          leading: Icon(
+            Icons.alt_route,
+          )),
     );
   }
 }
