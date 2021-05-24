@@ -148,7 +148,7 @@ class _CreateOfferState extends State<CreateOffer> {
     DateTime date = await showDatePicker(
       context: context,
       initialDate: pickedDate,
-      firstDate: DateTime(DateTime.now().year),
+      firstDate: DateTime(DateTime.now().day),
       lastDate: DateTime(DateTime.now().year + 1),
     );
 

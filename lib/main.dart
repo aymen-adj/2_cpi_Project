@@ -9,6 +9,9 @@ import 'package:ii_cpi_project/screens/Rating.dart';
 import 'package:ii_cpi_project/screens/Sign%20up.dart';
 import 'package:ii_cpi_project/screens/log_in.dart';
 
+import 'screens/Home.dart';
+import 'screens/LogInUsingPhone.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -17,12 +20,11 @@ void main() async {
       // theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => Rating(),
+        '/': (context) => LogInUsingPhone(),
+        'home': (context) => Home(),
         ProfileScreen.id: (context) => ProfileScreen(),
         CreateOffer.id: (context) => CreateOffer(),
         CreateDemande.id: (context) => CreateDemande(),
-        Sign.id: (context) => Login(),
-        Login.id: (context) => Sign(),
       },
     ),
   );

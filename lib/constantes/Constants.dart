@@ -122,14 +122,6 @@ const List<String> kWilayaNumerated = [
   "58 - عين قزّام",
 ];
 
-enum Vehicules {
-  Herbine,
-  DFM,
-  DFSK,
-  DACIA,
-  KANGO,
-}
-
 Map wilayat = kWilaya.asMap();
 
 const List<DropdownMenuItem<String>> vehicles = [
@@ -201,3 +193,6 @@ const List<DropdownMenuItem<String>> kWilayat = [
   DropdownMenuItem(value: "57 - عين صالح", child: Text("57 - عين صالح")),
   DropdownMenuItem(value: "58 - عين قزّام", child: Text("58 - عين قزّام")),
 ];
+
+const bool demande = false;
+const bool offer = true;
