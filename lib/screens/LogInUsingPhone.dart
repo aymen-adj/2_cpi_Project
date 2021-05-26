@@ -62,7 +62,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 200,
+                      height: MediaQuery.of(context).size.height / 4,
                     ),
                     Text(
                       "Enter your phone number ",
@@ -75,6 +75,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                       height: 30,
                     ),
                     Formule(
+                        maxLength: 10,
                         text: "Phone",
                         color: _color,
                         keyboardtype: TextInputType.number,
@@ -128,7 +129,16 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                 title: Text("Phone verification"),
                 content: Column(
                   children: [
-                    Text('Drop The OTP here'),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 4,
+                    ),
+                    Text(
+                      'Drop The OTP here',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 17,
+                      ),
+                    ),
                     TextField(
                       maxLength: 6,
                       keyboardType: TextInputType.number,

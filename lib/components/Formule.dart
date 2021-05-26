@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class Formule extends StatefulWidget {
   final String Function(String value) validator;
-
   final String hint;
+  final int maxLength;
   Formule(
       {@required this.text,
       @required this.icon,
@@ -12,6 +12,7 @@ class Formule extends StatefulWidget {
       this.color,
       this.keyboardtype,
       this.pass,
+      this.maxLength,
       this.validator});
   final String text;
   final IconData icon;
@@ -27,17 +28,29 @@ class _FormuleState extends State<Formule> {
     return Container(
       margin: EdgeInsets.only(left: 15),
       child: TextFormField(
+        maxLength: widget.maxLength,
+        cursorColor: widget.color,
         autofocus: true,
         decoration: InputDecoration(
-            hintText: widget.hint,
-            icon: Icon(
-              widget.icon,
-              color: widget.color,
-            ),
-            labelStyle: TextStyle(
-              color: widget.color,
-            ),
-            labelText: widget.text),
+          hintText: widget.hint,
+          icon: Icon(
+            widget.icon,
+            color: widget.color,
+          ),
+          labelStyle: TextStyle(
+            color: widget.color,
+          ),
+          labelText: widget.text,
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: widget.color),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: widget.color),
+          ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(color: widget.color),
+          ),
+        ),
         keyboardType: widget.keyboardtype,
         obscureText: widget.pass ?? false,
         autovalidateMode: AutovalidateMode.always,
