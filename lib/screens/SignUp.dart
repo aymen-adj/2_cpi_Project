@@ -14,12 +14,14 @@ class _SignUpState extends State<SignUp> {
   String fname = "", lname = "";
 
   void setTheColorOfFAB() {
-    if (ColorLName == Colors.grey || ColorLName == Colors.grey) {
-      ColorFAB = Colors.grey;
-    } else if (ColorLName == Colors.red || ColorFName == Colors.red) {
-      ColorFAB = Colors.red;
-    } else if (ColorLName == Colors.blue && ColorLName == Colors.blue) {
+    if (ColorLName == Colors.blue && ColorFName == Colors.blue) {
       ColorFAB = Colors.blue;
+    } else if (ColorLName == Colors.grey || ColorFName == Colors.grey) {
+      ColorFAB = Colors.grey;
+    }
+    if (ColorLName == Colors.red || ColorFName == Colors.red) {
+      ColorFAB = Colors.red;
+      print("red");
     }
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {});
@@ -34,7 +36,7 @@ class _SignUpState extends State<SignUp> {
         backgroundColor: ColorFAB,
         onPressed: () {
           if (ColorFAB == Colors.grey) {
-            showSnackBar("الرجاء ادخال الاسم و اللقب", context);
+            showSnackBar("الرجاء مل الاسم و اللقب", context);
           } else if (ColorFAB == Colors.red) {
             showSnackBar("الرجاء ادخال الاسم و اللقب صحيحان", context);
           } else {}
@@ -72,19 +74,28 @@ class _SignUpState extends State<SignUp> {
                         textDirection: TextDirection.rtl,
                         children: [
                           Formule(
-                            icon: Icons.add,
                             text: "الاسم",
                             color: ColorFName,
                             validator: (value) {
                               fname = value;
-                              return null;
+                              String validator;
+                              if (value == "") {
+                                validator = null;
+                                ColorFName = Colors.grey;
+                              } else if (value == "moh") {
+                                ColorFName = Colors.blue;
+                              } else {
+                                ColorFName = Colors.red;
+                                validator = null;
+                              }
+                              setTheColorOfFAB();
+                              return validator;
                             },
                           ),
                           SizedBox(
                             height: 10,
                           ),
                           Formule(
-                            icon: Icons.add,
                             text: "اللقب",
                             color: ColorLName,
                             validator: (value) {
@@ -96,6 +107,7 @@ class _SignUpState extends State<SignUp> {
                               } else if (value == "moh") {
                                 ColorLName = Colors.blue;
                               } else {
+                                ColorLName = Colors.red;
                                 validator = null;
                               }
                               setTheColorOfFAB();

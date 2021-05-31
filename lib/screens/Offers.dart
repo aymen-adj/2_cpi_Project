@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
 import 'package:ii_cpi_project/constantes/Colors.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
-import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
-import 'package:mysql1/mysql1.dart';
 
 class Offers extends StatefulWidget {
   ScrollController scrollController = ScrollController();
