@@ -75,48 +75,49 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                       height: 30,
                     ),
                     Formule(
-                        maxLength: 10,
-                        text: "Phone",
-                        color: _color,
-                        keyboardtype: TextInputType.number,
-                        icon: Icons.phone,
-                        hint: "يرجى إدخال رقم الهاتف",
-                        validator: (value) {
-                          valide = true;
+                      maxLength: 10,
+                      text: "Phone",
+                      color: _color,
+                      keyboardtype: TextInputType.number,
+                      icon: Icons.phone,
+                      hint: "يرجى إدخال رقم الهاتف",
+                      validator: (value) {
+                        valide = true;
+                        WidgetsBinding.instance
+                            .addPostFrameCallback((timeStamp) {
+                          setState(() {
+                            number = value;
+                          });
+                        });
+
+                        if (number.length == 0) {
                           WidgetsBinding.instance
                               .addPostFrameCallback((timeStamp) {
                             setState(() {
-                              number = value;
+                              _color = Colors.grey;
+                            });
+                            return null;
+                          });
+                        } else if (!ValidNumber(value)) {
+                          WidgetsBinding.instance
+                              .addPostFrameCallback((timeStamp) {
+                            setState(() {
+                              _color = Colors.red;
+                              valide = false;
                             });
                           });
+                        } else {
+                          WidgetsBinding.instance
+                              .addPostFrameCallback((timeStamp) {
+                            setState(() {
+                              _color = Colors.blue;
+                            });
+                          });
+                        }
 
-                          if (number.length == 0) {
-                            WidgetsBinding.instance
-                                .addPostFrameCallback((timeStamp) {
-                              setState(() {
-                                _color = Colors.grey;
-                              });
-                              return null;
-                            });
-                          } else if (!ValidNumber(value)) {
-                            WidgetsBinding.instance
-                                .addPostFrameCallback((timeStamp) {
-                              setState(() {
-                                _color = Colors.red;
-                                valide = false;
-                              });
-                            });
-                          } else {
-                            WidgetsBinding.instance
-                                .addPostFrameCallback((timeStamp) {
-                              setState(() {
-                                _color = Colors.blue;
-                              });
-                            });
-                          }
-
-                          return null;
-                        }),
+                        return null;
+                      },
+                    ),
                   ],
                 ),
               ),
