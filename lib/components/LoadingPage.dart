@@ -14,11 +14,9 @@ class LoadingPage extends StatelessWidget {
           ],
         ),
         Container(
-          color: Colors.black26,
           child: Center(
               child: CircularProgressIndicator(
-            strokeWidth: 7,
-            backgroundColor: Colors.white10,
+            strokeWidth: 4,
           )),
         ),
       ],
@@ -41,7 +39,7 @@ class EmptyPost extends StatelessWidget {
             Expanded(child: Container(), flex: 3),
           ],
         ),
-        elevation: 4,
+       // elevation: 4,
         margin: EdgeInsets.all(10),
         color: Colors.white,
       ),

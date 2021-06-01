@@ -17,6 +17,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   String _verification;
   String _otp;
+  bool isLoading = false;
   Future Connect() async {
     await _auth.verifyPhoneNumber(
       phoneNumber: "+213" + number.substring(1),
@@ -35,6 +36,9 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                 ));
       },
       codeSent: (code, val) {
+        setState(() {
+          isLoading = false;
+        });
         _verification = code;
       },
       codeAutoRetrievalTimeout: (value) {},
@@ -128,39 +132,41 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                     : StepState.indexed,
                 isActive: currentStep == 1,
                 title: Text("Phone verification"),
-                content: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 4,
-                    ),
-                    Text(
-                      'Drop The OTP here',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 17,
-                      ),
-                    ),
-                    TextField(
-                      maxLength: 6,
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) {
-                        _otp = value;
-                        if (value.length == 0)
-                          setState(() {
-                            _colorstep2 = Colors.grey;
-                          });
-                        else if (value.length != 6)
-                          setState(() {
-                            _colorstep2 = Colors.red;
-                          });
-                        else
-                          setState(() {
-                            _colorstep2 = Colors.blue;
-                          });
-                      },
-                    ),
-                  ],
-                )),
+                content: (isLoading)
+                    ? CircularProgressIndicator()
+                    : Column(
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 4,
+                          ),
+                          Text(
+                            'Drop The OTP here',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17,
+                            ),
+                          ),
+                          TextField(
+                            maxLength: 6,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              _otp = value;
+                              if (value.length == 0)
+                                setState(() {
+                                  _colorstep2 = Colors.grey;
+                                });
+                              else if (value.length != 6)
+                                setState(() {
+                                  _colorstep2 = Colors.red;
+                                });
+                              else
+                                setState(() {
+                                  _colorstep2 = Colors.blue;
+                                });
+                            },
+                          ),
+                        ],
+                      )),
           ],
           currentStep: currentStep,
           type: StepperType.horizontal,
@@ -178,6 +184,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
             if (currentStep == 0) {
               if (valide && number.length != 0) {
                 setState(() {
+                  isLoading = true;
                   currentStep++;
                   _color = Colors.black;
                 });
