@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
@@ -33,7 +34,6 @@ class _DemandesState extends State<Demandes> {
         child: StreamBuilder(
             stream: importPosts(postType: demande),
             builder: (context, snapshot) {
-              print('sjjjjj    ' + snapshot.toString());
               return snapshot.hasError ||
                       !snapshot.hasData ||
                       snapshot.data == null
