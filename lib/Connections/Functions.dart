@@ -17,15 +17,16 @@ import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/models/postClass.dart';
 import 'package:mysql1/mysql1.dart';
 
+var settings = ConnectionSettings(
+  //host: '172.20.10.10',   //when using iphone
+  host: "192.168.43.155",
+  port: 3306,
+  user: 'mosbah',
+  password: 'mosbah',
+  db: 'ftrigk',
+);
 void createPostToDB(
     var postingDate, date, trajet, vehicule, description, postType) async {
-  var settings = ConnectionSettings(
-    host: '172.20.10.10',
-    port: 3306,
-    user: 'mosbah',
-    password: 'mosbah',
-    db: 'ftrigk',
-  );
   var conn = await MySqlConnection.connect(settings);
   print(conn.toString());
   var r = await conn.query(
@@ -38,13 +39,6 @@ Stream<List<Widget>> importPosts({@required bool postType}) async* {
   //! 0 --> demandes 1--> offers
   //! there is a postType map in Constatns. Use it.
   List<Widget> posts = [];
-  var settings = ConnectionSettings(
-    host: '172.20.10.10',
-    port: 3306,
-    user: 'mosbah',
-    password: 'mosbah',
-    db: 'ftrigk',
-  );
   var conn = await MySqlConnection.connect(settings);
   var result =
       await conn.query("SELECT * FROM `Post` WHERE PostType=?", [postType]);
@@ -83,13 +77,6 @@ Stream<List<Widget>> importPosts({@required bool postType}) async* {
 }
 
 void createuser(String nom, number) async {
-  var settings = ConnectionSettings(
-    host: '172.20.10.10',
-    port: 3306,
-    user: 'mosbah',
-    password: 'mosbah',
-    db: 'ftrigk',
-  );
   var conn = await MySqlConnection.connect(settings);
   await conn.query(
       "insert into user (FirstName,PhoneNumber) values (?,?)", [nom, number]);
