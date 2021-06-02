@@ -214,6 +214,7 @@ class _CreateOfferState extends State<CreateOffer> {
 
   TimeOfDay pickedTime = TimeOfDay.now();
 
+  // ignore: missing_return
   StepState stepState(int step, bool isTrue) {
     if (step > currentStep)
       return StepState.indexed;
