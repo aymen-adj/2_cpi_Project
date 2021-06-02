@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CreateDemande extends StatefulWidget {
-  static final String id = "create demandes";
+  static const String id = "create demandes";
   @override
   _CreateDemandeState createState() => _CreateDemandeState();
 }

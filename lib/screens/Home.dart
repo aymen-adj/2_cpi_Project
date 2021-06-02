@@ -90,9 +90,8 @@ class _HomeState extends State<Home> {
   }
 }
 */
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/components/DialogFiler.dart';
+import 'package:ii_cpi_project/components/DialogFilter.dart';
 import 'package:ii_cpi_project/components/Drawer.dart';
 import 'package:ii_cpi_project/screens/Demandes.dart';
 import 'package:ii_cpi_project/screens/Offers.dart';

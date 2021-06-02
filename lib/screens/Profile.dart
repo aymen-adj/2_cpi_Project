@@ -5,7 +5,7 @@ import 'package:ii_cpi_project/components/RatingStars.dart';
 import 'package:ii_cpi_project/components/TextBox.dart';
 
 class ProfileScreen extends StatefulWidget {
-  static final String id = 'profile';
+  static const String id = 'profile';
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }

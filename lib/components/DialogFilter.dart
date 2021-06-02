@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
-import 'package:ii_cpi_project/components/SearchFiler.dart';
+import 'package:ii_cpi_project/components/SearchFilter.dart';
 
 class DialogFilter extends StatefulWidget {
   static List<String> traget = [null, null];
