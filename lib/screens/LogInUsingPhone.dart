@@ -18,7 +18,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
   String _verification;
   String _otp;
   bool isLoading = false;
-  Future Connect() async {
+  Future connect() async {
     await _auth.verifyPhoneNumber(
       phoneNumber: "+213" + number.substring(1),
       verificationCompleted: (credential) {
@@ -102,7 +102,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                             });
                             return null;
                           });
-                        } else if (!ValidNumber(value)) {
+                        } else if (!validNumber(value)) {
                           WidgetsBinding.instance
                               .addPostFrameCallback((timeStamp) {
                             setState(() {
@@ -188,7 +188,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                   currentStep++;
                   _color = Colors.black;
                 });
-                Connect();
+                connect();
               } else {
                 final snackbar =
                     SnackBar(content: Text('Please Enter a Valid Number !'));
@@ -206,7 +206,9 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                     .signInWithCredential(PhoneAuthProvider.credential(
                         verificationId: _verification, smsCode: _otp))
                     .then((value) {
+                  // if(user!=null)
                   Navigator.popAndPushNamed(context, 'home');
+                  // else =>SignUp Screen
                 }).onError((error, stackTrace) {
                   showDialog(
                       context: context,
@@ -221,7 +223,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
     );
   }
 
-  Widget removeButtons(BuildContext,
+  Widget removeButtons(context,
           {void Function() onStepCancel, void Function() onStepContinue}) =>
       Container();
 }

@@ -14,7 +14,7 @@ class Post extends StatefulWidget {
 }
 
 class _PostState extends State<Post> {
-  double h = null;
+  double h;
 
   final userName = 'Profile name';
   int maxlines = 2;
@@ -198,7 +198,7 @@ class TrajetContainer extends StatelessWidget {
 }
 
 class DetailedTrajet extends StatelessWidget {
-  List<dynamic> trajet;
+ final List<dynamic> trajet;
   DetailedTrajet({this.trajet});
   @override
   Widget build(BuildContext context) {
@@ -206,7 +206,7 @@ class DetailedTrajet extends StatelessWidget {
       margin: EdgeInsets.all(10),
       child: ListTile(
           title: chipList(
-            TransformStringToChip(trajet),
+            transformStringToChip(trajet),
           ),
           leading: Icon(
             Icons.alt_route,
