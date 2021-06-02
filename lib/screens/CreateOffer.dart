@@ -194,7 +194,7 @@ class _CreateOfferState extends State<CreateOffer> {
 */
 
 class CreateOffer extends StatefulWidget {
-  static final String id = 'create Offer';
+  static const String id = 'create Offer';
   @override
   _CreateOfferState createState() => _CreateOfferState();
 }

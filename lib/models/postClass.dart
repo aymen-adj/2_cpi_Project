@@ -14,15 +14,16 @@ class PostClass {
   final String phoneNumber;
   final String time;
 
-  PostClass(
-      {this.userId,
-      this.postID,
-      this.postingDate,
-      this.date,
-      this.trajet,
-      this.vehicule,
-      this.description,
-      this.postType,
-      this.phoneNumber,
-      this.time});
+  PostClass({
+    this.userId,
+    this.postID,
+    this.postingDate,
+    this.date,
+    this.trajet,
+    this.vehicule,
+    this.description,
+    this.postType,
+    this.phoneNumber,
+    this.time,
+  });
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/components/DialogFiler.dart';
+import 'package:ii_cpi_project/components/DialogFilter.dart';
 
 class Filter extends StatefulWidget {
   Filter({@required this.dropTitle, @required this.dropdownmenu});
