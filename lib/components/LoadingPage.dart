@@ -1,6 +1,14 @@
-import 'package:flutter/material.dart';
 
-class LoadingPage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/constantes/Functions.dart';
+import 'package:url_launcher/url_launcher.dart';
+class LoadingPage extends StatefulWidget {
+  @override
+  _LoadingPageState createState() => _LoadingPageState();
+}
+
+
+class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -11,14 +19,20 @@ class LoadingPage extends StatelessWidget {
             EmptyPost(),
             EmptyPost(),
             EmptyPost(),
+            Center(child: ElevatedButton(
+              child: Text("call zaki"),
+              onPressed: () {
+                setState(() {
+
+                  makePhoneCall('0770228853');
+                   // sendNotification();
+
+                });
+                },
+            ),)
           ],
         ),
-        Container(
-          child: Center(
-              child: CircularProgressIndicator(
-            strokeWidth: 4,
-          )),
-        ),
+
       ],
     );
   }
@@ -46,3 +60,19 @@ class EmptyPost extends StatelessWidget {
     );
   }
 }
+
+//213779457275'
+_launchPhoneURL(String phoneNumber) async {
+  String url = 'tel:' + phoneNumber;
+  launch("tel://214324234");
+    print("kkkkkkkkkkk");
+
+}
+/*
+Container(
+child: Center(
+child: CircularProgressIndicator(
+strokeWidth: 4,
+)),
+),
+ */
