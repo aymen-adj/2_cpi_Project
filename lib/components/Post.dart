@@ -7,7 +7,8 @@ import 'package:ii_cpi_project/screens/Profile.dart';
 
 class Post extends StatefulWidget {
   final PostClass post;
-  Post({@required this.post});
+  final bool isOffer;
+  Post({@required this.post, @required this.isOffer});
   @override
   _PostState createState() => _PostState();
 }
@@ -86,48 +87,6 @@ class _PostState extends State<Post> {
                         ),
                       ),
                     ),
-                    // Container(
-                    //   height: 150,
-                    //   // width: double.infinity,
-                    //   padding: EdgeInsets.all(10),
-                    //   child: Column(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    //     crossAxisAlignment: CrossAxisAlignment.center,
-                    //     textDirection: TextDirection.rtl,
-                    //     children: [
-                    //       Row(
-                    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    //         children: [
-                    //           CustomContainer(
-                    //             text: widget.post.vehicule.toString(),
-                    //             icon: Icons.train_rounded,
-                    //             subtitle: 'نوع المركبة',
-                    //           ),
-                    //           CustomContainer(
-                    //             icon: Icons.phone,
-                    //             text: '${widget.post.phoneNumber}',
-                    //             subtitle: 'رقم الهاتف',
-                    //           )
-                    //         ],
-                    //       ),
-                    //       Row(
-                    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    //         children: [
-                    //           CustomContainer(
-                    //             icon: Icons.timer,
-                    //             text: widget.post.time,
-                    //             subtitle: 'الوقت',
-                    //           ),
-                    //           CustomContainer(
-                    //             icon: Icons.timer,
-                    //             text: widget.post.date,
-                    //             subtitle: 'تاريخ الانطلاق',
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     Divider(),
                     Directionality(
                       textDirection: TextDirection.rtl,
@@ -148,7 +107,7 @@ class _PostState extends State<Post> {
                     ),
                     Directionality(
                       textDirection: TextDirection.rtl,
-                      child: widget.post.postType
+                      child: widget.isOffer
                           ? ExpansionTile(
                               title: Text("المزيد"),
                               expandedAlignment: Alignment.topRight,
@@ -164,7 +123,7 @@ class _PostState extends State<Post> {
                                   subtitle: Text("نوع المركبة"),
                                 ),
                                 ListTile(
-                                  onTap: (){
+                                  onTap: () {
                                     setState(() {
                                       makePhoneCall(widget.post.phoneNumber);
                                     });

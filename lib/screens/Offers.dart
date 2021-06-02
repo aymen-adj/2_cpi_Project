@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
-import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
 
@@ -39,7 +38,7 @@ class _OffersState extends State<Offers> {
         color: Colors.blue,
         child: StreamBuilder(
             // initialData: CircularProgressIndicator(),
-            stream: importPosts(postType: offer),
+            stream: importPosts(postType: "Offer"),
             builder: (context, snapshot) {
               print('sjjjjj    ' + snapshot.toString());
               return snapshot.hasError ||
