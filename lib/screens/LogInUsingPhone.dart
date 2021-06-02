@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/Formule.dart';
+import 'package:ii_cpi_project/screens/SignUp.dart';
 
 class LogInUsingPhone extends StatefulWidget {
   @override
@@ -24,7 +24,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
       phoneNumber: "+213" + number.substring(1),
       verificationCompleted: (credential) {
         _auth.signInWithCredential(credential).then((value) {
-          Navigator.popAndPushNamed(context, 'home');
+          gotoHome();
         });
       },
       timeout: Duration(seconds: 120),
@@ -208,7 +208,8 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                         verificationId: _verification, smsCode: _otp))
                     .then((value) {
                   // if(user!=null)
-                  Navigator.popAndPushNamed(context, 'home');
+                  gotoHome();
+
                   // else =>SignUp Screen
                 }).onError((error, stackTrace) {
                   showDialog(
@@ -227,4 +228,12 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
   Widget removeButtons(context,
           {void Function() onStepCancel, void Function() onStepContinue}) =>
       Container();
+
+  void gotoHome() {
+    if (true) {
+      Navigator.popAndPushNamed(context, 'home');
+    } else {
+      Navigator.popAndPushNamed(context, SignUp.id);
+    }
+  }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:ii_cpi_project/components/Formule.dart';
 
 class SignUp extends StatefulWidget {
+  static String id = "SignUp";
   @override
   _SignUpState createState() => _SignUpState();
 }
