@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -44,10 +45,21 @@ Future<void> getRefresh() async {
 }
 
 Future<void> makePhoneCall(String url) async {
-  url='tel:'+url;
+  url = 'tel:' + url;
   if (await canLaunch(url)) {
     await launch(url);
   } else {
     throw 'Could not launch $url';
   }
+}
+
+String getTheTypeOfVehicule(int type) {
+  if (type == 0)
+    return "شاحنة مبردة";
+  else if (type == 1)
+    return "شاحنة";
+  else if (type == 2)
+    return " سيارة";
+  else
+    return "دراجة";
 }

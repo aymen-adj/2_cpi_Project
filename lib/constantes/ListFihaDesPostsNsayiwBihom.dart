@@ -7,7 +7,6 @@ import 'package:ii_cpi_project/models/postClass.dart';
 PostClass firstPostClass = PostClass(
   postID: 20,
   // postingDate: duration.inHours,
-  postType: demande,
   userId: 244,
   vehicule: 'herbine',
   trajet: kWilaya.sublist(4, 14),
@@ -28,5 +27,6 @@ List<Widget> Posts = [
   WilayatImages(),
   Post(
     post: firstPostClass,
+    isOffer: true,
   ),
 ].toSet().toList();

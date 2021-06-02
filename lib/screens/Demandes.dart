@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
-import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 
 class Demandes extends StatefulWidget {
@@ -32,7 +31,7 @@ class _DemandesState extends State<Demandes> {
         backgroundColor: Colors.white,
         color: Colors.blue,
         child: StreamBuilder(
-            stream: importPosts(postType: demande),
+            stream: importPosts(postType: "Demande"),
             builder: (context, snapshot) {
               return snapshot.hasError ||
                       !snapshot.hasData ||

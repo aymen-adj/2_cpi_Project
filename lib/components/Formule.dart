@@ -7,7 +7,7 @@ class Formule extends StatefulWidget {
   final int maxLength;
   Formule(
       {@required this.text,
-      @required this.icon,
+      this.icon,
       this.hint,
       this.color,
       this.keyboardtype,
