@@ -33,19 +33,19 @@ class MyDrawer extends StatelessWidget {
               icon: Icons.location_on_outlined,
             ),
             DrawerItem(
-              title: 'My Demands',
+              title: 'طلباتي',
               icon: Icons.description,
             ),
             DrawerItem(
-              title: 'My Offers',
+              title: 'عروضي',
               icon: Icons.local_offer,
             ),
             DrawerItem(
-              title: 'Settings',
+              title: 'الاعدادات',
               icon: Icons.settings,
             ),
             DrawerItem(
-              title: 'Log Out',
+              title: 'تسجيل الخروج',
               icon: Icons.logout,
             ),
             DrawerHeader(

@@ -47,11 +47,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-   - images/logo.png
-   - images/avatar.jpg
-   - images/cool-background.png
-   - images/emoji2.png
-   - images/background.jpg
+   - images/
   fonts:
      - family: Amiri
        fonts:
