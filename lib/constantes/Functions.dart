@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 String getPostingTime() {
   return '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}  ${DateTime.now().hour}:${DateTime.now().minute}';
@@ -40,4 +41,13 @@ String stringToNumWilaya(List<String> trajet) {
 
 Future<void> getRefresh() async {
   await Future.delayed(Duration(seconds: 3));
+}
+
+Future<void> makePhoneCall(String url) async {
+  url='tel:'+url;
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }

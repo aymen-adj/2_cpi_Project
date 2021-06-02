@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ii_cpi_project/components/Chips.dart';
+import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/models/postClass.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 
@@ -163,6 +164,11 @@ class _PostState extends State<Post> {
                                   subtitle: Text("نوع المركبة"),
                                 ),
                                 ListTile(
+                                  onTap: (){
+                                    setState(() {
+                                      makePhoneCall(widget.post.phoneNumber);
+                                    });
+                                  },
                                   onLongPress: () {
                                     Clipboard.setData(ClipboardData(
                                         text: widget.post.phoneNumber
