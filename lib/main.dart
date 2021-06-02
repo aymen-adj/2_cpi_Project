@@ -5,7 +5,6 @@ import 'package:ii_cpi_project/screens/CreateOffer.dart';
 import 'package:ii_cpi_project/screens/Home.dart';
 
 import 'package:ii_cpi_project/screens/Profile.dart';
-import 'package:ii_cpi_project/screens/SignUp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

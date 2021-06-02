@@ -377,7 +377,7 @@ class _CreateOfferState extends State<CreateOffer> {
     );
   }
 
-  Widget removeButtons(BuildContext,
+  Widget removeButtons(context,
           {void Function() onStepCancel, void Function() onStepContinue}) =>
       Container();
 }

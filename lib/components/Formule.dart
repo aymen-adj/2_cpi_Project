@@ -7,7 +7,7 @@ class Formule extends StatefulWidget {
   final int maxLength;
   Formule(
       {@required this.text,
-      @required this.icon,
+      this.icon,
       this.hint,
       this.color,
       this.keyboardtype,
@@ -60,6 +60,6 @@ class _FormuleState extends State<Formule> {
   }
 }
 
-bool ValidNumber(String Number) {
-  return RegExp(r'^0[5-7][0-9]{8}$').hasMatch(Number);
+bool validNumber(String number) {
+  return RegExp(r'^0[5-7][0-9]{8}$').hasMatch(number);
 }

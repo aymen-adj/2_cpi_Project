@@ -6,6 +6,7 @@ import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
 
+// ignore: must_be_immutable
 class Offers extends StatefulWidget {
   ScrollController scrollController = ScrollController();
   Offers({this.scrollController});
@@ -18,6 +19,7 @@ class _OffersState extends State<Offers> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        //  backgroundColor: ActiveColor,
           child: Icon(
             Icons.post_add_rounded,
             size: 40,
@@ -39,6 +41,7 @@ class _OffersState extends State<Offers> {
             // initialData: CircularProgressIndicator(),
             stream: importPosts(postType: offer),
             builder: (context, snapshot) {
+              print('sjjjjj    ' + snapshot.toString());
               return snapshot.hasError ||
                       !snapshot.hasData ||
                       snapshot.data == null

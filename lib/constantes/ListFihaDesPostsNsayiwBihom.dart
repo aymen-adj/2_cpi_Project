@@ -24,7 +24,7 @@ DateTime kbel = DateTime.parse('2021-05-21');
 
 Duration duration = doka.difference(kbel);
 
-List<Widget> Posts = [
+List<Widget> posts = [
   WilayatImages(),
   Post(
     post: firstPostClass,

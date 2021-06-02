@@ -32,7 +32,12 @@ class _LoadingPageState extends State<LoadingPage> {
             ),)
           ],
         ),
-
+        Container(
+          child: Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 4,
+              )),
+        ),
       ],
     );
   }
@@ -62,9 +67,9 @@ class EmptyPost extends StatelessWidget {
 }
 
 //213779457275'
-_launchPhoneURL(String phoneNumber) async {
+launchPhoneURL(String phoneNumber) async {
   String url = 'tel:' + phoneNumber;
-  launch("tel://214324234");
+  launch(url);
     print("kkkkkkkkkkk");
 
 }
