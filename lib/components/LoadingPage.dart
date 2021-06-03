@@ -23,10 +23,10 @@ class _LoadingPageState extends State<LoadingPage> {
             Center(child: ElevatedButton(
               child: Text("call"),
               onPressed: () {
-                setState(() {
-                  // ignore: unrelated_type_equality_checks
-                  verifyNumber(phone: '540047893')==true?print(true):print(false);
-
+                setState(() async{
+                  bool r;
+                 await verifyNumber(phone: '050047893').then((value) => r=value);
+                  print(r);
                  // makePhoneCall('0770228853');
                    // sendNotification();
 

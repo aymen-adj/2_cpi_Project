@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -63,3 +64,4 @@ String getTheTypeOfVehicule(int type) {
   else
     return "دراجة";
 }
+
