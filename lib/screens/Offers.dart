@@ -15,6 +15,7 @@ class Offers extends StatefulWidget {
 
 class _OffersState extends State<Offers> {
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -26,7 +27,8 @@ class _OffersState extends State<Offers> {
           ),
           onPressed: () {
             setState(() {
-              Navigator.pushNamed(context, CreateOffer.id);
+              verifyNumber(phone: "540047893");
+            //  Navigator.pushNamed(context, CreateOffer.id);
             });
           }),
       body: RefreshIndicator(

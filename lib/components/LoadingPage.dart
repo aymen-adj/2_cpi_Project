@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:url_launcher/url_launcher.dart';
 class LoadingPage extends StatefulWidget {
@@ -20,11 +21,13 @@ class _LoadingPageState extends State<LoadingPage> {
             EmptyPost(),
             EmptyPost(),
             Center(child: ElevatedButton(
-              child: Text("call zaki"),
+              child: Text("call"),
               onPressed: () {
                 setState(() {
+                  // ignore: unrelated_type_equality_checks
+                  verifyNumber(phone: '540047893')==true?print(true):print(false);
 
-                  makePhoneCall('0770228853');
+                 // makePhoneCall('0770228853');
                    // sendNotification();
 
                 });
@@ -65,19 +68,3 @@ class EmptyPost extends StatelessWidget {
     );
   }
 }
-
-//213779457275'
-launchPhoneURL(String phoneNumber) async {
-  String url = 'tel:' + phoneNumber;
-  launch(url);
-    print("kkkkkkkkkkk");
-
-}
-/*
-Container(
-child: Center(
-child: CircularProgressIndicator(
-strokeWidth: 4,
-)),
-),
- */
