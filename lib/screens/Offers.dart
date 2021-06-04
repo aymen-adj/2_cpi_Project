@@ -41,14 +41,16 @@ class _OffersState extends State<Offers> {
         color: Colors.blue,
         child: StreamBuilder(
             stream: importPosts(postType: "Offer"),
-            builder: (context, snapshot)  {
+            builder: (context, snapshot) {
               List body=[Header()];
-if (snapshot.hasData){
-  snapshot.data.forEach((element) {body.add(element);});
-}
-return (snapshot.hasError ||
+                if(snapshot.hasData){
+                  for(int k=0; k<snapshot.data.length;k++){
+                    body.add(snapshot.data[k]);
+                  }
+                }
+             return (snapshot.hasError ||
                       !snapshot.hasData ||
-                      snapshot.data.length ==null )
+                      snapshot.data==null )
                   ? LoadingPage()
                   : ListView.builder(
                     itemCount: body.length,

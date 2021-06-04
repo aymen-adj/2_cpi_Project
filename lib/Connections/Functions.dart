@@ -20,8 +20,8 @@ import 'package:ii_cpi_project/models/user.dart';
 import 'package:mysql1/mysql1.dart';
 
 var settings = ConnectionSettings(
-  //host: '172.20.10.10',   //when using iphone
-  host: "192.168.43.155",
+  host: '172.20.10.10',   //when using iphone
+ // host: "192.168.43.155",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
@@ -47,6 +47,7 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
 
   for (var r in result) {
     r.fields.forEach((key, value) {
+      print(value);
       entriesToPost.add(value);
     });
     print(result);
@@ -70,6 +71,7 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
       isOffer: postType == "Offer",
     ));
     entriesToPost.clear();
+
   }
   try {
     yield posts;
