@@ -19,7 +19,7 @@ Widget buildChip(String wilayaName, int step) {
   );
 }
 
-List<Widget> transformStringToChip(List<String> listOfString) {
+List<Widget> TransformStringToChip(List<String> listOfString) {
   List<Widget> traj = [];
   for (int i = 0; i < listOfString.length; i++) {
     traj.add(buildChip(listOfString[i], i + 1));

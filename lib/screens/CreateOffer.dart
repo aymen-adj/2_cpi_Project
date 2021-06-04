@@ -214,7 +214,6 @@ class _CreateOfferState extends State<CreateOffer> {
 
   TimeOfDay pickedTime = TimeOfDay.now();
 
-  // ignore: missing_return
   StepState stepState(int step, bool isTrue) {
     if (step > currentStep)
       return StepState.indexed;
@@ -260,128 +259,125 @@ class _CreateOfferState extends State<CreateOffer> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            child: Icon(
-              Icons.arrow_downward_outlined,
-            ),
-            onPressed: () {
-              if ((isTrue0) &&
-                  (currentStep == 0) &&
-                  (traget.length > 1) &&
-                  (traget.length < 9)) currentStep++;
-              if ((isTrue1) && (currentStep == 1)) currentStep++;
-              print(currentStep);
-              // currentStep++;
-              //Logic true1
-              //Logic true2
-
-              if ((currentStep == 2) &&
-                  ((isTrue0 == false) ||
-                      (isTrue1 == false) ||
-                      (isTrue2 == false))) print('alpha');
-
-              setState(() {});
-            },
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+            Icons.arrow_downward_outlined,
           ),
-          body: Stepper(
-            physics: ScrollPhysics(),
-            type: StepperType.vertical,
-            currentStep: currentStep,
-            onStepTapped: (step) {
-              if (step < currentStep) currentStep = step;
-              print(step);
-              setState(() {});
-            },
-            controlsBuilder: removeButtons,
-            steps: [
-              Step(
-                state: stepState(0, isTrue0),
-                subtitle: Text('اختر الولايات التي تمر بها'),
-                isActive: currentStep == 0,
-                title: Text("اختر المسار"),
-                content: Container(
-                  height: MediaQuery.of(context).size.height / 2,
-                  child: PathChooser(
-                    onChoosePath: (path) {
-                      traget = path;
-                      if ((traget.length < 2) || (traget.length > 9))
-                        isTrue0 = false;
-                      else
-                        isTrue0 = true;
-                      print(traget);
-                      setState(() {});
+          onPressed: () {
+            if ((isTrue0) &&
+                (currentStep == 0) &&
+                (traget.length > 1) &&
+                (traget.length < 9)) currentStep++;
+            if ((isTrue1) && (currentStep == 1)) currentStep++;
+            print(currentStep);
+            // currentStep++;
+            //Logic true1
+            //Logic true2
+
+            if ((currentStep == 2) &&
+                ((isTrue0 == false) ||
+                    (isTrue1 == false) ||
+                    (isTrue2 == false))) print('alpha');
+
+            setState(() {});
+          },
+        ),
+        body: Stepper(
+          physics: ScrollPhysics(),
+          type: StepperType.vertical,
+          currentStep: currentStep,
+          onStepTapped: (step) {
+            if (step < currentStep) currentStep = step;
+            print(step);
+            setState(() {});
+          },
+          controlsBuilder: removeButtons,
+          steps: [
+            Step(
+              state: stepState(0, isTrue0),
+              subtitle: Text('choisir les wilaya li tfot 3lihm'),
+              isActive: currentStep == 0,
+              title: Text("Choose trajetoire"),
+              content: Container(
+                height: MediaQuery.of(context).size.height / 2,
+                child: PathChooser(
+                  onChoosePath: (path) {
+                    traget = path;
+                    if ((traget.length < 2) || (traget.length > 9))
+                      isTrue0 = false;
+                    else
+                      isTrue0 = true;
+                    print(traget);
+                    setState(() {});
+                  },
+                ),
+              ),
+            ),
+            Step(
+              subtitle: Text('choisir l\'w9t khay'),
+              state: stepState(1, isTrue1),
+              isActive: currentStep == 1,
+              title: Text('Choose Time'),
+              content: Column(
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      _selectDate();
+                    },
+                    icon: Icon(Icons.calendar_today),
+                    label: Text(dateLable),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      _selectTime();
+                    },
+                    icon: Icon(Icons.watch_later_sharp),
+                    label: Text(timeLable),
+                  ),
+                ],
+              ),
+            ),
+            Step(
+              isActive: currentStep == 2,
+              state: stepState(2, isTrue2),
+              subtitle: Text('choisir tomobil!'),
+              title: Text('Choose Vehicle'),
+              content: Column(
+                children: [
+                  DropdownButton(
+                    hint: Text("نوع المركبة"),
+                    items: vehicles,
+                    value: vehicle,
+                    icon: Icon(Icons.directions_car),
+                    autofocus: true,
+                    onChanged: (value) {
+                      setState(() {
+                        vehicle = value;
+                        if (controller.text.isEmpty) isTrue2 = false;
+                      });
                     },
                   ),
-                ),
-              ),
-              Step(
-                subtitle: Text('اختر الوقت الذي تمر فيه'),
-                state: stepState(1, isTrue1),
-                isActive: currentStep == 1,
-                title: Text('اختر الوقت'),
-                content: Column(
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        _selectDate();
-                      },
-                      icon: Icon(Icons.calendar_today),
-                      label: Text(dateLable),
-                    ),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        _selectTime();
-                      },
-                      icon: Icon(Icons.watch_later_sharp),
-                      label: Text(timeLable),
-                    ),
-                  ],
-                ),
-              ),
-              Step(
-                isActive: currentStep == 2,
-                state: stepState(2, isTrue2),
-                subtitle: Text('اختر وسيلة النقل المناسبة '),
-                title: Text('اختر الآلة'),
-                content: Column(
-                  children: [
-                    DropdownButton(
-                      hint: Text("نوع المركبة"),
-                      items: vehicles,
-                      value: vehicle,
-                      icon: Icon(Icons.directions_car),
-                      autofocus: true,
-                      onChanged: (value) {
-                        setState(() {
-                          vehicle = value;
-                          if (controller.text.isEmpty) isTrue2 = false;
-                        });
-                      },
-                    ),
-                    TextField(
-                      controller: controller,
-                      decoration: InputDecoration(
-                        hintText: 'Enter a description',
-                        labelText: 'Description',
-                        icon: Icon(
-                          Icons.directions_car,
-                        ),
+                  TextField(
+                    controller: controller,
+                    decoration: InputDecoration(
+                      hintText: 'Enter a description',
+                      labelText: 'Description',
+                      icon: Icon(
+                        Icons.directions_car,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget removeButtons(context,
+  Widget removeButtons(BuildContext,
           {void Function() onStepCancel, void Function() onStepContinue}) =>
       Container();
 }
