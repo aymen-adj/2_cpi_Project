@@ -5,6 +5,7 @@ import 'package:ii_cpi_project/components/LoadingPage.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 
 class Demandes extends StatefulWidget {
+  static final String id = 'demands';
   @override
   _DemandesState createState() => _DemandesState();
 }

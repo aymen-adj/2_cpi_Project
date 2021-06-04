@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
+import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
 
+// ignore: must_be_immutable
 class Offers extends StatefulWidget {
+  static final String id ='Offers';
   ScrollController scrollController = ScrollController();
   Offers({this.scrollController});
   @override
@@ -14,9 +17,11 @@ class Offers extends StatefulWidget {
 
 class _OffersState extends State<Offers> {
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        //  backgroundColor: ActiveColor,
           child: Icon(
             Icons.post_add_rounded,
             size: 40,
@@ -24,7 +29,8 @@ class _OffersState extends State<Offers> {
           ),
           onPressed: () {
             setState(() {
-              Navigator.pushNamed(context, CreateOffer.id);
+              verifyNumber(phone: "540047893");
+             Navigator.pushNamed(context, CreateOffer.id);
             });
           }),
       body: RefreshIndicator(
@@ -35,19 +41,21 @@ class _OffersState extends State<Offers> {
         backgroundColor: Colors.white,
         color: Colors.blue,
         child: StreamBuilder(
-            // initialData: CircularProgressIndicator(),
             stream: importPosts(postType: "Offer"),
             builder: (context, snapshot) {
-              return snapshot.hasError ||
+              List body=[Header(),Container(color: Colors.amber,height: 200,)];//snapshot.data];
+
+
+              return !(snapshot.hasError ||
                       !snapshot.hasData ||
-                      snapshot.data == null
+                      snapshot.data == null)
                   ? LoadingPage()
                   : ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, i) {
-                        return snapshot.data[i];
-                      },
-                    );
+                    itemCount: body.length,
+                    itemBuilder: (context, i) {
+                      return body[i] ;// snapshot.data[i];
+                    },
+                  );
             }),
       ),
     );

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/screens/LogInUsingPhone.dart';
+import 'package:ii_cpi_project/screens/MyDemands.dart';
+import 'package:ii_cpi_project/screens/MyOffers.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -33,20 +36,23 @@ class MyDrawer extends StatelessWidget {
               icon: Icons.location_on_outlined,
             ),
             DrawerItem(
-              title: 'My Demands',
+              title: 'طلباتي',
               icon: Icons.description,
+              idOfPage:MyDemands.id ,
             ),
             DrawerItem(
-              title: 'My Offers',
+              title: 'عروضي',
               icon: Icons.local_offer,
+              idOfPage: MyOffers.id,
             ),
             DrawerItem(
-              title: 'Settings',
+              title: 'الاعدادات',
               icon: Icons.settings,
             ),
             DrawerItem(
-              title: 'Log Out',
+              title: 'تسجيل الخروج',
               icon: Icons.logout,
+              idOfPage: LogInUsingPhone.id,
             ),
             DrawerHeader(
               child: Image.asset('images/logo.png'),

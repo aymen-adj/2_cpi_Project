@@ -3,24 +3,25 @@ import 'package:flutter/rendering.dart';
 import 'package:ii_cpi_project/components/Formule.dart';
 
 class SignUp extends StatefulWidget {
+  static String id = "SignUp";
   @override
   _SignUpState createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
-  Color ColorFName = Colors.grey;
-  Color ColorFAB = Colors.grey;
-  Color ColorLName = Colors.grey;
+  Color colorFName = Colors.grey;
+  Color colorFAB = Colors.grey;
+  Color colorLName = Colors.grey;
   String fname = "", lname = "";
 
   void setTheColorOfFAB() {
-    if (ColorLName == Colors.blue && ColorFName == Colors.blue) {
-      ColorFAB = Colors.blue;
-    } else if (ColorLName == Colors.grey || ColorFName == Colors.grey) {
-      ColorFAB = Colors.grey;
+    if (colorLName == Colors.blue && colorFName == Colors.blue) {
+      colorFAB = Colors.blue;
+    } else if (colorLName == Colors.grey || colorFName == Colors.grey) {
+      colorFAB = Colors.grey;
     }
-    if (ColorLName == Colors.red || ColorFName == Colors.red) {
-      ColorFAB = Colors.red;
+    if (colorLName == Colors.red || colorFName == Colors.red) {
+      colorFAB = Colors.red;
       print("red");
     }
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -33,11 +34,11 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.arrow_forward_sharp),
-        backgroundColor: ColorFAB,
+        backgroundColor: colorFAB,
         onPressed: () {
-          if (ColorFAB == Colors.grey) {
+          if (colorFAB == Colors.grey) {
             showSnackBar("الرجاء مل الاسم و اللقب", context);
-          } else if (ColorFAB == Colors.red) {
+          } else if (colorFAB == Colors.red) {
             showSnackBar("الرجاء ادخال الاسم و اللقب صحيحان", context);
           } else {}
         },
@@ -75,17 +76,17 @@ class _SignUpState extends State<SignUp> {
                         children: [
                           Formule(
                             text: "الاسم",
-                            color: ColorFName,
+                            color: colorFName,
                             validator: (value) {
                               fname = value;
                               String validator;
                               if (value == "") {
                                 validator = null;
-                                ColorFName = Colors.grey;
+                                colorFName = Colors.grey;
                               } else if (value == "moh") {
-                                ColorFName = Colors.blue;
+                                colorFName = Colors.blue;
                               } else {
-                                ColorFName = Colors.red;
+                                colorFName = Colors.red;
                                 validator = null;
                               }
                               setTheColorOfFAB();
@@ -97,17 +98,17 @@ class _SignUpState extends State<SignUp> {
                           ),
                           Formule(
                             text: "اللقب",
-                            color: ColorLName,
+                            color: colorLName,
                             validator: (value) {
                               lname = value;
                               String validator;
                               if (value == "") {
                                 validator = null;
-                                ColorLName = Colors.grey;
+                                colorLName = Colors.grey;
                               } else if (value == "moh") {
-                                ColorLName = Colors.blue;
+                                colorLName = Colors.blue;
                               } else {
-                                ColorLName = Colors.red;
+                                colorLName = Colors.red;
                                 validator = null;
                               }
                               setTheColorOfFAB();

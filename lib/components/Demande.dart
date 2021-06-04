@@ -34,7 +34,7 @@ class _DemandeState extends State<Demande> {
                   width: 1,
                 ),
                 icon: Icon(Icons.more_horiz_rounded),
-                items: <String>['Save Post', 'Report Post', 'Notify Me']
+                items: <String>['حفظ المنشور', 'الإبلاغ عن المنشور', 'اعلمني']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     // to transform list<string> to DropDownMenuItem
