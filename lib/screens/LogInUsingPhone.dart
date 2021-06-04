@@ -1,12 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/Formule.dart';
-import 'package:ii_cpi_project/screens/SignUp.dart';
 
 class LogInUsingPhone extends StatefulWidget {
-  static final String id ='LoginPhone';
   @override
   _LogInUsingPhoneState createState() => _LogInUsingPhoneState();
 }
@@ -21,12 +18,12 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
   String _verification;
   String _otp;
   bool isLoading = false;
-  Future connect() async {
+  Future Connect() async {
     await _auth.verifyPhoneNumber(
       phoneNumber: "+213" + number.substring(1),
       verificationCompleted: (credential) {
         _auth.signInWithCredential(credential).then((value) {
-          gotoHome();
+          Navigator.popAndPushNamed(context, 'home');
         });
       },
       timeout: Duration(seconds: 120),
@@ -105,7 +102,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                             });
                             return null;
                           });
-                        } else if (!validNumber(value)) {
+                        } else if (!ValidNumber(value)) {
                           WidgetsBinding.instance
                               .addPostFrameCallback((timeStamp) {
                             setState(() {
@@ -191,7 +188,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                   currentStep++;
                   _color = Colors.black;
                 });
-                connect();
+                Connect();
               } else {
                 final snackbar =
                     SnackBar(content: Text('Please Enter a Valid Number !'));
@@ -209,10 +206,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                     .signInWithCredential(PhoneAuthProvider.credential(
                         verificationId: _verification, smsCode: _otp))
                     .then((value) {
-                  // if(user!=null)
-                  gotoHome();
-
-                  // else =>SignUp Screen
+                  Navigator.popAndPushNamed(context, 'home');
                 }).onError((error, stackTrace) {
                   showDialog(
                       context: context,
@@ -227,17 +221,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
     );
   }
 
-  Widget removeButtons(context,
+  Widget removeButtons(BuildContext,
           {void Function() onStepCancel, void Function() onStepContinue}) =>
       Container();
-
-  void gotoHome() async{
-    bool numberExist;
-   await verifyNumber(phone: number).then((value) => numberExist=value);
-    if (numberExist) { //verifyNumber(phone: number)!=null
-      Navigator.popAndPushNamed(context, 'home');
-    } else {
-      Navigator.popAndPushNamed(context, SignUp.id);
-    }
-  }
 }
