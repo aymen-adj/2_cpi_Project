@@ -29,7 +29,6 @@ class _OffersState extends State<Offers> {
           ),
           onPressed: () {
             setState(() {
-              verifyNumber(phone: "540047893");
              Navigator.pushNamed(context, CreateOffer.id);
             });
           }),
@@ -42,13 +41,14 @@ class _OffersState extends State<Offers> {
         color: Colors.blue,
         child: StreamBuilder(
             stream: importPosts(postType: "Offer"),
-            builder: (context, snapshot) {
-              List body=[Header(),Container(color: Colors.amber,height: 200,)];//snapshot.data];
-
-
-              return !(snapshot.hasError ||
+            builder: (context, snapshot)  {
+              List body=[Header()];
+if (snapshot.hasData){
+  snapshot.data.forEach((element) {body.add(element);});
+}
+return (snapshot.hasError ||
                       !snapshot.hasData ||
-                      snapshot.data == null)
+                      snapshot.data.length ==null )
                   ? LoadingPage()
                   : ListView.builder(
                     itemCount: body.length,

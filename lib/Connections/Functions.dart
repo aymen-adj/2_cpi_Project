@@ -27,31 +27,29 @@ var settings = ConnectionSettings(
   password: 'mosbah',
   db: 'ftrigk',
 );
-void createPostToDB(
-    var postingDate, date, trajet, vehicule, description, postType) async {
+void createPostToDB(var postingDate, date, trajet, vehicule, description,
+    String postType) async {
   var conn = await MySqlConnection.connect(settings);
   print(conn.toString());
   var r = await conn.query(
-      "insert into Post (PostingDate,Date,Trajet,Vehicule,Description,PostType) values (?,?,?,?,?,?)",
+      "insert into  '$postType' (PostingDate,Date,Trajet,Vehicule,Description) values (?,?,?,?,?)",
       [postingDate, date, trajet, vehicule, description, postType]);
   print(r);
 }
 
 Stream<List<Widget>> importPosts({@required String postType}) async* {
-  //! 0 --> demands 1--> offers
-  //! there is a postType map in Constants. Use it.
+  //! 0 --> demandes 1--> offers
+  //! there is a postType map in Constatns. Use it.
   List<Widget> posts = [];
   var conn = await MySqlConnection.connect(settings);
-  var result =
-      await conn.query("SELECT * FROM `Post` WHERE PostType=?", [postType]);
-  print(result);
-
+  var result = await conn.query("SELECT * FROM `$postType`");
   List<dynamic> entriesToPost = [];
 
   for (var r in result) {
     r.fields.forEach((key, value) {
       entriesToPost.add(value);
     });
+    print(result);
 
     PostClass postClass = PostClass(
       userId: entriesToPost[0],
@@ -62,12 +60,15 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
               entriesToPost[3].toString().length - 9,
               entriesToPost[3].toString().length),
       trajet: numToStringWilaya(entriesToPost[4].toString()),
-      vehicule: entriesToPost[5].toString(),
+      vehicule: getTheTypeOfVehicule(entriesToPost[5]),
       description: entriesToPost[6].toString(),
-      phoneNumber: entriesToPost[8].toString(),
+      phoneNumber: entriesToPost[7].toString(),
       // time: entriesToPost[9].toString(),
     );
-    posts.add(Post(post: postClass, isOffer: true,));
+    posts.add(Post(
+      post: postClass,
+      isOffer: postType == "Offer",
+    ));
     entriesToPost.clear();
   }
   try {
@@ -77,16 +78,16 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
   }
 }
 
-void createuser(String firstName,famillyName, number) async {
+void createuser(String nom, number) async {
   var conn = await MySqlConnection.connect(settings);
   await conn.query(
-      "insert into user (FirstName,FamillyName,PhoneNumber) values (?,?)", [firstName,famillyName, number]);
+      "insert into user (FirstName,PhoneNumber) values (?,?)", [nom, number]);
 }
 
- Future<bool> verifyNumber({@required phone}) async {
+Future<bool> verifyNumber({@required phone}) async {
   var conn = await MySqlConnection.connect(settings);
   var result =
-      await conn.query("SELECT * FROM `user` WHERE PhoneNumber=?", [phone]);
+  await conn.query("SELECT * FROM `user` WHERE PhoneNumber=?", [phone]);
   if(result.isEmpty){return Future<bool>.value(false);}
   else{
     List<dynamic> entriesToUser = [];
@@ -113,7 +114,7 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
   List<Widget> posts = [];
   var conn = await MySqlConnection.connect(settings);
   var result =
-  await conn.query("SELECT * FROM `$table` WHERE userId=?", [thisUser.id]);
+  await conn.query("SELECT * FROM `$table` WHERE userId=?", [1]);
   print(result);
 
   List<dynamic> entriesToPost = [];
@@ -134,7 +135,7 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
       trajet: numToStringWilaya(entriesToPost[4].toString()),
       vehicule: entriesToPost[5].toString(),
       description: entriesToPost[6].toString(),
-      phoneNumber: entriesToPost[8].toString(),
+      phoneNumber: entriesToPost[7].toString(),
       // time: entriesToPost[9].toString(),
     );
     posts.add(Post(post: postClass, isOffer: true,));
@@ -146,8 +147,4 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
     print(e);
   }
 }
-
-
-
-
 
