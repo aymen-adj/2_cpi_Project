@@ -1,8 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:ii_cpi_project/Connections/Functions.dart';
-import 'package:ii_cpi_project/constantes/Functions.dart';
-import 'package:url_launcher/url_launcher.dart';
 class LoadingPage extends StatefulWidget {
   @override
   _LoadingPageState createState() => _LoadingPageState();
@@ -23,10 +20,8 @@ class _LoadingPageState extends State<LoadingPage> {
             Center(child: ElevatedButton(
               child: Text("call"),
               onPressed: () {
-                setState(() async{
-                  bool r;
-                 await verifyNumber(phone: '050047893').then((value) => r=value);
-                  print(r);
+                setState(() {
+
                  // makePhoneCall('0770228853');
                    // sendNotification();
 

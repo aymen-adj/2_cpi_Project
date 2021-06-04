@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/Formule.dart';
-import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/screens/SignUp.dart';
 
 class LogInUsingPhone extends StatefulWidget {
+  static final String id ='LoginPhone';
   @override
   _LogInUsingPhoneState createState() => _LogInUsingPhoneState();
 }
@@ -233,7 +233,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
 
   void gotoHome() async{
     bool numberExist;
-   await verifyNumber(phone: '540047893').then((value) => numberExist=value);
+   await verifyNumber(phone: number).then((value) => numberExist=value);
     if (numberExist) { //verifyNumber(phone: number)!=null
       Navigator.popAndPushNamed(context, 'home');
     } else {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/models/user.dart';
 
 const List<String> kWilaya = [
@@ -199,3 +200,27 @@ const bool demande = false;
 const bool offer = true;
 
 User thisUser;
+List<Category> categories = [
+  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),
+
+];
