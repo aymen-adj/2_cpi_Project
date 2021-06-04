@@ -107,3 +107,47 @@ void createuser(String firstName,famillyName, number) async {
 }
 
 
+Stream<List<Widget>> importUserPosts({@required String table}) async* {
+  //! 0 --> demands 1--> offers
+  //! there is a postType map in Constants. Use it.
+  List<Widget> posts = [];
+  var conn = await MySqlConnection.connect(settings);
+  var result =
+  await conn.query("SELECT * FROM `$table` WHERE userId=?", [thisUser.id]);
+  print(result);
+
+  List<dynamic> entriesToPost = [];
+
+  for (var r in result) {
+    r.fields.forEach((key, value) {
+      entriesToPost.add(value);
+    });
+
+    PostClass postClass = PostClass(
+      userId: entriesToPost[0],
+      postID: entriesToPost[1],
+      postingDate: entriesToPost[2],
+      date: entriesToPost[3].toString().substring(0, 10) +
+          entriesToPost[3].toString().substring(
+              entriesToPost[3].toString().length - 9,
+              entriesToPost[3].toString().length),
+      trajet: numToStringWilaya(entriesToPost[4].toString()),
+      vehicule: entriesToPost[5].toString(),
+      description: entriesToPost[6].toString(),
+      phoneNumber: entriesToPost[8].toString(),
+      // time: entriesToPost[9].toString(),
+    );
+    posts.add(Post(post: postClass, isOffer: true,));
+    entriesToPost.clear();
+  }
+  try {
+    yield posts;
+  } catch (e) {
+    print(e);
+  }
+}
+
+
+
+
+

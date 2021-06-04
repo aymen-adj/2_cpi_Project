@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 
@@ -31,7 +32,7 @@ class _MyDemandsState extends State<MyDemands> {
         backgroundColor: Colors.white,
         color: Colors.blue,
         child: StreamBuilder(
-          // stream: importPosts(postType: "Offer"),
+           stream: importUserPosts(table: "demands"),
             builder: (context, snapshot) {
               return (snapshot.hasError ||
                   !snapshot.hasData ||
