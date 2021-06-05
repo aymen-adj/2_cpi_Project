@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/PathChooser.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 
@@ -282,7 +283,7 @@ class _CreateOfferState extends State<CreateOffer> {
                   ((isTrue0 == false) ||
                       (isTrue1 == false) ||
                       (isTrue2 == false))) print('alpha');
-
+//              createPostToDB(post, "Offer");
               setState(() {});
             },
           ),

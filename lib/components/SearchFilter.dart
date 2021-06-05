@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/DialogFilter.dart';
+import 'package:ii_cpi_project/constantes/Constants.dart';
+import 'package:ii_cpi_project/constantes/Functions.dart';
 
 class Filter extends StatefulWidget {
   Filter({@required this.dropTitle, @required this.dropdownmenu});
@@ -31,7 +33,7 @@ class _FilterState extends State<Filter> {
               value: wilaya,
               onChanged: (value) {
                 setState(() {
-                  wilaya = value;
+                  wilaya=value;
                 });
                 if (widget.dropTitle == "الإنطلاق")
                   DialogFilter.traget[0] = wilaya;

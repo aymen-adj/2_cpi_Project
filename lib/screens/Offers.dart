@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
+import 'package:ii_cpi_project/components/DialogFilter.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
+import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
 
 // ignore: must_be_immutable
 class Offers extends StatefulWidget {
+  static final String id ='Offers';
   ScrollController scrollController = ScrollController();
   Offers({this.scrollController});
   @override
@@ -14,6 +17,7 @@ class Offers extends StatefulWidget {
 }
 
 class _OffersState extends State<Offers> {
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +30,7 @@ class _OffersState extends State<Offers> {
           ),
           onPressed: () {
             setState(() {
-              Navigator.pushNamed(context, CreateOffer.id);
+             Navigator.pushNamed(context, CreateOffer.id);
             });
           }),
       body: RefreshIndicator(
@@ -37,20 +41,24 @@ class _OffersState extends State<Offers> {
         backgroundColor: Colors.white,
         color: Colors.blue,
         child: StreamBuilder(
-            // initialData: CircularProgressIndicator(),
-            stream: importPosts(postType: "Offer"),
+            stream: DialogFilter.isSearching? searchForPost(postType: "Offer",arrive: DialogFilter.traget.last,depart: DialogFilter.traget.first,vehicle: getNumOfVehicule(DialogFilter.vehicule),): importPosts(postType: "Offer"),
             builder: (context, snapshot) {
-              print('sjjjjj    ' + snapshot.toString());
-              return snapshot.hasError ||
+              List body=[Header()];
+                if(snapshot.hasData){
+                  for(int k=0; k<snapshot.data.length;k++){
+                    body.add(snapshot.data[k]);
+                  }
+                }
+             return (snapshot.hasError ||
                       !snapshot.hasData ||
-                      snapshot.data == null
+                      snapshot.data==null )
                   ? LoadingPage()
                   : ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, i) {
-                        return snapshot.data[i];
-                      },
-                    );
+                    itemCount: body.length,
+                    itemBuilder: (context, i) {
+                      return body[i] ;// snapshot.data[i];
+                    },
+                  );
             }),
       ),
     );

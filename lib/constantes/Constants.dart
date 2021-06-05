@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/headOfHome.dart';
+import 'package:ii_cpi_project/models/user.dart';
 
 const List<String> kWilaya = [
   "أدرار",
@@ -197,4 +199,28 @@ const List<DropdownMenuItem<String>> kWilayat = [
 const bool demande = false;
 const bool offer = true;
 
-var postType = [demande, offer].asMap();
+User thisUser;
+List<Category> categories = [
+  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),
+
+];
