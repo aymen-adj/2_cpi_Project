@@ -27,12 +27,18 @@ var settings = ConnectionSettings(
   password: 'mosbah',
   db: 'ftrigk',
 );
-void createPostToDB(PostClass postClass,String postType)async {
+void createPostToDB(PostClass postClass, String postType) async {
   var conn = await MySqlConnection.connect(settings);
   print(conn.toString());
   var r = await conn.query(
       "insert into  '$postType' (PostingDate,Date,Trajet,Vehicule,Description) values (?,?,?,?,?)",
-      [postClass.postingDate, postClass.date, postClass.trajet, postClass.vehicule, postClass.description]);
+      [
+        postClass.postingDate,
+        postClass.date,
+        postClass.trajet.first,
+        postClass.vehicule,
+        postClass.description
+      ]);
   print(r);
 }
 
@@ -70,7 +76,6 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
       isOffer: postType == "Offer",
     ));
     entriesToPost.clear();
-
   }
   try {
     yield posts;
@@ -88,13 +93,14 @@ void createuser(String nom, number) async {
 Future<bool> verifyNumber({@required phone}) async {
   var conn = await MySqlConnection.connect(settings);
   var result =
-  await conn.query("SELECT * FROM `user` WHERE PhoneNumber=?", [phone]);
-  if(result.isEmpty){return Future<bool>.value(false);}
-  else{
+      await conn.query("SELECT * FROM `user` WHERE PhoneNumber=?", [phone]);
+  if (result.isEmpty) {
+    return Future<bool>.value(false);
+  } else {
     List<dynamic> entriesToUser = [];
-    entriesToUser=result.first.toList();
+    entriesToUser = result.first.toList();
 
-    User user=User(
+    User user = User(
       id: entriesToUser[0],
       firstName: entriesToUser[1].toString(),
       famillyName: entriesToUser[2].toString(),
@@ -102,20 +108,17 @@ Future<bool> verifyNumber({@required phone}) async {
       rateAsClient: entriesToUser[4],
       rateAsDriver: entriesToUser[5],
     );
-    thisUser=user;
-    return Future<bool>.value(user!=null);
+    thisUser = user;
+    return Future<bool>.value(user != null);
   }
-
 }
-
 
 Stream<List<Widget>> importUserPosts({@required String table}) async* {
   //! 0 --> demands 1--> offers
   //! there is a postType map in Constants. Use it.
   List<Widget> posts = [];
   var conn = await MySqlConnection.connect(settings);
-  var result =
-  await conn.query("SELECT * FROM `$table` WHERE userId=?", [1]);
+  var result = await conn.query("SELECT * FROM `$table` WHERE userId=?", [1]);
   print(result);
 
   List<dynamic> entriesToPost = [];
@@ -139,7 +142,10 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
       phoneNumber: entriesToPost[7].toString(),
       // time: entriesToPost[9].toString(),
     );
-    posts.add(Post(post: postClass, isOffer: true,));
+    posts.add(Post(
+      post: postClass,
+      isOffer: true,
+    ));
     entriesToPost.clear();
   }
   try {
@@ -149,13 +155,18 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
   }
 }
 
-Stream<List<Widget>> searchForPost({@required String postType,String depart,String arrive,int vehicle}) async* {
+Stream<List<Widget>> searchForPost(
+    {@required String postType,
+    String depart,
+    String arrive,
+    int vehicle}) async* {
   //! 0 --> demands 1--> offers
   //! there is a postType map in Constants. Use it.
   List<Widget> posts = [];
   var conn = await MySqlConnection.connect(settings);
-  var result =
-  await conn.query("SELECT * FROM Offer WHERE (Trajet LIKE (?) OR Trajet LIKE (?))  AND Vehicule =(?)", ["%$depart%","%$arrive%",vehicle]);
+  var result = await conn.query(
+      "SELECT * FROM Offer WHERE (Trajet LIKE (?) OR Trajet LIKE (?))  AND Vehicule =(?)",
+      ["%$depart%", "%$arrive%", vehicle]);
   print(result);
 
   List<dynamic> entriesToPost = [];
@@ -179,7 +190,10 @@ Stream<List<Widget>> searchForPost({@required String postType,String depart,Stri
       phoneNumber: entriesToPost[7].toString(),
       // time: entriesToPost[9].toString(),
     );
-    posts.add(Post(post: postClass, isOffer: true,));
+    posts.add(Post(
+      post: postClass,
+      isOffer: true,
+    ));
     entriesToPost.clear();
   }
   try {

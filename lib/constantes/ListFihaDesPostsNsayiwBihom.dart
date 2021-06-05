@@ -9,7 +9,6 @@ PostClass firstPostClass = PostClass(
   // postingDate: duration.inHours,
   userId: 244,
   vehicule: 'herbine',
-  trajet: kWilaya.sublist(4, 14),
   date: '22/10/2020',
   time: '13:30',
   phoneNumber: '0540047893',

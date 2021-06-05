@@ -3,6 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/PathChooser.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
+import '../constantes/Constants.dart';
+import '../constantes/Functions.dart';
+import '../models/postClass.dart';
 
 /*
 class CreateOffer extends StatefulWidget {
@@ -211,7 +214,7 @@ class _CreateOfferState extends State<CreateOffer> {
   bool isTrue2 = true;
   String timeLable = 'Choose Time';
   String dateLable = 'Choose Date';
-  TextEditingController controller = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   TimeOfDay pickedTime = TimeOfDay.now();
 
@@ -246,7 +249,6 @@ class _CreateOfferState extends State<CreateOffer> {
       firstDate: DateTime(DateTime.now().day),
       lastDate: DateTime(2025),
     );
-    print('alpha');
     if (picked != null && picked != pickedDate)
       setState(() {
         pickedDate = picked;
@@ -282,8 +284,21 @@ class _CreateOfferState extends State<CreateOffer> {
               if ((currentStep == 2) &&
                   ((isTrue0 == false) ||
                       (isTrue1 == false) ||
-                      (isTrue2 == false))) print('alpha');
-//              createPostToDB(post, "Offer");
+                      (isTrue2 == false))) {
+                PostClass post = PostClass(
+                  date: dateLable,
+                  time: timeLable,
+                  description: descriptionController.text,
+                  phoneNumber: thisUser.phoneNumber,
+                  postingDate: getPostingTime(),
+                  trajet: [
+                    stringToNumWilaya(traget),
+                  ],
+                  userId: thisUser.id,
+                  vehicule: vehicle,
+                );
+                createPostToDB(post, "Offer");
+              }
               setState(() {});
             },
           ),
@@ -358,12 +373,13 @@ class _CreateOfferState extends State<CreateOffer> {
                       onChanged: (value) {
                         setState(() {
                           vehicle = value;
-                          if (controller.text.isEmpty) isTrue2 = false;
+                          if (descriptionController.text.isEmpty)
+                            isTrue2 = false;
                         });
                       },
                     ),
                     TextField(
-                      controller: controller,
+                      controller: descriptionController,
                       decoration: InputDecoration(
                         hintText: 'Enter a description',
                         labelText: 'Description',
