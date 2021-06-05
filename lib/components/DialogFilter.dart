@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/components/SearchFilter.dart';
+import 'package:ii_cpi_project/constantes/Functions.dart';
 
 class DialogFilter extends StatefulWidget {
   static List<String> traget = [null, null];
@@ -72,10 +74,13 @@ class _DialogFilterState extends State<DialogFilter> {
                 ElevatedButton(
                   child: Text("بحث"),
                   onPressed: () {
-                    print(DialogFilter.traget);
-                    print(DialogFilter.vehicule);
+                    DialogFilter.traget=[stringToNumWilaya(DialogFilter.traget)];
+                   // print(DialogFilter.traget);
+                    //print(DialogFilter.vehicule);
                     DialogFilter.date = pickedDate;
-                    print(DialogFilter.date);
+                    //print(DialogFilter.date);
+
+
                   },
                 ),
               ],

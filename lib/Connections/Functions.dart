@@ -20,20 +20,19 @@ import 'package:ii_cpi_project/models/user.dart';
 import 'package:mysql1/mysql1.dart';
 
 var settings = ConnectionSettings(
-  host: '172.20.10.10',   //when using iphone
- // host: "192.168.43.155",
+  //host: '172.20.10.10',   //when using iphone
+  host: "192.168.43.145",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
   db: 'ftrigk',
 );
-void createPostToDB(var postingDate, date, trajet, vehicule, description,
-    String postType) async {
+void createPostToDB(PostClass postClass,String postType)async {
   var conn = await MySqlConnection.connect(settings);
   print(conn.toString());
   var r = await conn.query(
       "insert into  '$postType' (PostingDate,Date,Trajet,Vehicule,Description) values (?,?,?,?,?)",
-      [postingDate, date, trajet, vehicule, description, postType]);
+      [postClass.postingDate, postClass.date, postClass.trajet, postClass.vehicule, postClass.description]);
   print(r);
 }
 
@@ -83,7 +82,7 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
 void createuser(String nom, number) async {
   var conn = await MySqlConnection.connect(settings);
   await conn.query(
-      "insert into user (FirstName,PhoneNumber) values (?,?)", [nom, number]);
+      "insert into 'user'(FirstName,PhoneNumber) values (?,?)", [nom, number]);
 }
 
 Future<bool> verifyNumber({@required phone}) async {
@@ -150,3 +149,42 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
   }
 }
 
+Stream<List<Widget>> searchForPost({@required String postType,String depart,String arrive,int vehicle}) async* {
+  //! 0 --> demands 1--> offers
+  //! there is a postType map in Constants. Use it.
+  List<Widget> posts = [];
+  var conn = await MySqlConnection.connect(settings);
+  var result =
+  await conn.query("SELECT * FROM Offer WHERE (Trajet LIKE (?) OR Trajet LIKE (?))  AND Vehicule =(?)", ["%$depart%","%$arrive%",vehicle]);
+  print(result);
+
+  List<dynamic> entriesToPost = [];
+
+  for (var r in result) {
+    r.fields.forEach((key, value) {
+      entriesToPost.add(value);
+    });
+
+    PostClass postClass = PostClass(
+      userId: entriesToPost[0],
+      postID: entriesToPost[1],
+      postingDate: entriesToPost[2],
+      date: entriesToPost[3].toString().substring(0, 10) +
+          entriesToPost[3].toString().substring(
+              entriesToPost[3].toString().length - 9,
+              entriesToPost[3].toString().length),
+      trajet: numToStringWilaya(entriesToPost[4].toString()),
+      vehicule: entriesToPost[5].toString(),
+      description: entriesToPost[6].toString(),
+      phoneNumber: entriesToPost[7].toString(),
+      // time: entriesToPost[9].toString(),
+    );
+    posts.add(Post(post: postClass, isOffer: true,));
+    entriesToPost.clear();
+  }
+  try {
+    yield posts;
+  } catch (e) {
+    print(e);
+  }
+}

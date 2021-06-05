@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
+import 'package:ii_cpi_project/components/DialogFilter.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
 import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
@@ -40,7 +41,7 @@ class _OffersState extends State<Offers> {
         backgroundColor: Colors.white,
         color: Colors.blue,
         child: StreamBuilder(
-            stream: importPosts(postType: "Offer"),
+            stream: searchForPost(postType: "Offer",arrive: DialogFilter.traget.last,depart: DialogFilter.traget.first,vehicle: getNumOfVehicule(DialogFilter.vehicule),), //importPosts(postType: "Offer"),
             builder: (context, snapshot) {
               List body=[Header()];
                 if(snapshot.hasData){
