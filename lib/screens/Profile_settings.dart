@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Formule.dart';
+import 'package:ii_cpi_project/screens/Languages.dart';
+import 'package:ii_cpi_project/screens/Support.dart';
 
 class ProfileSettings extends StatefulWidget {
   @override
@@ -73,19 +75,26 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 SizedBox(
                   height: 20,
                 ),
-                Formule(
-                  // textDirection: TextDirection.rtl,
-                  icon: Icons.account_circle,
-                  hint: 'Aouinane Moussa',
-                  text: "اسم المستخدم",
+                Container(
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  child: Column(
+                    children: [
+                      Formule(
+                        // textDirection: TextDirection.rtl,
+                        icon: Icons.account_circle,
+                        hint: 'Aouinane Moussa',
+                        text: "اسم المستخدم",
 
-                  color: _color,
-                ),
-                Formule(
-                  icon: Icons.phone,
-                  hint: '0770228853',
-                  text: "الهاتف",
-                  color: _color,
+                        color: _color,
+                      ),
+                      Formule(
+                        icon: Icons.phone,
+                        hint: '0770228853',
+                        text: "الهاتف",
+                        color: _color,
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 30.0,
@@ -115,7 +124,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 ),
                 ListTile(
                   onTap: () {
-                    setState(() {});
+                    setState(() {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Languages()));
+                    });
                   },
                   leading: CircleAvatar(
                     radius: 18,
@@ -162,11 +174,14 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 ),
                 ListTile(
                   onTap: () {
-                    setState(() {});
+                    setState(() {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Support()));
+                    });
                   },
                   leading: CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage('images/supp.jpg'),
+                    backgroundImage: AssetImage('images/supp.png'),
                     backgroundColor: Colors.transparent,
                   ),
                   title: Text(
