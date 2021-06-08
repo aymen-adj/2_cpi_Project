@@ -26,7 +26,7 @@ class MyDrawer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
                     ),),
-                   // backgroundColor: Colors.primaries,
+                    //backgroundColor: Colors.primaries,
                     backgroundImage: thisUser.firstName==null? AssetImage('images/emoji2.png'):null,
                     radius: 50,
                   ),
