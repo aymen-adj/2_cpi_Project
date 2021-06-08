@@ -124,7 +124,7 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
 
   var result =
       await conn.query("SELECT * FROM `$table` WHERE userId=?", [thisUser.id]);
-  var result = await conn.query("SELECT * FROM `$table` WHERE userId=?", [1]);
+  //var result = await conn.query("SELECT * FROM `$table` WHERE userId=?", [1]);
 
   print(result);
 
