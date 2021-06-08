@@ -22,7 +22,7 @@ class _PostState extends State<Post> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
       child: Card(
         elevation: 4,
         child: Container(
@@ -125,13 +125,12 @@ class _PostState extends State<Post> {
                                 ListTile(
                                   onTap: () {
                                     setState(() {
-                                      makePhoneCall(widget.post.phoneNumber);
+                                      makePhoneCall("0${widget.post.phoneNumber}");
                                     });
                                   },
                                   onLongPress: () {
                                     Clipboard.setData(ClipboardData(
-                                        text: widget.post.phoneNumber
-                                            .toString()));
+                                        text: "0${widget.post.phoneNumber}"));
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(
                                       content: Text(
@@ -142,7 +141,7 @@ class _PostState extends State<Post> {
                                     ));
                                   },
                                   leading: Icon(Icons.phone),
-                                  title: Text(widget.post.phoneNumber),
+                                  title: Text("0${widget.post.phoneNumber}"),
                                   subtitle: Text("الهاتف"),
                                 ),
                                 DetailedTrajet(
@@ -167,12 +166,16 @@ class _PostState extends State<Post> {
   }
 }
 
+// ignore: must_be_immutable
 class TrajetContainer extends StatelessWidget {
-  final List<String> trajet;
+  List<String> trajet;
 
   TrajetContainer({this.trajet});
   @override
   Widget build(BuildContext context) {
+    if (trajet==null){
+      trajet=['none'];
+    }
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

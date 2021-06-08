@@ -32,7 +32,7 @@ class _MyDemandsState extends State<MyDemands> {
         backgroundColor: Colors.white,
         color: Colors.blue,
         child: StreamBuilder(
-           stream: importUserPosts(table: "demands"),
+           stream: importUserPosts(table: "Demande"),
             builder: (context, snapshot) {
               return (snapshot.hasError ||
                   !snapshot.hasData ||

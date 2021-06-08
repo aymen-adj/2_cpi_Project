@@ -3,6 +3,7 @@ import 'package:ii_cpi_project/components/Circle.dart';
 import 'package:ii_cpi_project/components/RatingNumber.dart';
 import 'package:ii_cpi_project/components/RatingStars.dart';
 import 'package:ii_cpi_project/components/TextBox.dart';
+import 'package:ii_cpi_project/constantes/Constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String id = 'profile';
@@ -14,30 +15,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF9302F1),
-
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.search,
-                size: 35.0,
-              ),
-              onPressed: () {
-                print('lpa');
-              }),
-        ],
-        brightness: Brightness.light,
-        //backgroundColor: Colors.amber,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(
-          "Profile Screen",
-        ),
-        centerTitle: false,
-
-        leading: Icon(Icons.menu),
-      ),
       body: Column(
         children: [
           Expanded(
@@ -143,8 +120,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color2: Theme.of(context).scaffoldBackgroundColor,
                             ),
                             CircleAvatar(
-                              backgroundImage:
-                                  AssetImage('lib/assets/avatar.jpg'),
+                              child: thisUser!=null ?
+                                Text(thisUser.firstName[0].toUpperCase(),style: TextStyle(
+                                backgroundColor: Colors.transparent,
+                                fontSize: 70,
+                              ),
+                                ):Image.asset("images/avatarn.jpg"),
                               backgroundColor: Colors.blue,
                               radius: 50.0,
                             ),

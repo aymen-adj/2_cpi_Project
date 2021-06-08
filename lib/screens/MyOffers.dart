@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
+import 'package:ii_cpi_project/components/editPost.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
+import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
 
 class MyOffers extends StatefulWidget {
   static final String id ='MyOffers';
@@ -27,21 +29,29 @@ class _MyOffersState extends State<MyOffers> {
       body: RefreshIndicator(
         onRefresh: () async {
           await getRefresh();
+          var k=await findUserById(1);
+          print(k);
           setState(() {});
         },
         backgroundColor: Colors.white,
         color: Colors.blue,
         child: StreamBuilder(
-            stream: importUserPosts(table: "offer"),
+            stream: importUserPosts(table: "Offer"),
             builder: (context, snapshot) {
+
               return (snapshot.hasError ||
                   !snapshot.hasData ||
                   snapshot.data == null)
                   ? LoadingPage()
                   : ListView.builder(
-                itemCount: snapshot.data.length,
+                itemCount: 3,//snapshot.data.length,
                 itemBuilder: (context, i) {
-                  return snapshot.data[i] ;// snapshot.data[i];
+                  return Column(
+                    children: [
+                      posts[i],
+                   EditPost(),
+                    ],
+                  ) ;//snapshot.data[i] ;
                 },
               );
             }),
@@ -49,4 +59,6 @@ class _MyOffersState extends State<MyOffers> {
     );
   }
   }
+
+
 

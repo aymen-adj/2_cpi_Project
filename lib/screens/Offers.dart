@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
+import 'package:ii_cpi_project/components/DialogFilter.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
 import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
@@ -29,7 +30,6 @@ class _OffersState extends State<Offers> {
           ),
           onPressed: () {
             setState(() {
-              verifyNumber(phone: "540047893");
              Navigator.pushNamed(context, CreateOffer.id);
             });
           }),
@@ -41,14 +41,17 @@ class _OffersState extends State<Offers> {
         backgroundColor: Colors.white,
         color: Colors.blue,
         child: StreamBuilder(
-            stream: importPosts(postType: "Offer"),
+            stream: DialogFilter.isSearching ? searchForPost(postType: "Offer",arrive: DialogFilter.traget.last,depart: DialogFilter.traget.first,vehicle: getNumOfVehicule(DialogFilter.vehicule),): importPosts(postType: "Offer"),
             builder: (context, snapshot) {
-              List body=[Header(),Container(color: Colors.amber,height: 200,)];//snapshot.data];
-
-
-              return !(snapshot.hasError ||
+              List body=[Header()];
+                if(snapshot.hasData){
+                  for(int k=0; k<snapshot.data.length;k++){
+                    body.add(snapshot.data[k]);
+                  }
+                }
+             return (snapshot.hasError ||
                       !snapshot.hasData ||
-                      snapshot.data == null)
+                      snapshot.data==null )
                   ? LoadingPage()
                   : ListView.builder(
                     itemCount: body.length,
