@@ -20,9 +20,8 @@ import 'package:ii_cpi_project/models/user.dart';
 import 'package:mysql1/mysql1.dart';
 
 var settings = ConnectionSettings(
- // host: '172.20.10.10',   //when using iphone
- // host: "192.168.43.145",
-  host: "...",
+  //host: '172.20.10.10',   //when using iphone
+  host: "192.168.43.145",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
@@ -110,6 +109,7 @@ Future<bool> verifyNumber({@required phone}) async {
       rateAsDriver: entriesToUser[5],
     );
     thisUser = user;
+    await setUserInSharedPrefs();
     return Future<bool>.value(user != null);
   }
 }
@@ -203,8 +203,9 @@ Stream<List<Widget>> searchForPost(
     print(e);
   }
 }
+
 //kakakak
-Future<User> findUserById(int id) async{
+Future<User> findUserById(int id) async {
   var conn = await MySqlConnection.connect(settings);
   var result = await conn.query("SELECT * FROM `User` WHERE userId=?", [id]);
   print(result);

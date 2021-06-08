@@ -6,7 +6,7 @@ import 'package:ii_cpi_project/components/Formule.dart';
 import 'package:ii_cpi_project/screens/SignUp.dart';
 
 class LogInUsingPhone extends StatefulWidget {
-  static final String id ='LoginPhone';
+  static final String id = 'LoginPhone';
   @override
   _LogInUsingPhoneState createState() => _LogInUsingPhoneState();
 }
@@ -32,11 +32,12 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
       timeout: Duration(seconds: 120),
       verificationFailed: (erreur) {
         showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  title: Text("Capatcha Error "),
-                  content: Text('Please Repeat The Capatcha'),
-                ));
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("Capatcha Error "),
+            content: Text('Please Repeat The Capatcha'),
+          ),
+        );
       },
       codeSent: (code, val) {
         setState(() {
@@ -231,10 +232,10 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
           {void Function() onStepCancel, void Function() onStepContinue}) =>
       Container();
 
-  void gotoHome() async{
+  void gotoHome() async {
     bool numberExist;
-   await verifyNumber(phone: number).then((value) => numberExist=value);
-    if (numberExist) { //verifyNumber(phone: number)!=null
+    await verifyNumber(phone: number).then((value) => numberExist = value);
+    if (numberExist) {
       Navigator.popAndPushNamed(context, 'home');
     } else {
       Navigator.popAndPushNamed(context, SignUp.id);
