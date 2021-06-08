@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
+import 'package:ii_cpi_project/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String getPostingTime() {
@@ -35,10 +37,10 @@ List<String> numToStringWilaya(String trajet) {
 String stringToNumWilaya(List<String> trajet) {
   String temp = "";
   for (int i = 0; i < trajet.length; i++) {
-    if(kWilaya.indexOf(trajet[i])<9)
-    temp =temp + '0'+(kWilayaNumerated.indexOf(trajet[i]) + 1).toString() ;
-        else temp =temp+ (kWilayaNumerated.indexOf(trajet[i]) + 1).toString();
-
+    if (kWilaya.indexOf(trajet[i]) < 9)
+      temp = temp + '0' + (kWilayaNumerated.indexOf(trajet[i]) + 1).toString();
+    else
+      temp = temp + (kWilayaNumerated.indexOf(trajet[i]) + 1).toString();
   }
   print(temp);
   return temp;
@@ -67,12 +69,37 @@ String getTheTypeOfVehicule(int type) {
   else
     return "دراجة";
 }
-int getNumOfVehicule(String vehicule){
-  if (vehicule=="شاحنة مبردة")
+
+int getNumOfVehicule(String vehicule) {
+  if (vehicule == "شاحنة مبردة")
     return 0;
-  else if (vehicule=="شاحنة")
+  else if (vehicule == "شاحنة")
     return 1;
-  else if (vehicule==" سيارة")
+  else if (vehicule == " سيارة")
     return 2;
-  else return 3;
+  else
+    return 3;
+}
+
+Future<User> getUserFromSharedPrefs() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return User(
+    famillyName: prefs.getString("famillyName"),
+    firstName: prefs.getString("firstName"),
+    id: prefs.getInt("id"),
+    phoneNumber: prefs.getString("phoneNumber"),
+    rateAsClient: prefs.getDouble("rateAsClient"),
+    rateAsDriver: prefs.getDouble("rateAsDriver"),
+  );
+}
+
+Future<void> setUserInSharedPrefs() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString("famillyName", thisUser.famillyName);
+  prefs.setString("firstName", thisUser.firstName);
+  prefs.setInt("id", thisUser.id);
+  prefs.setString("phoneNumber", thisUser.phoneNumber);
+  prefs.setDouble("rateAsClient", thisUser.rateAsClient);
+  prefs.setDouble("rateAsDriver", thisUser.rateAsDriver);
+  prefs.setBool('logIn', true);
 }

@@ -242,7 +242,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
       //verifyNumber(phone: number)!=null
       Navigator.popAndPushNamed(context, 'home');
     } else {
-      Navigator.popAndPushNamed(context, SignUp.id,arguments: number);
+      Navigator.popAndPushNamed(context, SignUp.id, arguments: number);
     }
   }
 }

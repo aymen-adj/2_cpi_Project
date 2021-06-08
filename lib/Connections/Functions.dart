@@ -111,6 +111,7 @@ Future<bool> verifyNumber({@required phone}) async {
       rateAsDriver: entriesToUser[5],
     );
     thisUser = user;
+    await setUserInSharedPrefs();
     return Future<bool>.value(user != null);
   }
 }
