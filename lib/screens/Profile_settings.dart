@@ -9,7 +9,6 @@ class ProfileSettings extends StatefulWidget {
 
 class _ProfileSettingsState extends State<ProfileSettings> {
   bool b = false;
-  bool c = false;
   Color _color = Colors.grey;
   @override
   Widget build(BuildContext context) {
@@ -89,29 +88,6 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 ),
                 SizedBox(
                   height: 30.0,
-                ),
-                ListTile(
-                  leading: CircleAvatar(
-                    radius: 18,
-                    backgroundImage: AssetImage('images/dark.png'),
-                    backgroundColor: Colors.transparent,
-                  ),
-                  title: Text(
-                    'الوضع المظلم',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.black,
-                    ),
-                  ),
-                  trailing: Switch(
-                    activeColor: Colors.black,
-                    value: c,
-                    onChanged: (value) {
-                      setState(() {
-                        c = value;
-                      });
-                    },
-                  ),
                 ),
                 ListTile(
                   onTap: () {

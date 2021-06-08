@@ -14,10 +14,10 @@ void main() async {
   await Firebase.initializeApp();
   runApp(
     MaterialApp(
-      // theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => Home(),
+        '/': (context) => LogInUsingPhone(),
+        'home': (context) => Home(),
         ProfileScreen.id: (context) => ProfileScreen(),
         CreateOffer.id: (context) => CreateOffer(),
         CreateDemande.id: (context) => CreateDemande(),
@@ -25,8 +25,6 @@ void main() async {
         MyDemands.id: (context) => MyDemands(),
         MyOffers.id: (context) => MyOffers(),
         LogInUsingPhone.id: (context) => LogInUsingPhone(),
-
-
       },
     ),
   );

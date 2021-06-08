@@ -199,28 +199,31 @@ const List<DropdownMenuItem<String>> kWilayat = [
 const bool demande = false;
 const bool offer = true;
 
-User thisUser;
+User thisUser = User();
 List<Category> categories = [
   Category(
     icon: Icons.car_rental,
     name: 'Car',
     isSelected: false,
-  ),  Category(
-    icon: Icons.car_rental,
-    name: 'Car',
-    isSelected: false,
-  ),  Category(
-    icon: Icons.car_rental,
-    name: 'Car',
-    isSelected: false,
-  ),  Category(
-    icon: Icons.car_rental,
-    name: 'Car',
-    isSelected: false,
-  ),  Category(
+  ),
+  Category(
     icon: Icons.car_rental,
     name: 'Car',
     isSelected: false,
   ),
-
+  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),
+  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),
+  Category(
+    icon: Icons.car_rental,
+    name: 'Car',
+    isSelected: false,
+  ),
 ];

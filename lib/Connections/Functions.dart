@@ -21,7 +21,8 @@ import 'package:mysql1/mysql1.dart';
 
 var settings = ConnectionSettings(
   //host: '172.20.10.10',   //when using iphone
-  host: "192.168.43.155",
+  // host: "192.168.43.155",
+  host: "192.168.43.145",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
@@ -67,7 +68,10 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
       phoneNumber: entriesToPost[8].toString(),
       // time: entriesToPost[9].toString(),
     );
-    posts.add(Post(post: postClass, isOffer: true,));
+    posts.add(Post(
+      post: postClass,
+      isOffer: true,
+    ));
     entriesToPost.clear();
   }
   try {
@@ -77,22 +81,24 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
   }
 }
 
-void createuser(String firstName,famillyName, number) async {
+void createuser(String firstName, famillyName, number) async {
   var conn = await MySqlConnection.connect(settings);
   await conn.query(
-      "insert into user (FirstName,FamillyName,PhoneNumber) values (?,?)", [firstName,famillyName, number]);
+      "insert into user (FirstName,FamillyName,PhoneNumber) values (?,?,?)",
+      [firstName, famillyName, number]);
 }
 
- Future<bool> verifyNumber({@required phone}) async {
+Future<bool> verifyNumber({@required phone}) async {
   var conn = await MySqlConnection.connect(settings);
   var result =
       await conn.query("SELECT * FROM `user` WHERE PhoneNumber=?", [phone]);
-  if(result.isEmpty){return Future<bool>.value(false);}
-  else{
+  if (result.isEmpty) {
+    return Future<bool>.value(false);
+  } else {
     List<dynamic> entriesToUser = [];
-    entriesToUser=result.first.toList();
+    entriesToUser = result.first.toList();
 
-    User user=User(
+    User user = User(
       id: entriesToUser[0],
       firstName: entriesToUser[1].toString(),
       famillyName: entriesToUser[2].toString(),
@@ -100,12 +106,10 @@ void createuser(String firstName,famillyName, number) async {
       rateAsClient: entriesToUser[4],
       rateAsDriver: entriesToUser[5],
     );
-    thisUser=user;
-    return Future<bool>.value(user!=null);
+    thisUser = user;
+    return Future<bool>.value(user != null);
   }
-
 }
-
 
 Stream<List<Widget>> importUserPosts({@required String table}) async* {
   //! 0 --> demands 1--> offers
@@ -113,7 +117,7 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
   List<Widget> posts = [];
   var conn = await MySqlConnection.connect(settings);
   var result =
-  await conn.query("SELECT * FROM `$table` WHERE userId=?", [thisUser.id]);
+      await conn.query("SELECT * FROM `$table` WHERE userId=?", [thisUser.id]);
   print(result);
 
   List<dynamic> entriesToPost = [];
@@ -137,7 +141,10 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
       phoneNumber: entriesToPost[8].toString(),
       // time: entriesToPost[9].toString(),
     );
-    posts.add(Post(post: postClass, isOffer: true,));
+    posts.add(Post(
+      post: postClass,
+      isOffer: true,
+    ));
     entriesToPost.clear();
   }
   try {
@@ -146,8 +153,3 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
     print(e);
   }
 }
-
-
-
-
-

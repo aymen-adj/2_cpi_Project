@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/Formule.dart';
+import 'package:ii_cpi_project/constantes/Constants.dart';
 
 class SignUp extends StatefulWidget {
   static String id = "SignUp";
@@ -20,10 +22,7 @@ class _SignUpState extends State<SignUp> {
     } else if (colorLName == Colors.grey || colorFName == Colors.grey) {
       colorFAB = Colors.grey;
     }
-    if (colorLName == Colors.red || colorFName == Colors.red) {
-      colorFAB = Colors.red;
-      print("red");
-    }
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {});
     });
@@ -31,102 +30,97 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_forward_sharp),
-        backgroundColor: colorFAB,
-        onPressed: () {
-          if (colorFAB == Colors.grey) {
-            showSnackBar("الرجاء مل الاسم و اللقب", context);
-          } else if (colorFAB == Colors.red) {
-            showSnackBar("الرجاء ادخال الاسم و اللقب صحيحان", context);
-          } else {}
-        },
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0),
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    color: Colors.blue,
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+    return SafeArea(
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.arrow_forward_sharp),
+              backgroundColor: colorFAB,
+              onPressed: () {
+                if (colorFAB == Colors.grey) {
+                  showSnackBar("الرجاء مل الاسم و اللقب", context);
+                } else {
+                  thisUser.firstName = fname;
+                  thisUser.famillyName = lname;
+                  //print("this user " + thisUser.phoneNumber);
+                  thisUser.phoneNumber =
+                      ModalRoute.of(context).settings.arguments as String;
+                  createuser(thisUser.firstName, thisUser.famillyName,
+                      thisUser.phoneNumber);
+                  print("user added");
+                }
+              },
             ),
-            Directionality(
-              textDirection: TextDirection.rtl,
+            body: SingleChildScrollView(
               child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Card(
-                    elevation: 10,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      child: Image(
+                        image: AssetImage("images/user.png"),
+                      ),
+                      height: 250,
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        textDirection: TextDirection.rtl,
                         children: [
                           Formule(
-                            text: "الاسم",
+                            text: "الإسم",
                             color: colorFName,
+                            hint: "يرجى إدخال الإسم",
+                            icon: Icons.account_circle,
+                            // ignore: missing_return
                             validator: (value) {
-                              fname = value;
-                              String validator;
-                              if (value == "") {
-                                validator = null;
-                                colorFName = Colors.grey;
-                              } else if (value == "moh") {
+                              if (value.length > 0) {
                                 colorFName = Colors.blue;
-                              } else {
-                                colorFName = Colors.red;
-                                validator = null;
-                              }
+                              } else
+                                colorFName = Colors.grey;
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((timeStamp) {
+                                setState(() {});
+                              });
+
+                              fname = value;
                               setTheColorOfFAB();
-                              return validator;
                             },
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 40,
                           ),
                           Formule(
                             text: "اللقب",
                             color: colorLName,
+                            hint: "يرجى إدخال اللقب",
+                            icon: Icons.account_circle,
+                            // ignore: missing_return
                             validator: (value) {
-                              lname = value;
-                              String validator;
-                              if (value == "") {
-                                validator = null;
-                                colorLName = Colors.grey;
-                              } else if (value == "moh") {
+                              if (value.length > 0) {
                                 colorLName = Colors.blue;
-                              } else {
-                                colorLName = Colors.red;
-                                validator = null;
-                              }
+                              } else
+                                colorLName = Colors.grey;
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((timeStamp) {
+                                setState(() {});
+                              });
+                              lname = value;
                               setTheColorOfFAB();
-                              return validator;
                             },
-                          ),
-                          SizedBox(
-                            height: 10,
                           ),
                         ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-            )
-          ],
-        ),
+            )),
       ),
     );
   }
