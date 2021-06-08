@@ -20,8 +20,9 @@ import 'package:ii_cpi_project/models/user.dart';
 import 'package:mysql1/mysql1.dart';
 
 var settings = ConnectionSettings(
-  //host: '172.20.10.10',   //when using iphone
-  host: "192.168.43.145",
+ // host: '172.20.10.10',   //when using iphone
+ // host: "192.168.43.145",
+  host: "...",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
@@ -201,4 +202,21 @@ Stream<List<Widget>> searchForPost(
   } catch (e) {
     print(e);
   }
+}
+
+Future<User> findUserById(int id) async{
+  var conn = await MySqlConnection.connect(settings);
+  var result = await conn.query("SELECT * FROM `User` WHERE userId=?", [id]);
+  print(result);
+  List<dynamic> entriesToUser = [];
+  entriesToUser = result.first.toList();
+  User user = User(
+    id: entriesToUser[0],
+    firstName: entriesToUser[1].toString(),
+    famillyName: entriesToUser[2].toString(),
+    phoneNumber: '0' + entriesToUser[3].toString(),
+    rateAsClient: entriesToUser[4],
+    rateAsDriver: entriesToUser[5],
+  );
+  return Future<User>.value(user);
 }

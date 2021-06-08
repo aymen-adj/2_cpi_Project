@@ -6,7 +6,7 @@ import 'package:ii_cpi_project/models/postClass.dart';
 
 PostClass firstPostClass = PostClass(
   postID: 20,
-  // postingDate: duration.inHours,
+   postingDate: doka,
   userId: 244,
   vehicule: 'herbine',
   date: '22/10/2020',
@@ -23,9 +23,18 @@ DateTime kbel = DateTime.parse('2021-05-21');
 Duration duration = doka.difference(kbel);
 
 List<Widget> posts = [
-  WilayatImages(),
   Post(
     post: firstPostClass,
     isOffer: true,
   ),
-].toSet().toList();
+  Post(
+    post: firstPostClass,
+    isOffer: true,
+  ),Post(
+    post: firstPostClass,
+    isOffer: true,
+  ),Post(
+    post: firstPostClass,
+    isOffer: true,
+  ),
+];

@@ -1,7 +1,7 @@
 //*NOTICE :
 // !les proprieties واحد ما يبدل الترتيب تاع
 class PostClass {
-  final userId;
+  final int userId;
   final postID;
   final DateTime postingDate;
   final String date;

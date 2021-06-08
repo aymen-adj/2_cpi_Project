@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/screens/LogInUsingPhone.dart';
 import 'package:ii_cpi_project/screens/MyDemands.dart';
 import 'package:ii_cpi_project/screens/MyOffers.dart';
+import 'package:ii_cpi_project/screens/Profile_settings.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -20,11 +22,16 @@ class MyDrawer extends StatelessWidget {
               child: Column(
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage('images/avatar.jpg'),
+                    child:  thisUser.firstName==null?null:Text(thisUser.firstName.substring(0,2).toUpperCase(),style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40,
+                    ),),
+                   // backgroundColor: Colors.primaries,
+                    backgroundImage: thisUser.firstName==null? AssetImage('images/emoji2.png'):null,
                     radius: 50,
                   ),
                   Text(
-                    'Mosbah Aymen',
+                    thisUser.firstName==null ?"user name" : thisUser.firstName,
                     style: TextStyle(
                         fontFamily: 'Amiri', fontWeight: FontWeight.bold),
                   )
@@ -78,7 +85,6 @@ class DrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      //: EdgeInsets.symmetric(horizontal: 20),
       title: Text(
         title,
         style: TextStyle(

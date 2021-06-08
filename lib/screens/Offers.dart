@@ -41,7 +41,7 @@ class _OffersState extends State<Offers> {
         backgroundColor: Colors.white,
         color: Colors.blue,
         child: StreamBuilder(
-            stream: DialogFilter.isSearching? searchForPost(postType: "Offer",arrive: DialogFilter.traget.last,depart: DialogFilter.traget.first,vehicle: getNumOfVehicule(DialogFilter.vehicule),): importPosts(postType: "Offer"),
+            stream: DialogFilter.isSearching ? searchForPost(postType: "Offer",arrive: DialogFilter.traget.last,depart: DialogFilter.traget.first,vehicle: getNumOfVehicule(DialogFilter.vehicule),): importPosts(postType: "Offer"),
             builder: (context, snapshot) {
               List body=[Header()];
                 if(snapshot.hasData){

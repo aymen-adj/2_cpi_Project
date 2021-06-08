@@ -290,7 +290,7 @@ class _CreateOfferState extends State<CreateOffer> {
                   time: timeLable,
                   description: descriptionController.text,
                   phoneNumber: thisUser.phoneNumber,
-                  postingDate: getPostingTime(),
+                  postingDate: DateTime.now(),
                   trajet: [
                     stringToNumWilaya(traget),
                   ],

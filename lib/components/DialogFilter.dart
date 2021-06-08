@@ -39,11 +39,16 @@ class _DialogFilterState extends State<DialogFilter> {
 
   @override
   Widget build(BuildContext context) {
+    if(DialogFilter.isSearching){
+      getRefresh();
+    }
     return StatefulBuilder(builder: (context, setStat) {
       return Directionality(
         textDirection: TextDirection.rtl,
         child: Container(
+
           child: AlertDialog(
+
             insetPadding: EdgeInsets.symmetric(vertical: 250, horizontal: 25),
             contentPadding: EdgeInsets.zero,
             clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -52,7 +57,6 @@ class _DialogFilterState extends State<DialogFilter> {
               child: Column(
                 children: [
                   SwitchListTile(
-
                     activeColor: Colors.deepOrange,
                       title: Text('تفعيل الفلترة'),
                     onChanged: (value){
@@ -63,8 +67,7 @@ class _DialogFilterState extends State<DialogFilter> {
                            DialogFilter.date = pickedDate;
                          }
                        });
-
-
+                       getRefresh();
                     },
                     value: DialogFilter.isSearching,
                   ),
@@ -93,7 +96,8 @@ class _DialogFilterState extends State<DialogFilter> {
                   ElevatedButton(
                     child: Text("بحث"),
                     onPressed: () {
-
+                      getRefresh();
+                      Navigator.pop(context);
                     },
                   ),
                 ],
