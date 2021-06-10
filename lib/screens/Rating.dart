@@ -64,7 +64,7 @@ class _RatingState extends State<Rating> {
               ),
             ),
             SizedBox(height: 20),
-            StarIcon(),
+            Directionality(textDirection: TextDirection.rtl, child: StarIcon()),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {},
@@ -135,7 +135,7 @@ class _StarIconState extends State<StarIcon> {
   Widget build(BuildContext context) {
     return StarRating(
       rating: rating,
-      color: Colors.yellow,
+      color: Colors.blue,
       onRatingChanged: (rating) => setState(() => this.rating = rating),
     );
   }

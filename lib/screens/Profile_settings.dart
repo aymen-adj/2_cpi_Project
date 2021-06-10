@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Formule.dart';
 import 'package:ii_cpi_project/screens/Languages.dart';
 import 'package:ii_cpi_project/screens/Support.dart';
+import 'package:ii_cpi_project/screens/Feedback.dart';
 
 class ProfileSettings extends StatefulWidget {
   @override
@@ -178,7 +179,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 ),
                 ListTile(
                   onTap: () {
-                    setState(() {});
+                    setState(() {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FeedBack()));
+                    });
                   },
                   leading: CircleAvatar(
                     radius: 18,
