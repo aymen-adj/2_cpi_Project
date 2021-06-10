@@ -8,7 +8,6 @@ import 'package:ii_cpi_project/screens/MyDemands.dart';
 import 'package:ii_cpi_project/screens/MyOffers.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 import 'package:ii_cpi_project/screens/SignUp.dart';
-import 'package:ii_cpi_project/screens/Splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +16,8 @@ void main() async {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => Home(),
-        //'home': (context) => Home(),
+        '/': (context) => LogInUsingPhone(),
+        'home': (context) => Home(),
         ProfileScreen.id: (context) => ProfileScreen(),
         CreateOffer.id: (context) => CreateOffer(),
         CreateDemande.id: (context) => CreateDemande(),
@@ -30,4 +29,3 @@ void main() async {
     ),
   );
 }
-

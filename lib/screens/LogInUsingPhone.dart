@@ -22,6 +22,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
   String _verification;
   String _otp;
   bool isLoading = false;
+  String Token;
   Future connect() async {
     await _auth.verifyPhoneNumber(
       phoneNumber: "+213" + number.substring(1),
@@ -214,7 +215,7 @@ class _LogInUsingPhoneState extends State<LogInUsingPhone> {
                           verificationId: _verification, smsCode: _otp))
                       .then((value) {
                     thisUser.phoneNumber = number.substring(1);
-                    Navigator.popAndPushNamed(context, 'home');
+                    gotoHome();
                   }).onError((error, stackTrace) {
                     showDialog(
                         context: context,
