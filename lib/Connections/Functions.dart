@@ -20,9 +20,9 @@ import 'package:ii_cpi_project/models/user.dart';
 import 'package:mysql1/mysql1.dart';
 
 var settings = ConnectionSettings(
-  // host: '172.20.10.10',   //when using iphone
-  // host: "192.168.43.145",
-  host: "...",
+ // host: '172.20.10.10',   //when using iphone
+  host: "192.168.43.145",
+  //host: "...",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
@@ -57,10 +57,9 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
       entriesToPost.add(value);
     });
     print(result);
-
     PostClass postClass = PostClass(
-      userId: entriesToPost[0],
-      postID: entriesToPost[1],
+      userId: entriesToPost[1],
+      postID: entriesToPost[0],
       postingDate: entriesToPost[2],
       date: entriesToPost[3].toString().substring(0, 10) +
           entriesToPost[3].toString().substring(
@@ -72,9 +71,13 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
       phoneNumber: entriesToPost[7].toString(),
       // time: entriesToPost[9].toString(),
     );
+    User user ;
+    await findUserById(postClass.userId.toInt(), conn).then((value) =>user=value );
+
     posts.add(Post(
       post: postClass,
-      isOffer: true,
+      isOffer: postType == "Offer",
+      user: user,
     ));
     entriesToPost.clear();
   }
@@ -84,12 +87,10 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
     print(e);
   }
 }
-
-void createuser(String firstName, famillyName, number) async {
+void createuser(String nom,String fname, number,String token) async {
   var conn = await MySqlConnection.connect(settings);
   await conn.query(
-      "insert into user (FirstName,FamillyName,PhoneNumber) values (?,?,?)",
-      [firstName, famillyName, number]);
+      "insert into 'user'(FirstName,FamillyName,PhoneNumber,token) values (?,?,?,?)", [nom,fname ,number,token]);
 }
 
 Future<bool> verifyNumber({@required phone}) async {
@@ -111,7 +112,6 @@ Future<bool> verifyNumber({@required phone}) async {
       rateAsDriver: entriesToUser[5],
     );
     thisUser = user;
-    await setUserInSharedPrefs();
     return Future<bool>.value(user != null);
   }
 }
@@ -121,11 +121,7 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
   //! there is a postType map in Constants. Use it.
   List<Widget> posts = [];
   var conn = await MySqlConnection.connect(settings);
-
-  var result =
-      await conn.query("SELECT * FROM `$table` WHERE userId=?", [thisUser.id]);
-  //var result = await conn.query("SELECT * FROM `$table` WHERE userId=?", [1]);
-
+  var result = await conn.query("SELECT * FROM `$table` WHERE userId=?", [1]);
   print(result);
 
   List<dynamic> entriesToPost = [];
@@ -136,8 +132,8 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
     });
 
     PostClass postClass = PostClass(
-      userId: entriesToPost[0],
-      postID: entriesToPost[1],
+      userId: entriesToPost[1],
+      postID: entriesToPost[0],
       postingDate: entriesToPost[2],
       date: entriesToPost[3].toString().substring(0, 10) +
           entriesToPost[3].toString().substring(
@@ -149,10 +145,14 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
       phoneNumber: entriesToPost[7].toString(),
       // time: entriesToPost[9].toString(),
     );
+    User user ;
+   await findUserById(postClass.userId.toInt(), conn).then((value) =>user=value );
     posts.add(Post(
       post: postClass,
       isOffer: true,
+      user: user,
     ));
+    print(user.firstName);
     entriesToPost.clear();
   }
   try {
@@ -209,11 +209,9 @@ Stream<List<Widget>> searchForPost(
     print(e);
   }
 }
-
 //kakakak
-Future<User> findUserById(int id) async {
-  var conn = await MySqlConnection.connect(settings);
-  var result = await conn.query("SELECT * FROM `User` WHERE userId=?", [id]);
+Future<User> findUserById(int id,conn) async{
+  var result = await conn.query("SELECT * FROM `user` WHERE userId=?", [id]);
   print(result);
   List<dynamic> entriesToUser = [];
   entriesToUser = result.first.toList();

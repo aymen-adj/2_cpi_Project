@@ -4,11 +4,14 @@ class User {
   String famillyName;
   String phoneNumber;
   double rateAsClient, rateAsDriver;
+  String token;
   User(
       {this.phoneNumber,
       this.firstName,
       this.rateAsClient,
       this.rateAsDriver,
       this.famillyName,
-      this.id});
+      this.id,
+        this.token,
+      });
 }

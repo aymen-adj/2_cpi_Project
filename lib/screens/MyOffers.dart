@@ -29,8 +29,6 @@ class _MyOffersState extends State<MyOffers> {
       body: RefreshIndicator(
         onRefresh: () async {
           await getRefresh();
-          var k=await findUserById(1);
-          print(k);
           setState(() {});
         },
         backgroundColor: Colors.white,
@@ -44,11 +42,11 @@ class _MyOffersState extends State<MyOffers> {
                   snapshot.data == null)
                   ? LoadingPage()
                   : ListView.builder(
-                itemCount: 3,//snapshot.data.length,
+                itemCount: snapshot.data.length,//snapshot.data.length,
                 itemBuilder: (context, i) {
                   return Column(
                     children: [
-                      posts[i],
+                      snapshot.data[i],
                    EditPost(),
                     ],
                   ) ;//snapshot.data[i] ;

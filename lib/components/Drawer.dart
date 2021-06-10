@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/screens/LogInUsingPhone.dart';
@@ -26,7 +28,7 @@ class MyDrawer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
                     ),),
-                    //backgroundColor: Colors.primaries,
+                    backgroundColor: Colors.primaries[Random().nextInt(Colors.primaries.length)],
                     backgroundImage: thisUser.firstName==null? AssetImage('images/emoji2.png'):null,
                     radius: 50,
                   ),

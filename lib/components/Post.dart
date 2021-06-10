@@ -1,47 +1,59 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ii_cpi_project/components/Chips.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/models/postClass.dart';
+import 'package:ii_cpi_project/models/user.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 
 class Post extends StatefulWidget {
   final PostClass post;
   final bool isOffer;
-  Post({@required this.post, @required this.isOffer});
+  final User user;
+  bool complete=true;
+  Post({@required this.post, @required this.isOffer,this.user});
+
   @override
   _PostState createState() => _PostState();
 }
 
 class _PostState extends State<Post> {
-  double h;
 
-  final userName = 'Profile name';
+  double h;
   int maxlines = 2;
   bool trajetIsDetailed = false;
+
   @override
+  void initState() {
+    super.initState();
+  }
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
       child: Card(
-        elevation: 4,
+        elevation: 7,
+        color: Colors.white,
         child: Container(
           child: Column(
             children: [
               ListTile(
                 leading: CircleAvatar(
-                  child: Image.asset('images/logo.png'),
+                  backgroundColor: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                  child:widget.user.firstName==null? Text("${Icons.emoji_emotions}"): Text(widget.user.firstName.substring(0,2)),
                 ),
-                title: Text(userName),
+                title: Text(widget.user.firstName==null? ' no name':widget.user.firstName),
                 subtitle: Text(widget.post.postingDate == null
                     ? 'Just now'
-                    : widget.post.postingDate.toString()),
+                    : widget.post.postingDate.toString().substring(1,16)),
                 trailing: DropdownButton(
                   underline: Container(
                     width: 1,
                   ),
-                  icon: Icon(Icons.more_horiz_rounded),
-                  dropdownColor: Colors.blueGrey,
+                  icon:  Icon(Icons.more_horiz_rounded),
+                 // dropdownColor: Colors.blueGrey,
                   items: <String>['Save Post', 'Report Post', 'Notify Me']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
@@ -65,6 +77,22 @@ class _PostState extends State<Post> {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
+                    widget.complete? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(("ممتلئ")),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(Icons.check_circle,size: 30,
+                            color:Colors.green),
+                        ),
+                      ],
+                    ):Container(),
+
                     Container(
                       width: double.infinity,
                       child: GestureDetector(

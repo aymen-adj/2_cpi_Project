@@ -47,7 +47,7 @@ class _SignUpState extends State<SignUp> {
                   thisUser.phoneNumber =
                       ModalRoute.of(context).settings.arguments as String;
                   createuser(thisUser.firstName, thisUser.famillyName,
-                      thisUser.phoneNumber);
+                      thisUser.phoneNumber,thisUser.token);
                   print("user added");
                 }
               },

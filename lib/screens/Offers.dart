@@ -5,6 +5,7 @@ import 'package:ii_cpi_project/components/DialogFilter.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
 import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
+import 'package:ii_cpi_project/models/user.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
 
 // ignore: must_be_immutable
@@ -18,8 +19,10 @@ class Offers extends StatefulWidget {
 
 class _OffersState extends State<Offers> {
   @override
-  @override
+
+
   Widget build(BuildContext context) {
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         //  backgroundColor: ActiveColor,
@@ -28,7 +31,7 @@ class _OffersState extends State<Offers> {
             size: 40,
             color: Colors.white,
           ),
-          onPressed: () {
+          onPressed: () async{
             setState(() {
              Navigator.pushNamed(context, CreateOffer.id);
             });
@@ -54,6 +57,7 @@ class _OffersState extends State<Offers> {
                       snapshot.data==null )
                   ? LoadingPage()
                   : ListView.builder(
+               controller: widget.scrollController,
                     itemCount: body.length,
                     itemBuilder: (context, i) {
                       return body[i] ;// snapshot.data[i];
