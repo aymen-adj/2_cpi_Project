@@ -43,15 +43,18 @@ class _SignUpState extends State<SignUp> {
                   showSnackBar("الرجاء مل الاسم و اللقب", context);
                 } else {
                   thisUser.token = await getToken();
-                  print(thisUser.token);
                   thisUser.firstName = fname;
                   thisUser.famillyName = lname;
                   //print("this user " + thisUser.phoneNumber);
                   thisUser.phoneNumber =
                       ModalRoute.of(context).settings.arguments as String;
-                  createuser(thisUser.firstName, thisUser.famillyName,
+                  await createuser(thisUser.firstName, thisUser.famillyName,
                       thisUser.phoneNumber, thisUser.token);
-                  Navigator.popAndPushNamed(context, 'home');
+                  print("user added");
+                  bool a = await verifyNumber(phone: thisUser.phoneNumber);
+                  if (a) {
+                    Navigator.of(context).pushNamed('home');
+                  }
                 }
               },
             ),

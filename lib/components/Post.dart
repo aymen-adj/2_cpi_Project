@@ -12,15 +12,14 @@ class Post extends StatefulWidget {
   final PostClass post;
   final bool isOffer;
   final User user;
-  bool complete=true;
-  Post({@required this.post, @required this.isOffer,this.user});
+  bool complete = true;
+  Post({@required this.post, @required this.isOffer, this.user});
 
   @override
   _PostState createState() => _PostState();
 }
 
 class _PostState extends State<Post> {
-
   double h;
   int maxlines = 2;
   bool trajetIsDetailed = false;
@@ -29,8 +28,8 @@ class _PostState extends State<Post> {
   void initState() {
     super.initState();
   }
-  Widget build(BuildContext context) {
 
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
       child: Card(
@@ -41,19 +40,24 @@ class _PostState extends State<Post> {
             children: [
               ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                  child:widget.user.firstName==null? Text("${Icons.emoji_emotions}"): Text(widget.user.firstName.substring(0,2)),
+                  backgroundColor: Colors
+                      .primaries[Random().nextInt(Colors.primaries.length)],
+                  child: widget.user.firstName == null
+                      ? Text("${Icons.emoji_emotions}")
+                      : Text(widget.user.firstName.substring(0, 2)),
                 ),
-                title: Text(widget.user.firstName==null? ' no name':widget.user.firstName),
+                title: Text(widget.user.firstName == null
+                    ? ' no name'
+                    : widget.user.firstName),
                 subtitle: Text(widget.post.postingDate == null
                     ? 'Just now'
-                    : widget.post.postingDate.toString().substring(1,16)),
+                    : widget.post.postingDate.toString().substring(1, 16)),
                 trailing: DropdownButton(
                   underline: Container(
                     width: 1,
                   ),
-                  icon:  Icon(Icons.more_horiz_rounded),
-                 // dropdownColor: Colors.blueGrey,
+                  icon: Icon(Icons.more_horiz_rounded),
+                  // dropdownColor: Colors.blueGrey,
                   items: <String>['Save Post', 'Report Post', 'Notify Me']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
@@ -77,22 +81,22 @@ class _PostState extends State<Post> {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    widget.complete? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(("ممتلئ")),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.check_circle,size: 30,
-                            color:Colors.green),
-                        ),
-                      ],
-                    ):Container(),
-
+                    widget.complete
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(("ممتلئ")),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(Icons.check_circle,
+                                    size: 30, color: Colors.green),
+                              ),
+                            ],
+                          )
+                        : Container(),
                     Container(
                       width: double.infinity,
                       child: GestureDetector(
@@ -101,6 +105,11 @@ class _PostState extends State<Post> {
                             maxlines == 3 && TextOverflow.values != []
                                 ? maxlines = 50
                                 : maxlines = 3;
+                            {
+                              maxlines == 3 && TextOverflow.values != []
+                                  ? maxlines = 50
+                                  : maxlines = 3;
+                            }
                           });
                         },
                         child: Text(
@@ -153,7 +162,8 @@ class _PostState extends State<Post> {
                                 ListTile(
                                   onTap: () {
                                     setState(() {
-                                      makePhoneCall("0${widget.post.phoneNumber}");
+                                      makePhoneCall(
+                                          "0${widget.post.phoneNumber}");
                                     });
                                   },
                                   onLongPress: () {
@@ -201,8 +211,8 @@ class TrajetContainer extends StatelessWidget {
   TrajetContainer({this.trajet});
   @override
   Widget build(BuildContext context) {
-    if (trajet==null){
-      trajet=['none'];
+    if (trajet == null) {
+      trajet = ['none'];
     }
     return Container(
       child: Column(
@@ -229,7 +239,7 @@ class TrajetContainer extends StatelessWidget {
 }
 
 class DetailedTrajet extends StatelessWidget {
- final List<dynamic> trajet;
+  final List<dynamic> trajet;
   DetailedTrajet({this.trajet});
   @override
   Widget build(BuildContext context) {

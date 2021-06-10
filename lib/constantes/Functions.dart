@@ -94,7 +94,7 @@ Future<User> getUserFromSharedPrefs() async {
   );
 }
 
-Future<void> setUserInSharedPrefs() async {
+Future<void> setUserInSharedPrefs(User user) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString("famillyName", thisUser.famillyName);
   prefs.setString("firstName", thisUser.firstName);
@@ -109,4 +109,8 @@ void SendNotification(String token, String msg) async {
   // ! ip ytbadl
   var url = Uri.parse('http://192.168.95.107:8000/' + token + '/' + msg);
   await http.get(url);
+  
+Future<void> logOut() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('logIn', false);
 }
