@@ -10,7 +10,6 @@
 //   }
 // }, verificationFailed:(Erreur){print("Erreur");}, codeSent:(verify,val){Verification=verify;}, codeAutoRetrievalTimeout: codeAutoRetrievalTimeout)
 // }
-
 import 'package:flutter/cupertino.dart';
 import 'package:ii_cpi_project/components/Post.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
@@ -20,9 +19,9 @@ import 'package:ii_cpi_project/models/user.dart';
 import 'package:mysql1/mysql1.dart';
 
 var settings = ConnectionSettings(
-  host: '172.20.10.10', //when using iphone
+  //host: '172.20.10.10', //when using iphone
   // host: "192.168.43.145",
-  //host: "...",
+  host: "192.168.121.145",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
@@ -89,11 +88,12 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
   }
 }
 
-void createuser(String nom, String fname, number, String token) async {
+Future<void> createuser(String nom, String fname, number, String token) async {
   var conn = await MySqlConnection.connect(settings);
   await conn.query(
       "insert into user (FirstName,FamillyName,PhoneNumber,token) values (?,?,?,?)",
       [nom, fname, number, token]);
+  await setUserInSharedPrefs(thisUser);
 }
 
 Future<bool> verifyNumber({@required phone}) async {
@@ -101,12 +101,12 @@ Future<bool> verifyNumber({@required phone}) async {
   var result =
       await conn.query("SELECT * FROM `user` WHERE PhoneNumber=?", [phone]);
   if (result.isEmpty) {
-    return Future<bool>.value(false);
+    return false;
   } else {
     List<dynamic> entriesToUser = [];
     entriesToUser = result.first.toList();
 
-    User user = User(
+    thisUser = User(
       id: entriesToUser[0],
       firstName: entriesToUser[1].toString(),
       famillyName: entriesToUser[2].toString(),
@@ -114,8 +114,8 @@ Future<bool> verifyNumber({@required phone}) async {
       rateAsClient: entriesToUser[4],
       rateAsDriver: entriesToUser[5],
     );
-    thisUser = user;
-    return Future<bool>.value(user != null);
+    await setUserInSharedPrefs(thisUser);
+    return true;
   }
 }
 

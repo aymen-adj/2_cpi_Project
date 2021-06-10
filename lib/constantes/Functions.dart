@@ -93,7 +93,7 @@ Future<User> getUserFromSharedPrefs() async {
   );
 }
 
-Future<void> setUserInSharedPrefs() async {
+Future<void> setUserInSharedPrefs(User user) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString("famillyName", thisUser.famillyName);
   prefs.setString("firstName", thisUser.firstName);
@@ -102,4 +102,9 @@ Future<void> setUserInSharedPrefs() async {
   prefs.setDouble("rateAsClient", thisUser.rateAsClient);
   prefs.setDouble("rateAsDriver", thisUser.rateAsDriver);
   prefs.setBool('logIn', true);
+}
+
+Future<void> logOut() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('logIn', false);
 }

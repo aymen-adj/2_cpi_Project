@@ -1,11 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
+import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/screens/LogInUsingPhone.dart';
 import 'package:ii_cpi_project/screens/MyDemands.dart';
 import 'package:ii_cpi_project/screens/MyOffers.dart';
-import 'package:ii_cpi_project/screens/Profile_settings.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -23,17 +21,31 @@ class MyDrawer extends StatelessWidget {
                 child: DrawerHeader(
               child: Column(
                 children: [
-                  CircleAvatar(
-                    child:  thisUser.firstName==null?null:Text(thisUser.firstName.substring(0,2).toUpperCase(),style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                    ),),
-                    backgroundColor: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                    backgroundImage: thisUser.firstName==null? AssetImage('images/emoji2.png'):null,
-                    radius: 50,
+                  GestureDetector(
+                    onTap: () {
+                      print(thisUser);
+                    },
+                    child: CircleAvatar(
+                      child: thisUser.firstName == null
+                          ? null
+                          : Text(
+                              thisUser.firstName.substring(0, 2).toUpperCase(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40,
+                              ),
+                            ),
+                      //backgroundColor: Colors.primaries,
+                      backgroundImage: thisUser.firstName == null
+                          ? AssetImage('images/emoji2.png')
+                          : null,
+                      radius: 50,
+                    ),
                   ),
                   Text(
-                    thisUser.firstName==null ?"user name" : thisUser.firstName,
+                    thisUser.firstName == null
+                        ? "user name"
+                        : thisUser.firstName,
                     style: TextStyle(
                         fontFamily: 'Amiri', fontWeight: FontWeight.bold),
                   )
@@ -47,7 +59,7 @@ class MyDrawer extends StatelessWidget {
             DrawerItem(
               title: 'طلباتي',
               icon: Icons.description,
-              idOfPage:MyDemands.id ,
+              idOfPage: MyDemands.id,
             ),
             DrawerItem(
               title: 'عروضي',
@@ -96,7 +108,10 @@ class DrawerItem extends StatelessWidget {
         icon,
         color: Colors.black,
       ),
-      onTap: () {
+      onTap: () async {
+        if (idOfPage == LogInUsingPhone.id) {
+          await logOut();
+        }
         Navigator.pushNamed(context, idOfPage);
       },
       subtitle: Container(
