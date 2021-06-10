@@ -11,6 +11,8 @@
 // }, verificationFailed:(Erreur){print("Erreur");}, codeSent:(verify,val){Verification=verify;}, codeAutoRetrievalTimeout: codeAutoRetrievalTimeout)
 // }
 
+import 'dart:isolate';
+
 import 'package:flutter/cupertino.dart';
 import 'package:ii_cpi_project/components/Post.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
@@ -20,8 +22,8 @@ import 'package:ii_cpi_project/models/user.dart';
 import 'package:mysql1/mysql1.dart';
 
 var settings = ConnectionSettings(
- // host: '172.20.10.10',   //when using iphone
-  host: "192.168.43.145",
+  host: '172.20.10.10',   //when using iphone
+ // host: "192.168.43.145",
   //host: "...",
   port: 3306,
   user: 'mosbah',
@@ -72,13 +74,13 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
       // time: entriesToPost[9].toString(),
     );
     User user ;
-    await findUserById(postClass.userId.toInt(), conn).then((value) =>user=value );
+     await findUserById(postClass.userId, conn).then((value) {print(value.firstName); user = value ;});
 
     posts.add(Post(
       post: postClass,
       isOffer: postType == "Offer",
-      user: user,
-    ));
+      user: user),
+    );
     entriesToPost.clear();
   }
   try {
@@ -211,7 +213,7 @@ Stream<List<Widget>> searchForPost(
 }
 //kakakak
 Future<User> findUserById(int id,conn) async{
-  var result = await conn.query("SELECT * FROM `user` WHERE userId=?", [id]);
+  var result = await conn.query("SELECT * FROM `user` WHERE userId=?", [1]);
   print(result);
   List<dynamic> entriesToUser = [];
   entriesToUser = result.first.toList();
@@ -222,6 +224,7 @@ Future<User> findUserById(int id,conn) async{
     phoneNumber: '0' + entriesToUser[3].toString(),
     rateAsClient: entriesToUser[4],
     rateAsDriver: entriesToUser[5],
+    token: entriesToUser[6],
   );
   return Future<User>.value(user);
 }

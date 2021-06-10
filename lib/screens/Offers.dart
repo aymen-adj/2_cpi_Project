@@ -5,7 +5,6 @@ import 'package:ii_cpi_project/components/DialogFilter.dart';
 import 'package:ii_cpi_project/components/LoadingPage.dart';
 import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
-import 'package:ii_cpi_project/models/user.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
 
 // ignore: must_be_immutable
