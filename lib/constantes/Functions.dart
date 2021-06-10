@@ -4,6 +4,7 @@ import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 String getPostingTime() {
   return '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}  ${DateTime.now().hour}:${DateTime.now().minute}';
@@ -102,4 +103,10 @@ Future<void> setUserInSharedPrefs() async {
   prefs.setDouble("rateAsClient", thisUser.rateAsClient);
   prefs.setDouble("rateAsDriver", thisUser.rateAsDriver);
   prefs.setBool('logIn', true);
+}
+
+void SendNotification(String token, String msg) async {
+  // ! ip ytbadl
+  var url = Uri.parse('http://192.168.95.107:8000/' + token + '/' + msg);
+  await http.get(url);
 }
