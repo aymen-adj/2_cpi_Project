@@ -28,7 +28,7 @@ class Support extends StatelessWidget {
                 onTap: () {},
                 leading: CircleAvatar(
                   radius: 18,
-                  backgroundImage: AssetImage('images/mail.jpg'),
+                  backgroundImage: AssetImage('images/email.png'),
                   backgroundColor: Colors.transparent,
                 ),
                 title: Text(
@@ -72,7 +72,7 @@ class Support extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                 ),
                 title: Text(
-                  'ftrigk.esi@gmail.com',
+                  '213-770228853+',
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.black,
