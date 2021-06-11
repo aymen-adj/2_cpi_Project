@@ -40,6 +40,7 @@ void goToNext(BuildContext context) async {
   } else {
     t = Home();
     thisUser = await getUserFromSharedPrefs();
+    print(thisUser);
   }
   Navigator.of(context).push(MaterialPageRoute(builder: (builder) => t));
 }

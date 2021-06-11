@@ -11,8 +11,6 @@
 // }, verificationFailed:(Erreur){print("Erreur");}, codeSent:(verify,val){Verification=verify;}, codeAutoRetrievalTimeout: codeAutoRetrievalTimeout)
 // }
 
-import 'dart:isolate';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/Post.dart';
@@ -23,9 +21,9 @@ import 'package:ii_cpi_project/models/user.dart';
 import 'package:mysql1/mysql1.dart';
 
 var settings = ConnectionSettings(
- // host: '172.20.10.10',   //when using iphone
- // host: "192.168.43.145",
-  host: "192.168.204.145",
+  // host: '172.20.10.10',   //when using iphone
+  // host: "192.168.43.145",
+  host: "192.168.43.145",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
@@ -74,15 +72,14 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
       // time: entriesToPost[9].toString(),
     );
     User user;
-    var result = await conn.query("SELECT * FROM `user` WHERE userId=?", [postClass.userId]);
-    print("userid "+postClass.userId.toString());
-   user=await  findUserById(postClass.userId, result);
+    var result = await conn
+        .query("SELECT * FROM `user` WHERE userId=?", [postClass.userId]);
+    print("userid " + postClass.userId.toString());
+    user = await findUserById(postClass.userId, result);
 
-     posts.add(Post(
-         post: postClass,
-         isOffer: postType == "Offer",
-         user: user),
-     );
+    posts.add(
+      Post(post: postClass, isOffer: postType == "Offer", user: user),
+    );
 
     entriesToPost.clear();
   }
@@ -92,7 +89,8 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
     print(e);
   }
 }
-void createuser(String nom,String fname, number,String token) async {
+
+Future<void> createuser(String nom, String fname, number, String token) async {
   var conn = await MySqlConnection.connect(settings);
   await conn.query(
       "insert into user (FirstName,FamillyName,PhoneNumber,token) values (?,?,?,?)",
@@ -105,12 +103,12 @@ Future<bool> verifyNumber({@required phone}) async {
   var result =
       await conn.query("SELECT * FROM `user` WHERE PhoneNumber=?", [phone]);
   if (result.isEmpty) {
-    return Future<bool>.value(false);
+    return false;
   } else {
     List<dynamic> entriesToUser = [];
     entriesToUser = result.first.toList();
 
-    User user = User(
+    thisUser = User(
       id: entriesToUser[0],
       firstName: entriesToUser[1].toString(),
       famillyName: entriesToUser[2].toString(),
@@ -118,8 +116,8 @@ Future<bool> verifyNumber({@required phone}) async {
       rateAsClient: entriesToUser[4],
       rateAsDriver: entriesToUser[5],
     );
-    thisUser = user;
-    return Future<bool>.value(user != null);
+    await setUserInSharedPrefs(thisUser);
+    return true;
   }
 }
 
@@ -128,7 +126,8 @@ Stream<List<Widget>> importUserPosts({@required String table}) async* {
   //! there is a postType map in Constants. Use it.
   List<Widget> posts = [];
   var conn = await MySqlConnection.connect(settings);
-  var result = await conn.query("SELECT * FROM `$table` WHERE userId=?", [thisUser.id]);
+  var result =
+      await conn.query("SELECT * FROM `$table` WHERE user Id=?", [thisUser.id]);
   print(result);
 
   List<dynamic> entriesToPost = [];
@@ -215,14 +214,13 @@ Stream<List<Widget>> searchForPost(
   }
 }
 
-Future<User> findUserById(int id,Results result) async{
-
+Future<User> findUserById(int id, Results result) async {
   List<dynamic> entriesToUser = [];
   result.first.forEach((element) {
     entriesToUser.add(element);
     print(element);
   });
-  print("result " +result.toString());
+  print("result " + result.toString());
   return User(
     id: entriesToUser[0],
     firstName: entriesToUser[1],
@@ -232,5 +230,4 @@ Future<User> findUserById(int id,Results result) async{
     rateAsDriver: entriesToUser[5],
     token: entriesToUser[6].toString(),
   );
-
 }

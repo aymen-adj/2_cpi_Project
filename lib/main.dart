@@ -17,8 +17,8 @@ void main() async {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => Home(),
-      //  'home': (context) => Home(),
+        '/': (context) => Splash(),
+        'home': (context) => Home(),
         ProfileScreen.id: (context) => ProfileScreen(),
         CreateOffer.id: (context) => CreateOffer(),
         CreateDemande.id: (context) => CreateDemande(),
