@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
@@ -18,7 +19,11 @@ class Offers extends StatefulWidget {
 
 class _OffersState extends State<Offers> {
   @override
-
+  void initState() {
+    // TODO: implement initState
+    getToken();
+  }
+  @override
 
   Widget build(BuildContext context) {
 
@@ -66,4 +71,8 @@ class _OffersState extends State<Offers> {
       ),
     );
   }
+}
+void getToken() async {
+  String s=await FirebaseMessaging.instance.getToken();
+  print("mosbah "+s);
 }

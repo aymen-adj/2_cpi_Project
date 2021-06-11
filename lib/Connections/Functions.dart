@@ -3,7 +3,7 @@
 // import'package:flutter/material.dart';
 // void PhoneFireBase({@required String phoneNumber,context,String Verification}) async {
 //   FirebaseAuth auth=FirebaseAuth.instance;
-//   auth.verifyPhoneNumber(phoneNumber: phoneNumber, verificationCompleted:(credential){
+//   auth.vhoneNumber: phoneNumber, verificationCompleted:(credential){
 //     auth.signInWithCredential(credential).then((value){
 //       Navigator.popAndPushNamed(context, 'home');
 //     });
@@ -25,7 +25,7 @@ import 'package:mysql1/mysql1.dart';
 var settings = ConnectionSettings(
  // host: '172.20.10.10',   //when using iphone
  // host: "192.168.43.145",
-  host: "192.168.204.145",
+  host: host,
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
@@ -70,14 +70,14 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
       trajet: numToStringWilaya(entriesToPost[4].toString()),
       vehicule: getTheTypeOfVehicule(entriesToPost[5]),
       description: entriesToPost[6].toString(),
-      phoneNumber: entriesToPost[7].toString(),
+    //  phoneNumber: entriesToPost[7].toString(),
       // time: entriesToPost[9].toString(),
     );
     User user;
     var result = await conn.query("SELECT * FROM `user` WHERE userId=?", [postClass.userId]);
     print("userid "+postClass.userId.toString());
-   user=await  findUserById(postClass.userId, result);
-
+    user=await  findUserById(postClass.userId, result);
+    postClass.phoneNumber = user.phoneNumber;
      posts.add(Post(
          post: postClass,
          isOffer: postType == "Offer",

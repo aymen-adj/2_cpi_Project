@@ -162,24 +162,25 @@ class _PostState extends State<Post> {
                                 ListTile(
                                   onTap: () {
                                     setState(() {
-                                      makePhoneCall(
-                                          "0${widget.post.phoneNumber}");
+                                    //  makePhoneCall(
+                                      //    "0${widget.post.phoneNumber}");
+                                      sendNotification(widget.user.token,"for loop");
                                     });
                                   },
                                   onLongPress: () {
                                     Clipboard.setData(ClipboardData(
-                                        text: "0${widget.post.phoneNumber}"));
+                                        text: "${widget.post.phoneNumber}"));
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(
                                       content: Text(
-                                        'تم النسخ   ',
+                                        'تم النسخ  ${widget.post.phoneNumber} ',
                                         textAlign: TextAlign.center,
                                       ),
                                       duration: Duration(milliseconds: 600),
                                     ));
                                   },
                                   leading: Icon(Icons.phone),
-                                  title: Text("0${widget.post.phoneNumber}"),
+                                  title: Text("${widget.post.phoneNumber}"),
                                   subtitle: Text("الهاتف"),
                                 ),
                                 DetailedTrajet(

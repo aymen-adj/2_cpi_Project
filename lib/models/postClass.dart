@@ -8,7 +8,7 @@ class PostClass {
   final List<String> trajet;
   final String vehicule;
   final String description;
-  final String phoneNumber;
+   String phoneNumber;
   final String time;
 
   PostClass({
