@@ -199,7 +199,14 @@ const List<DropdownMenuItem<String>> kWilayat = [
 const bool demande = false;
 const bool offer = true;
 
-User thisUser = User(firstName: "thisUser",phoneNumber: "000000000",id: 28);
+User thisUser = User(
+    famillyName: "asa",
+    token: "",
+    firstName: "thisUser",
+    phoneNumber: "000000000",
+    id: 28,
+    rateAsClient: 0,
+    rateAsDriver: 0);
 List<Category> categories = [
   Category(
     icon: Icons.car_rental,
