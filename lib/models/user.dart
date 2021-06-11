@@ -16,8 +16,7 @@ class User {
   });
   @override
   String toString() {
-    return "" +
-        id.toString() +
+    return "${id.toString() +
         " " +
         firstName +
         " " +
@@ -29,6 +28,6 @@ class User {
         " " +
         rateAsDriver.toString() +
         " " +
-        token;
+        token}";
   }
 }

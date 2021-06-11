@@ -23,7 +23,7 @@ class MyDrawer extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      print(thisUser);
+                      print(thisUser.toString());
                     },
                     child: CircleAvatar(
                       child: thisUser.firstName == null
