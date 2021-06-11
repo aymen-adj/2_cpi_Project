@@ -12,7 +12,6 @@ class Post extends StatefulWidget {
   final PostClass post;
   final bool isOffer;
   final User user;
-  bool complete = true;
   Post({@required this.post, @required this.isOffer, this.user});
 
   @override
@@ -40,11 +39,13 @@ class _PostState extends State<Post> {
             children: [
               ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: Colors
-                      .primaries[Random().nextInt(Colors.primaries.length)],
+                  backgroundColor: Colors.blue,
                   child: widget.user.firstName == null
                       ? Text("${Icons.emoji_emotions}")
-                      : Text(widget.user.firstName.substring(0, 2)),
+                      : Text(widget.user.firstName[0].toUpperCase(),style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
+                  ),),
                 ),
                 title: Text(widget.user.firstName == null
                     ? ' no name'
@@ -81,7 +82,7 @@ class _PostState extends State<Post> {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    widget.complete
+                    widget.post.complete
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -151,7 +152,7 @@ class _PostState extends State<Post> {
                               children: [
                                 ListTile(
                                   leading: Icon(Icons.calendar_today_rounded),
-                                  title: Text(widget.post.date),
+                                  title: Text(widget.post.date.substring(0,10)+" \n" + widget.post.date.substring(10,14)),
                                   subtitle: Text("تاريخ الانطلاق"),
                                 ),
                                 ListTile(
@@ -162,8 +163,8 @@ class _PostState extends State<Post> {
                                 ListTile(
                                   onTap: () {
                                     setState(() {
-                                    //  makePhoneCall(
-                                      //    "0${widget.post.phoneNumber}");
+                                     // makePhoneCall(
+                                       //  "${widget.post.phoneNumber}");
                                       sendNotification(widget.user.token,"for loop");
                                     });
                                   },
@@ -190,7 +191,7 @@ class _PostState extends State<Post> {
                             )
                           : ListTile(
                               leading: Icon(Icons.calendar_today_rounded),
-                              title: Text(widget.post.date),
+                              title:  Text(widget.post.date.substring(0,10)+" \n" + widget.post.date.substring(10,14)),
                               subtitle: Text("تاريخ الانطلاق"),
                             ),
                     ),

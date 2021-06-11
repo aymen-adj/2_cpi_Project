@@ -10,6 +10,7 @@ class PostClass {
   final String description;
    String phoneNumber;
   final String time;
+  bool complete=false;
 
   PostClass({
     this.userId,
@@ -21,5 +22,6 @@ class PostClass {
     this.description,
     this.phoneNumber,
     this.time,
+    //this.complete,
   });
 }

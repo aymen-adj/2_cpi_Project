@@ -103,14 +103,14 @@ void createuser(String nom,String fname, number,String token) async {
 Future<bool> verifyNumber({@required phone}) async {
   var conn = await MySqlConnection.connect(settings);
   var result =
-      await conn.query("SELECT * FROM `user` WHERE PhoneNumber=?", [phone]);
+  await conn.query("SELECT * FROM `user` WHERE PhoneNumber=?", [phone]);
   if (result.isEmpty) {
-    return Future<bool>.value(false);
+    return false;
   } else {
     List<dynamic> entriesToUser = [];
     entriesToUser = result.first.toList();
 
-    User user = User(
+    thisUser = User(
       id: entriesToUser[0],
       firstName: entriesToUser[1].toString(),
       famillyName: entriesToUser[2].toString(),
@@ -118,11 +118,10 @@ Future<bool> verifyNumber({@required phone}) async {
       rateAsClient: entriesToUser[4],
       rateAsDriver: entriesToUser[5],
     );
-    thisUser = user;
-    return Future<bool>.value(user != null);
+    await setUserInSharedPrefs(thisUser);
+    return true;
   }
 }
-
 Stream<List<Widget>> importUserPosts({@required String table}) async* {
   //! 0 --> demands 1--> offers
   //! there is a postType map in Constants. Use it.

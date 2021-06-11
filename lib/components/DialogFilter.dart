@@ -33,15 +33,15 @@ class _DialogFilterState extends State<DialogFilter> {
 
   @override
   void initState() {
+    DialogFilter.isSearching=false;
     pickedDate = DateTime.now();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    if(DialogFilter.isSearching){
       getRefresh();
-    }
+
     return StatefulBuilder(builder: (context, setStat) {
       return Directionality(
         textDirection: TextDirection.rtl,
@@ -56,21 +56,6 @@ class _DialogFilterState extends State<DialogFilter> {
             content: SingleChildScrollView(
               child: Column(
                 children: [
-                  SwitchListTile(
-                    activeColor: Colors.deepOrange,
-                      title: Text('تفعيل الفلترة'),
-                    onChanged: (value){
-                       setState(() {
-                         DialogFilter.isSearching=value;
-                         if (value){
-                           DialogFilter.traget=[stringToNumWilaya(DialogFilter.traget)];
-                           DialogFilter.date = pickedDate;
-                         }
-                       });
-                       getRefresh();
-                    },
-                    value: DialogFilter.isSearching,
-                  ),
                   Filter(
                     dropTitle: 'الإنطلاق',
                     dropdownmenu: kWilayat,
@@ -96,7 +81,9 @@ class _DialogFilterState extends State<DialogFilter> {
                   ElevatedButton(
                     child: Text("بحث"),
                     onPressed: () {
-                      getRefresh();
+                      setState(() {
+                       // DialogFilter.isSearching=true;
+                      });
                       Navigator.pop(context);
                     },
                   ),
