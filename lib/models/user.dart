@@ -16,18 +16,6 @@ class User {
   });
   @override
   String toString() {
-    return "${id.toString() +
-        " " +
-        firstName +
-        " " +
-        famillyName +
-        " " +
-        phoneNumber +
-        " " +
-        rateAsClient.toString() +
-        " " +
-        rateAsDriver.toString() +
-        " " +
-        token}";
+    return "${id.toString() + " " + firstName + " " + famillyName + " " + phoneNumber + " " + rateAsClient.toString() + " " + rateAsDriver.toString() + " " + token.toString()}";
   }
 }

@@ -48,9 +48,11 @@ class _SignUpState extends State<SignUp> {
                   //print("this user " + thisUser.phoneNumber);
                   thisUser.phoneNumber =
                       ModalRoute.of(context).settings.arguments as String;
+                  thisUser.rateAsClient = 0;
+                  thisUser.rateAsDriver = 0;
+
                   await createuser(thisUser.firstName, thisUser.famillyName,
                       thisUser.phoneNumber, thisUser.token);
-                  print("user added");
                   bool a = await verifyNumber(phone: thisUser.phoneNumber);
                   if (a) {
                     Navigator.of(context).pushNamed('home');
