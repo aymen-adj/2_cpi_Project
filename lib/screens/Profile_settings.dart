@@ -6,6 +6,7 @@ import 'package:ii_cpi_project/screens/Support.dart';
 import 'package:ii_cpi_project/screens/Feedback.dart';
 
 class ProfileSettings extends StatefulWidget {
+  static final String id = 'Settings';
   @override
   _ProfileSettingsState createState() => _ProfileSettingsState();
 }

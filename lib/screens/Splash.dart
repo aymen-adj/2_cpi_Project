@@ -31,13 +31,16 @@ void goToNext(BuildContext context) async {
   await Future.delayed(Duration(seconds: 5));
   SharedPreferences prefs = await SharedPreferences.getInstance();
   Widget t;
-  if ((prefs.getBool('new') ?? true)) {
+  if ((prefs.getBool('isNew') ?? true)) {
+    print("first time to in the app");
     t = Welcom();
   } else if (!(prefs.getBool('logIn') ?? false)) {
+    print("he is not logged in yet");
     t = LogInUsingPhone();
   } else {
     t = Home();
     thisUser = await getUserFromSharedPrefs();
+    print(thisUser);
   }
   Navigator.of(context).push(MaterialPageRoute(builder: (builder) => t));
 }

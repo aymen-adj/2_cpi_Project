@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/constantes/Constants.dart';
+import 'package:ii_cpi_project/screens/LogInUsingPhone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'LogInUsingPhone.dart';
 

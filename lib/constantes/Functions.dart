@@ -4,11 +4,14 @@ import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 String getPostingTime() {
   return '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}  ${DateTime.now().hour}:${DateTime.now().minute}';
 }
-
+// host: '172.20.10.10',   //when using iphone
+//host: "192.168.204.145",
+const host ="192.168.43.145";
 // ignore: non_constant_identifier_names
 List<Widget> TransformStringToWidget(List<String> listOfString) {
   List<Widget> traj = [];
@@ -93,7 +96,7 @@ Future<User> getUserFromSharedPrefs() async {
   );
 }
 
-Future<void> setUserInSharedPrefs() async {
+Future<void> setUserInSharedPrefs(User user) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString("famillyName", thisUser.famillyName);
   prefs.setString("firstName", thisUser.firstName);
@@ -102,4 +105,15 @@ Future<void> setUserInSharedPrefs() async {
   prefs.setDouble("rateAsClient", thisUser.rateAsClient);
   prefs.setDouble("rateAsDriver", thisUser.rateAsDriver);
   prefs.setBool('logIn', true);
+}
+
+void sendNotification(String token, String msg) async {
+  // ! ip ytbadl
+  var url = Uri.parse('http://192.168.43.107:8000/' + token + '/' + msg);
+    await http.get(url);
+  print(url);
+}
+Future<void> logOut() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('logIn', false);
 }

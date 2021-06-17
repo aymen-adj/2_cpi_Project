@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
@@ -37,18 +38,25 @@ class _SignUpState extends State<SignUp> {
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.arrow_forward_sharp),
               backgroundColor: colorFAB,
-              onPressed: () {
+              onPressed: () async {
                 if (colorFAB == Colors.grey) {
                   showSnackBar("الرجاء مل الاسم و اللقب", context);
                 } else {
+                  thisUser.token = await getToken();
                   thisUser.firstName = fname;
                   thisUser.famillyName = lname;
                   //print("this user " + thisUser.phoneNumber);
                   thisUser.phoneNumber =
                       ModalRoute.of(context).settings.arguments as String;
-                  createuser(thisUser.firstName, thisUser.famillyName,
-                      thisUser.phoneNumber);
-                  print("user added");
+                  thisUser.rateAsClient = 0;
+                  thisUser.rateAsDriver = 0;
+
+                  await createuser(thisUser.firstName, thisUser.famillyName,
+                      thisUser.phoneNumber, thisUser.token);
+                  bool a = await verifyNumber(phone: thisUser.phoneNumber);
+                  if (a) {
+                    Navigator.of(context).pushNamed('home');
+                  }
                 }
               },
             ),
@@ -133,4 +141,9 @@ void showSnackBar(String g, BuildContext context) {
     textDirection: TextDirection.rtl,
   ));
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}
+
+Future<String> getToken() async {
+  String s = await FirebaseMessaging.instance.getToken();
+  return s;
 }

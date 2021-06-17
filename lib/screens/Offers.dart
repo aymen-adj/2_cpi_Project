@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
@@ -6,20 +7,26 @@ import 'package:ii_cpi_project/components/LoadingPage.dart';
 import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/screens/CreateOffer.dart';
+import 'package:ii_cpi_project/screens/Demandes.dart';
 
 // ignore: must_be_immutable
 class Offers extends StatefulWidget {
   static final String id ='Offers';
-  ScrollController scrollController = ScrollController();
-  Offers({this.scrollController});
+  static ScrollController scrollController ;
   @override
   _OffersState createState() => _OffersState();
 }
 
 class _OffersState extends State<Offers> {
   @override
+  void initState(){
+    // TODO: implement initState
+    getToken();
+  }
   @override
+
   Widget build(BuildContext context) {
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         //  backgroundColor: ActiveColor,
@@ -28,7 +35,7 @@ class _OffersState extends State<Offers> {
             size: 40,
             color: Colors.white,
           ),
-          onPressed: () {
+          onPressed: () async{
             setState(() {
              Navigator.pushNamed(context, CreateOffer.id);
             });
@@ -54,6 +61,7 @@ class _OffersState extends State<Offers> {
                       snapshot.data==null )
                   ? LoadingPage()
                   : ListView.builder(
+               controller: Demandes.scrollController,
                     itemCount: body.length,
                     itemBuilder: (context, i) {
                       return body[i] ;// snapshot.data[i];
@@ -63,4 +71,8 @@ class _OffersState extends State<Offers> {
       ),
     );
   }
+}
+void getToken() async {
+  String s=await FirebaseMessaging.instance.getToken();
+  print("mosbah "+s);
 }

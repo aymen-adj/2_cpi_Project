@@ -1,47 +1,64 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ii_cpi_project/components/Chips.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/models/postClass.dart';
+import 'package:ii_cpi_project/models/user.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 
 class Post extends StatefulWidget {
   final PostClass post;
   final bool isOffer;
-  Post({@required this.post, @required this.isOffer});
+  final User user;
+  Post({@required this.post, @required this.isOffer, this.user});
+
   @override
   _PostState createState() => _PostState();
 }
 
 class _PostState extends State<Post> {
   double h;
-
-  final userName = 'Profile name';
   int maxlines = 2;
   bool trajetIsDetailed = false;
+
   @override
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
       child: Card(
-        elevation: 4,
+        elevation: 7,
+        color: Colors.white,
         child: Container(
           child: Column(
             children: [
               ListTile(
                 leading: CircleAvatar(
-                  child: Image.asset('images/logo.png'),
+                  backgroundColor: Colors.blue,
+                  child: widget.user.firstName == null
+                      ? Text("${Icons.emoji_emotions}")
+                      : Text(widget.user.firstName[0].toUpperCase(),style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
+                  ),),
                 ),
-                title: Text(userName),
+                title: Text(widget.user.firstName == null
+                    ? ' no name'
+                    : widget.user.firstName),
                 subtitle: Text(widget.post.postingDate == null
                     ? 'Just now'
-                    : widget.post.postingDate.toString()),
+                    : widget.post.postingDate.toString().substring(1, 16)),
                 trailing: DropdownButton(
                   underline: Container(
                     width: 1,
                   ),
                   icon: Icon(Icons.more_horiz_rounded),
-                  dropdownColor: Colors.blueGrey,
+                  // dropdownColor: Colors.blueGrey,
                   items: <String>['Save Post', 'Report Post', 'Notify Me']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
@@ -65,6 +82,22 @@ class _PostState extends State<Post> {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: [
+                    widget.post.complete
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(("ممتلئ")),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(Icons.check_circle,
+                                    size: 30, color: Colors.green),
+                              ),
+                            ],
+                          )
+                        : Container(),
                     Container(
                       width: double.infinity,
                       child: GestureDetector(
@@ -73,6 +106,11 @@ class _PostState extends State<Post> {
                             maxlines == 3 && TextOverflow.values != []
                                 ? maxlines = 50
                                 : maxlines = 3;
+                            {
+                              maxlines == 3 && TextOverflow.values != []
+                                  ? maxlines = 50
+                                  : maxlines = 3;
+                            }
                           });
                         },
                         child: Text(
@@ -114,7 +152,7 @@ class _PostState extends State<Post> {
                               children: [
                                 ListTile(
                                   leading: Icon(Icons.calendar_today_rounded),
-                                  title: Text(widget.post.date),
+                                  title: Text(widget.post.date.substring(0,10)+" \n" + widget.post.date.substring(10,14)),
                                   subtitle: Text("تاريخ الانطلاق"),
                                 ),
                                 ListTile(
@@ -125,23 +163,25 @@ class _PostState extends State<Post> {
                                 ListTile(
                                   onTap: () {
                                     setState(() {
-                                      makePhoneCall("0${widget.post.phoneNumber}");
+                                     // makePhoneCall(
+                                       //  "${widget.post.phoneNumber}");
+                                      sendNotification(widget.user.token,"for loop");
                                     });
                                   },
                                   onLongPress: () {
                                     Clipboard.setData(ClipboardData(
-                                        text: "0${widget.post.phoneNumber}"));
+                                        text: "${widget.post.phoneNumber}"));
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(
                                       content: Text(
-                                        'تم النسخ   ',
+                                        'تم النسخ  ${widget.post.phoneNumber} ',
                                         textAlign: TextAlign.center,
                                       ),
                                       duration: Duration(milliseconds: 600),
                                     ));
                                   },
                                   leading: Icon(Icons.phone),
-                                  title: Text("0${widget.post.phoneNumber}"),
+                                  title: Text("${widget.post.phoneNumber}"),
                                   subtitle: Text("الهاتف"),
                                 ),
                                 DetailedTrajet(
@@ -151,7 +191,7 @@ class _PostState extends State<Post> {
                             )
                           : ListTile(
                               leading: Icon(Icons.calendar_today_rounded),
-                              title: Text(widget.post.date),
+                              title:  Text(widget.post.date.substring(0,10)+" \n" + widget.post.date.substring(10,14)),
                               subtitle: Text("تاريخ الانطلاق"),
                             ),
                     ),
@@ -173,8 +213,8 @@ class TrajetContainer extends StatelessWidget {
   TrajetContainer({this.trajet});
   @override
   Widget build(BuildContext context) {
-    if (trajet==null){
-      trajet=['none'];
+    if (trajet == null) {
+      trajet = ['none'];
     }
     return Container(
       child: Column(
@@ -201,7 +241,7 @@ class TrajetContainer extends StatelessWidget {
 }
 
 class DetailedTrajet extends StatelessWidget {
- final List<dynamic> trajet;
+  final List<dynamic> trajet;
   DetailedTrajet({this.trajet});
   @override
   Widget build(BuildContext context) {
