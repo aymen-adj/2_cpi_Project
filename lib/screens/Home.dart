@@ -93,6 +93,7 @@ class _HomeState extends State<Home> {
 import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/DialogFilter.dart';
 import 'package:ii_cpi_project/components/Drawer.dart';
+import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/screens/Demandes.dart';
 import 'package:ii_cpi_project/screens/Offers.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
@@ -122,14 +123,19 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
-            title,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 28,
+          title: GestureDetector(
+            onTap: (){
+              gotoTopPage(Offers.scrollController);
+            },
+            child: Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
+              ),
+              textDirection: TextDirection.ltr,
             ),
-            textDirection: TextDirection.ltr,
           ),
           actions: [
             Container(
@@ -157,6 +163,7 @@ class _HomeState extends State<Home> {
           unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
           selectedLabelStyle: textTheme.caption,
           unselectedLabelStyle: textTheme.caption,
+
           onTap: (value) {
             setState(() {
               _currentIndex = value;

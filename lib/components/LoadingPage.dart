@@ -17,17 +17,7 @@ class _LoadingPageState extends State<LoadingPage> {
             EmptyPost(),
             EmptyPost(),
             EmptyPost(),
-            Center(child: ElevatedButton(
-              child: Text("call"),
-              onPressed: () {
-                setState(() {
 
-                 // makePhoneCall('0770228853');
-                   // sendNotification();
-
-                });
-                },
-            ),)
           ],
         ),
         Container(

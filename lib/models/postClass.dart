@@ -8,8 +8,9 @@ class PostClass {
   final List<String> trajet;
   final String vehicule;
   final String description;
-  final String phoneNumber;
+   String phoneNumber;
   final String time;
+  bool complete=false;
 
   PostClass({
     this.userId,
@@ -21,5 +22,6 @@ class PostClass {
     this.description,
     this.phoneNumber,
     this.time,
+    //this.complete,
   });
 }
