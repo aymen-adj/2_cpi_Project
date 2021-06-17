@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/models/user.dart';
 
+const List<String> adminsPhoneNumber = ['0770228853', '0540047893'];
+
 const List<String> kWilaya = [
   "أدرار",
   "الشلف",
