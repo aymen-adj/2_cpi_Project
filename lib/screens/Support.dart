@@ -68,7 +68,7 @@ class Support extends StatelessWidget {
                 onTap: () {},
                 leading: CircleAvatar(
                   radius: 18,
-                  backgroundImage: AssetImage('images/phone.png'),
+                  backgroundImage: AssetImage('images/phone2.png'),
                   backgroundColor: Colors.transparent,
                 ),
                 title: Text(
