@@ -23,7 +23,7 @@ import 'package:mysql1/mysql1.dart';
 var settings = ConnectionSettings(
   // host: '172.20.10.10',   //when using iphone
   // host: "192.168.43.145",
-  host: "192.168.30.145",
+  host: "192.168.51.145",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',

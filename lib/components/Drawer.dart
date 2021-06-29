@@ -18,7 +18,8 @@ class MyDrawer extends StatelessWidget {
               image: DecorationImage(
             fit: BoxFit.cover,
             image: AssetImage('images/cool-background.png'),
-          )),
+          ),
+          ),
           child: ListView(
             children: <Widget>[
               Center(
