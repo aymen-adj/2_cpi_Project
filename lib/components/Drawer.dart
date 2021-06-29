@@ -10,37 +10,27 @@ import 'package:ii_cpi_project/screens/SignUp.dart';
 class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Drawer(
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage('images/cool-background.png'),
-          ),
-          ),
-          child: ListView(
-            children: <Widget>[
-              Center(
-                  child: DrawerHeader(
-                child: Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        print(thisUser.toString());
-                      },
-                      child: CircleAvatar(
-                        child: thisUser.firstName == null
-                            ? null
-                            : Text(
-                                thisUser.firstName
-                                    .substring(0, 2)
-                                    .toUpperCase(),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 40,
-                                ),
+    return Drawer(
+      child: Container(
+        decoration: BoxDecoration(),
+        child: ListView(
+          children: <Widget>[
+            Center(
+                child: DrawerHeader(
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      print(thisUser.toString());
+                    },
+                    child: CircleAvatar(
+                      child: thisUser.firstName == null
+                          ? null
+                          : Text(
+                              thisUser.firstName.substring(0, 1).toUpperCase(),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40,
                               ),
                         //backgroundColor: Colors.primaries,
                         backgroundImage: thisUser.firstName == null
@@ -49,15 +39,46 @@ class MyDrawer extends StatelessWidget {
                         radius: 50,
                       ),
                     ),
-                    Text(
-                      thisUser.firstName == null
-                          ? "user name"
-                          : thisUser.firstName,
-                      style: TextStyle(
-                          fontFamily: 'Amiri', fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
+                  ),
+                  Text(
+                    thisUser.firstName == null
+                        ? "user name"
+                        : thisUser.firstName,
+                    style: TextStyle(
+                        fontFamily: 'Amiri', fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            )),
+            DrawerItem(
+              title: 'إشعاراتي',
+              icon: Icons.notifications,
+              idOfPage: 'notifications',
+            ),
+            DrawerItem(
+              title: 'طلباتي',
+              icon: Icons.description,
+              idOfPage: MyDemands.id,
+            ),
+            DrawerItem(
+              title: 'عروضي',
+              icon: Icons.local_offer,
+              idOfPage: MyOffers.id,
+            ),
+            DrawerItem(
+              title: 'الاعدادات',
+              icon: Icons.settings,
+            ),
+            DrawerItem(
+              title: 'تسجيل الخروج',
+              icon: Icons.logout,
+              idOfPage: LogInUsingPhone.id,
+            ),
+            DrawerHeader(
+              child: Image.asset('images/logo.png'),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                bottom: Radius.elliptical(500, 150),
               )),
               DrawerItem(
                 title: 'Find My Location',

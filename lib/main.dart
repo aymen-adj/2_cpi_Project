@@ -6,6 +6,7 @@ import 'package:ii_cpi_project/screens/Home.dart';
 import 'package:ii_cpi_project/screens/LogInUsingPhone.dart';
 import 'package:ii_cpi_project/screens/MyDemands.dart';
 import 'package:ii_cpi_project/screens/MyOffers.dart';
+import 'package:ii_cpi_project/screens/Notifications.dart';
 import 'package:ii_cpi_project/screens/Profile.dart';
 import 'package:ii_cpi_project/screens/SignUp.dart';
 import 'package:ii_cpi_project/screens/Welcom.dart';
@@ -19,6 +20,7 @@ void main() async {
       routes: {
         '/': (context) => Welcom(),
         'home': (context) => Home(),
+        'notifications': (context) => Notifications(),
         ProfileScreen.id: (context) => ProfileScreen(),
         CreateOffer.id: (context) => CreateOffer(),
         CreateDemande.id: (context) => CreateDemande(),

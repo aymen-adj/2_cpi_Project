@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/PathChooser.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
+
 import '../constantes/Constants.dart';
 import '../constantes/Functions.dart';
 import '../models/postClass.dart';
@@ -199,47 +200,68 @@ class _CreateOfferState extends State<CreateOffer> {
 
 class CreateOffer extends StatefulWidget {
   static const String id = 'create Offer';
-  @override
-  _CreateOfferState createState() => _CreateOfferState();
-}
 
-class _CreateOfferState extends State<CreateOffer> {
   DateTime pickedDate = DateTime.now();
+  TimeOfDay pickedTime = TimeOfDay.now();
   List<String> traget = [];
   String vehicle;
   String description;
+
+  @override
+  _CreateOfferState createState() => _CreateOfferState(
+        pickedDate: pickedDate,
+        pickedTime: pickedTime,
+        description: description,
+        traget: traget,
+        vehicle: vehicle,
+      );
+}
+
+class _CreateOfferState extends State<CreateOffer> {
+  _CreateOfferState({
+    @required this.pickedDate,
+    @required this.pickedTime,
+    @required this.description,
+    @required this.traget,
+    @required this.vehicle,
+  });
+
+  DateTime pickedDate;
+  List<String> traget;
+  String vehicle;
+  String description;
+  TimeOfDay pickedTime;
+  // DateTime pickedDate = DateTime.now();
+  // List<String> traget = [];
+  // String vehicle;
+  // String description;
+  // TimeOfDay pickedTime = TimeOfDay.now();
   int currentStep = 0;
-  bool isTrue0 = true;
   bool isTrue1 = false;
-  bool isTrue2 = true;
   String timeLable = 'Choose Time';
   String dateLable = 'Choose Date';
   TextEditingController descriptionController = TextEditingController();
-
-  TimeOfDay pickedTime = TimeOfDay.now();
-
-  // ignore: missing_return
-  StepState stepState(int step, bool isTrue) {
-    if (step > currentStep)
-      return StepState.indexed;
-    else if ((!isTrue) && (currentStep == step))
-      return StepState.error;
-    else if (step == currentStep)
-      return StepState.editing;
-    else if ((step < currentStep) && (isTrue))
-      return StepState.complete;
-    else if (isTrue == null) return StepState.editing;
-  }
+  StepState tragetState = StepState.editing;
+  StepState dateState = StepState.indexed;
+  StepState vehicleState = StepState.indexed;
 
   _selectTime() async {
     final TimeOfDay result =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
     if (result != null) {
-      setState(() {
+      {
         pickedTime = result;
         timeLable = pickedTime.format(context);
-      });
+      }
     }
+    if ((isTrue1) & (pickedTime != null) & (pickedDate != null)) {
+      dateState = StepState.complete;
+      isTrue1 = true;
+    } else {
+      dateState = StepState.error;
+      isTrue1 = false;
+    }
+    setState(() {});
   }
 
   _selectDate() async {
@@ -249,15 +271,29 @@ class _CreateOfferState extends State<CreateOffer> {
       firstDate: DateTime(DateTime.now().day),
       lastDate: DateTime(2025),
     );
-    if (picked != null && picked != pickedDate)
-      setState(() {
-        pickedDate = picked;
-        dateLable = pickedDate.toString().substring(0, 10);
-        if (pickedDate.isBefore(DateTime.now()))
-          isTrue1 = false;
-        else
-          isTrue1 = true;
-      });
+
+    if (picked != null && picked != pickedDate) {
+      pickedDate = picked;
+      dateLable = pickedDate.toString().substring(0, 10);
+      if (pickedDate.isBefore(DateTime.now()))
+        isTrue1 = false;
+      else
+        isTrue1 = true;
+    }
+    if ((isTrue1) & (pickedTime != null) & (pickedDate != null)) {
+      dateState = StepState.complete;
+      isTrue1 = true;
+    } else {
+      dateState = StepState.error;
+      isTrue1 = false;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    descriptionController.text = description;
   }
 
   @override
@@ -271,26 +307,52 @@ class _CreateOfferState extends State<CreateOffer> {
               Icons.arrow_downward_outlined,
             ),
             onPressed: () {
-              if ((isTrue0) &&
-                  (currentStep == 0) &&
-                  (traget.length > 1) &&
-                  (traget.length < 9)) currentStep++;
-              if ((isTrue1) && (currentStep == 1)) currentStep++;
-              print(currentStep);
-              // currentStep++;
-              //Logic true1
-              //Logic true2
+              if (currentStep == 0) if ((traget.length > 1) &
+                  (traget.length < 9)) {
+                setState(() {
+                  tragetState = StepState.complete;
+                  dateState = StepState.editing;
+                  currentStep = 1;
+                });
+                return;
+              } else
+                setState(() {
+                  tragetState = StepState.error;
+                  return;
+                });
 
-              if ((currentStep == 2) &&
-                  ((isTrue0 == false) ||
-                      (isTrue1 == false) ||
-                      (isTrue2 == false))) {
+              if ((currentStep == 1) &
+                  (dateState == StepState.complete) &
+                  (isTrue1)) {
+                setState(() {
+                  currentStep = 2;
+                  vehicleState = StepState.editing;
+                  return;
+                });
+              }
+
+              if (currentStep == 2) if ((vehicle == null) ||
+                  (descriptionController.text.isEmpty))
+                setState(() {
+                  vehicleState = StepState.error;
+                  return;
+                });
+              else
+                setState(() {
+                  vehicleState = StepState.complete;
+                  return;
+                });
+
+              if ((currentStep == 2) &
+                  (vehicleState == StepState.complete) &
+                  (tragetState == StepState.complete) &
+                  (dateState == StepState.complete)) {
                 PostClass post = PostClass(
                   date: dateLable,
                   time: timeLable,
                   description: descriptionController.text,
                   phoneNumber: thisUser.phoneNumber,
-                  postingDate: DateTime.now(),
+                  postingDate: DateTime.now().toUtc(),
                   trajet: [
                     stringToNumWilaya(traget),
                   ],
@@ -298,6 +360,7 @@ class _CreateOfferState extends State<CreateOffer> {
                   vehicule: vehicle,
                 );
                 createPostToDB(post, "Offer");
+                Navigator.pop(context);
               }
               setState(() {});
             },
@@ -314,7 +377,7 @@ class _CreateOfferState extends State<CreateOffer> {
             controlsBuilder: removeButtons,
             steps: [
               Step(
-                state: stepState(0, isTrue0),
+                state: tragetState,
                 subtitle: Text('اختر الولايات التي تمر بها'),
                 isActive: currentStep == 0,
                 title: Text("اختر المسار"),
@@ -324,10 +387,10 @@ class _CreateOfferState extends State<CreateOffer> {
                     onChoosePath: (path) {
                       traget = path;
                       if ((traget.length < 2) || (traget.length > 9))
-                        isTrue0 = false;
+                        tragetState = StepState.error;
                       else
-                        isTrue0 = true;
-                      print(traget);
+                        tragetState = StepState.complete;
+                      print(tragetState);
                       setState(() {});
                     },
                   ),
@@ -335,7 +398,7 @@ class _CreateOfferState extends State<CreateOffer> {
               ),
               Step(
                 subtitle: Text('اختر الوقت الذي تمر فيه'),
-                state: stepState(1, isTrue1),
+                state: dateState,
                 isActive: currentStep == 1,
                 title: Text('اختر الوقت'),
                 content: Column(
@@ -359,7 +422,7 @@ class _CreateOfferState extends State<CreateOffer> {
               ),
               Step(
                 isActive: currentStep == 2,
-                state: stepState(2, isTrue2),
+                state: vehicleState,
                 subtitle: Text('اختر وسيلة النقل المناسبة '),
                 title: Text('اختر الآلة'),
                 content: Column(
@@ -373,8 +436,6 @@ class _CreateOfferState extends State<CreateOffer> {
                       onChanged: (value) {
                         setState(() {
                           vehicle = value;
-                          if (descriptionController.text.isEmpty)
-                            isTrue2 = false;
                         });
                       },
                     ),

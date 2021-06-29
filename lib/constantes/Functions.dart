@@ -109,9 +109,8 @@ Future<void> setUserInSharedPrefs(User user) async {
 
 void sendNotification(String token, String msg) async {
   // ! ip ytbadl
-  var url = Uri.parse('http://192.168.43.107:8000/' + token + '/' + msg);
-    await http.get(url);
-  print(url);
+  var url = Uri.parse('http://192.168.43.206:8000/' + token + '/' + msg);
+  await http.get(url);
 }
 Future<void> logOut() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();

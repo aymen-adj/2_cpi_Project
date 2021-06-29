@@ -3,6 +3,15 @@ import 'package:ii_cpi_project/components/headOfHome.dart';
 import 'package:ii_cpi_project/models/user.dart';
 
 const List<String> adminsPhoneNumber = ['0770228853', '0540047893'];
+class NotificationClass {
+  NotificationClass(
+      {this.id, this.ownerid, this.userid, this.username, this.msg});
+  int ownerid;
+  int id;
+  int userid;
+  String username;
+  String msg;
+}
 
 const List<String> kWilaya = [
   "أدرار",

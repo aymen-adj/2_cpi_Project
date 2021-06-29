@@ -1,8 +1,11 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ii_cpi_project/Connections/Functions.dart';
 import 'package:ii_cpi_project/components/Chips.dart';
+import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/models/postClass.dart';
 import 'package:ii_cpi_project/models/user.dart';
@@ -49,10 +52,10 @@ class _PostState extends State<Post> {
                 ),
                 title: Text(widget.user.firstName == null
                     ? ' no name'
-                    : widget.user.firstName),
+                    : widget.user.firstName + " " + widget.user.famillyName),
                 subtitle: Text(widget.post.postingDate == null
                     ? 'Just now'
-                    : widget.post.postingDate.toString().substring(1, 16)),
+                    : widget.post.postingDate.toString().substring(0, 16)),
                 trailing: DropdownButton(
                   underline: Container(
                     width: 1,
@@ -152,7 +155,9 @@ class _PostState extends State<Post> {
                               children: [
                                 ListTile(
                                   leading: Icon(Icons.calendar_today_rounded),
-                                  title: Text(widget.post.date.substring(0,10)+" \n" + widget.post.date.substring(10,14)),
+                                  title: Text(widget.post.time +
+                                      " " +
+                                      widget.post.date.substring(0, 10)),
                                   subtitle: Text("تاريخ الانطلاق"),
                                 ),
                                 ListTile(
@@ -160,33 +165,123 @@ class _PostState extends State<Post> {
                                   title: Text(widget.post.vehicule),
                                   subtitle: Text("نوع المركبة"),
                                 ),
-                                ListTile(
-                                  onTap: () {
-                                    setState(() {
-                                     // makePhoneCall(
-                                       //  "${widget.post.phoneNumber}");
-                                      sendNotification(widget.user.token,"for loop");
-                                    });
-                                  },
-                                  onLongPress: () {
-                                    Clipboard.setData(ClipboardData(
-                                        text: "${widget.post.phoneNumber}"));
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                      content: Text(
-                                        'تم النسخ  ${widget.post.phoneNumber} ',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      duration: Duration(milliseconds: 600),
-                                    ));
-                                  },
-                                  leading: Icon(Icons.phone),
-                                  title: Text("${widget.post.phoneNumber}"),
-                                  subtitle: Text("الهاتف"),
-                                ),
                                 DetailedTrajet(
                                   trajet: widget.post.trajet,
-                                )
+                                ),
+                                ListTile(
+                                    title: TextButton(
+                                  child: Text('الإشتراك',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  onPressed: () {
+                                    if (thisUser.id != widget.user.id) {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                              content: Container(
+                                                  height: 95,
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                          "هل أنت متأكد من الإشتراك"),
+                                                      SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                SendNotification(
+                                                                    widget.user
+                                                                        .token,
+                                                                    "يريد " +
+                                                                        thisUser
+                                                                            .firstName +
+                                                                        " " +
+                                                                        thisUser
+                                                                            .famillyName +
+                                                                        " المشاركة في منشورك");
+                                                                insertNotification(
+                                                                    widget.user
+                                                                        .id,
+                                                                    thisUser.id,
+                                                                    thisUser.firstName +
+                                                                        thisUser
+                                                                            .famillyName,
+                                                                    "يريد الإشتراك في منشورك");
+                                                                Navigator.pop(
+                                                                    context);
+                                                                showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) =>
+                                                                          AlertDialog(
+                                                                    title:
+                                                                        Directionality(
+                                                                      textDirection:
+                                                                          TextDirection
+                                                                              .rtl,
+                                                                      child:
+                                                                          Text(
+                                                                        "تم الإشتراك بنجاح !",
+                                                                      ),
+                                                                    ),
+                                                                    content: Container(
+                                                                        height: 95,
+                                                                        child: Column(
+                                                                          children: [
+                                                                            Text("رقم هاتف السائق هو " +
+                                                                                widget.user.phoneNumber),
+                                                                            SizedBox(
+                                                                              height: 20,
+                                                                            ),
+                                                                            Row(
+                                                                              children: [
+                                                                                TextButton(
+                                                                                  child: Text(
+                                                                                    "الإتصال",
+                                                                                  ),
+                                                                                  onPressed: () {
+                                                                                    makePhoneCall(widget.user.phoneNumber);
+                                                                                  },
+                                                                                ),
+                                                                                SizedBox(
+                                                                                  width: 30,
+                                                                                ),
+                                                                                TextButton(
+                                                                                    onPressed: () {
+                                                                                      Clipboard.setData(ClipboardData(text: widget.user.phoneNumber));
+                                                                                      Navigator.pop(context);
+                                                                                      final snackbar = SnackBar(content: Text('تم نسخ رقم الهاتف'));
+                                                                                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                                                                                    },
+                                                                                    child: Text('نسخ الرقم')),
+                                                                              ],
+                                                                            )
+                                                                          ],
+                                                                        )),
+                                                                  ),
+                                                                );
+                                                              },
+                                                              child: Text(
+                                                                  "تأكيد")),
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text(
+                                                                  "إلغاء")),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ))));
+                                    }
+                                  },
+                                ))
                               ],
                             )
                           : ListTile(

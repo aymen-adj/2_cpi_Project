@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:ii_cpi_project/screens/CreateOffer.dart';
 
 class EditPost extends StatefulWidget {
-
   @override
   _EditPostState createState() => _EditPostState();
 }
@@ -10,9 +9,9 @@ class EditPost extends StatefulWidget {
 class _EditPostState extends State<EditPost> {
   @override
   Widget build(BuildContext context) {
-    Color color=Colors.grey[100];
+    Color color = Colors.grey[100];
 
-    return  Container(
+    return Container(
       height: 70,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 0, 8, 10),
@@ -25,10 +24,11 @@ class _EditPostState extends State<EditPost> {
             children: [
               Expanded(
                 child: GestureDetector(
-                    onTap: (){
-                      setState(() {
-
-                      });
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CreateOffer()),
+                      );
                     },
                     child: Container(
                       margin: EdgeInsets.all(3),
@@ -39,11 +39,13 @@ class _EditPostState extends State<EditPost> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("تعديل",
+                          Text(
+                            "تعديل",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                            ),),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(Icons.edit),
@@ -51,12 +53,11 @@ class _EditPostState extends State<EditPost> {
                         ],
                       ),
                     )),
-              ),Expanded(
+              ),
+              Expanded(
                 child: GestureDetector(
-                    onTap: (){
-                      setState(() {
-
-                      });
+                    onTap: () {
+                      setState(() {});
                     },
                     child: Container(
                       margin: EdgeInsets.all(3),
@@ -67,11 +68,13 @@ class _EditPostState extends State<EditPost> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("إنهاء",
+                          Text(
+                            "إنهاء",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                            ),),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(Icons.check_rounded),
@@ -82,40 +85,37 @@ class _EditPostState extends State<EditPost> {
               ),
               Expanded(
                 child: GestureDetector(
-                    onTap: (){
-                      setState(() {
-
-                      });
-                    },
-                    child: Expanded(
-
-                      child: Container(
-                        margin: EdgeInsets.all(3),
-                        decoration: BoxDecoration(
-                          color: color,
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ),
-
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text("حذف",
-                              style: TextStyle(
+                  onTap: () {
+                    setState(() {});
+                  },
+                  child: Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "حذف",
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                            ),),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(Icons.delete_rounded),
                             ),
-
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(Icons.delete_rounded),
+                          ),
+                        ],
                       ),
-                    ),),
+                    ),
+                  ),
+                ),
               ),
-
             ],
           ),
         ),

@@ -6,7 +6,7 @@ import 'package:ii_cpi_project/constantes/Functions.dart';
 import 'package:ii_cpi_project/constantes/ListFihaDesPostsNsayiwBihom.dart';
 
 class MyOffers extends StatefulWidget {
-  static final String id ='MyOffers';
+  static final String id = 'MyOffers';
   @override
   _MyOffersState createState() => _MyOffersState();
 }
@@ -16,15 +16,14 @@ class _MyOffersState extends State<MyOffers> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        //  backgroundColor: ActiveColor,
+          //  backgroundColor: ActiveColor,
           child: Icon(
             Icons.post_add_rounded,
             size: 40,
             color: Colors.white,
           ),
           onPressed: () {
-            setState(() {
-            });
+            setState(() {});
           }),
       body: RefreshIndicator(
         onRefresh: () async {
@@ -36,27 +35,23 @@ class _MyOffersState extends State<MyOffers> {
         child: StreamBuilder(
             stream: importUserPosts(table: "Offer"),
             builder: (context, snapshot) {
-
-              return (snapshot.hasError ||
-                  !snapshot.hasData ||
-                  snapshot.data == null)
+              return !(snapshot.hasError ||
+                      !snapshot.hasData ||
+                      snapshot.data == null)
                   ? LoadingPage()
                   : ListView.builder(
-                itemCount: snapshot.data.length,//snapshot.data.length,
-                itemBuilder: (context, i) {
-                  return Column(
-                    children: [
-                      snapshot.data[i],
-                   EditPost(),
-                    ],
-                  ) ;//snapshot.data[i] ;
-                },
-              );
+                      itemCount: posts.length, //snapshot.data.length,
+                      itemBuilder: (context, i) {
+                        return Column(
+                          children: [
+                            posts[i],
+                            EditPost(),
+                          ],
+                        ); //snapshot.data[i] ;
+                      },
+                    );
             }),
       ),
     );
   }
-  }
-
-
-
+}

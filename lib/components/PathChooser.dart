@@ -46,6 +46,7 @@ class _PathChooserState extends State<PathChooser> {
           onDeletIconPressed: () {
             setState(() {
               path.remove(path[index]);
+              returnTheTraget();
             });
           },
           onChooseWilaya: (_) {

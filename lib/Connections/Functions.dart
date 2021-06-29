@@ -13,6 +13,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ii_cpi_project/components/NotificationWidget.dart';
 import 'package:ii_cpi_project/components/Post.dart';
 import 'package:ii_cpi_project/constantes/Constants.dart';
 import 'package:ii_cpi_project/constantes/Functions.dart';
@@ -23,7 +24,7 @@ import 'package:mysql1/mysql1.dart';
 var settings = ConnectionSettings(
   // host: '172.20.10.10',   //when using iphone
   // host: "192.168.43.145",
-  host: "192.168.51.145",
+  host: "192.168.43.155",
   port: 3306,
   user: 'mosbah',
   password: 'mosbah',
@@ -33,13 +34,16 @@ void createPostToDB(PostClass postClass, String postType) async {
   var conn = await MySqlConnection.connect(settings);
   print(conn.toString());
   var r = await conn.query(
-      "insert into  '$postType' (PostingDate,Date,Trajet,Vehicule,Description) values (?,?,?,?,?)",
+      "insert into  $postType (UserId,PostingDate,Date,Time,Trajet,Vehicule,Description,phoneNumber) values (?,?,?,?,?,?,?,?)",
       [
+        postClass.userId,
         postClass.postingDate,
-        postClass.date,
+        DateTime.parse(postClass.date).toUtc(),
+        postClass.time,
         postClass.trajet.first,
-        postClass.vehicule,
-        postClass.description
+        getNumOfVehicule(postClass.vehicule),
+        postClass.description,
+        postClass.phoneNumber,
       ]);
   print(r);
 }
@@ -65,10 +69,11 @@ Stream<List<Widget>> importPosts({@required String postType}) async* {
           entriesToPost[3].toString().substring(
               entriesToPost[3].toString().length - 9,
               entriesToPost[3].toString().length),
-      trajet: numToStringWilaya(entriesToPost[4].toString()),
-      vehicule: getTheTypeOfVehicule(entriesToPost[5]),
-      description: entriesToPost[6].toString(),
-      phoneNumber: entriesToPost[7].toString(),
+      time: entriesToPost[4],
+      trajet: numToStringWilaya(entriesToPost[5].toString()),
+      vehicule: getTheTypeOfVehicule(entriesToPost[6]),
+      description: entriesToPost[7].toString(),
+      phoneNumber: entriesToPost[8].toString(),
       // time: entriesToPost[9].toString(),
     );
     User user;
@@ -246,4 +251,46 @@ Future<bool> archiver() async {
   await conn.query("DELETE FROM `Demande` WHERE Date <= now()", []);
 
   return !((await conn.query("select 'a'")).isEmpty);
+void insertNotification(ownerid, userId, username, msg) async {
+  var conn = await MySqlConnection.connect(settings);
+  print(conn.toString());
+  var r = await conn.query(
+      "insert into Notifications (ownerid,userId,username,msg) values (?,?,?,?)",
+      [ownerid, userId, username, msg]);
+}
+
+Stream<List<NotificationWidget>> importNotifications(
+    {@required int ownerid}) async* {
+  //! 0 --> demandes 1--> offers
+  //! there is a postType map in Constatns. Use it.
+  List<NotificationWidget> notifications = [];
+  var conn = await MySqlConnection.connect(settings);
+  var result = await conn
+      .query("SELECT * FROM `Notifications` WHERE ownerid=?", [ownerid]);
+  List<dynamic> entriesToNotification = [];
+
+  for (var r in result) {
+    r.fields.forEach((key, value) {
+      print(value);
+      entriesToNotification.add(value);
+    });
+    NotificationClass notification = NotificationClass(
+      id: entriesToNotification[0],
+      ownerid: entriesToNotification[1],
+      userid: entriesToNotification[2],
+      username: entriesToNotification[3],
+      msg: entriesToNotification[4],
+    );
+
+    notifications.add(
+      NotificationWidget(noti: notification),
+    );
+
+    entriesToNotification.clear();
+  }
+  try {
+    yield notifications;
+  } catch (e) {
+    print(e);
+  }
 }
